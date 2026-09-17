@@ -38,8 +38,8 @@ public class SQLiteInMemoryTest : MonoBehaviour
     private void Start()
     {
         // 1. 디스크 DB 경로 설정 (persistentDataPath 사용 - 없으면 sqlite3_open이 자동 생성함)
-        //diskDbPath = $"{Application.persistentDataPath}/GameData.db";
-        diskDbPath = $"{Application.streamingAssetsPath}/GameData.db";
+        //diskDbPath = $"{Application.persistentDataPath}/TestData.db";
+        diskDbPath = $"{Application.streamingAssetsPath}/TestData.db";
         Debug.Log($"[SQLite] 디스크 DB 경로: {diskDbPath}");
 
         // 2. 파이프라인 실행: 디스크 -> RAM 로드 -> RAM 데이터 조작 -> RAM -> 디스크 저장
