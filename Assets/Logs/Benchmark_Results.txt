@@ -1,0 +1,12 @@
+﻿[2026-10-01 16:33:45] [JSON (Direct IO)] [S100] [C1_Low] | Execution Time: 126.769 ms | Memory: 0.18 MB
+[2026-10-01 16:33:46] [Binary (Direct IO)] [S100] [C1_Low] | Execution Time: 5.029 ms | Memory: 0.07 MB
+[2026-10-01 16:33:47] [SQLite (Direct IO)] [S100] [C1_Low] | Execution Time: 44.617 ms | Memory: 0.00 MB
+[2026-10-01 16:34:49] [JSON (Direct IO)] [S100] [C3_High] | Execution Time: 145.448 ms | Memory: 0.37 MB
+[2026-10-01 16:34:49] [Binary (Direct IO)] [S100] [C3_High] | Execution Time: 9.688 ms | Memory: 0.15 MB
+[2026-10-01 16:34:50] [SQLite (Direct IO)] [S100] [C3_High] | Execution Time: 40.660 ms | Memory: 0.00 MB
+[2026-10-01 16:35:24] [JSON (Direct IO)] [S100K] [C1_Low] | Execution Time: 3926.634 ms | Memory: 133.80 MB
+[2026-10-01 16:35:28] [Binary (Direct IO)] [S100K] [C1_Low] | Execution Time: 3477.089 ms | Memory: 95.64 MB
+[2026-10-01 16:35:29] [SQLite (Direct IO)] [S100K] [C1_Low] | Execution Time: 243.199 ms | Memory: 4.07 MB
+[2026-10-01 16:35:59] [JSON (Direct IO)] [S100K] [C3_High] | Execution Time: 7685.590 ms | Memory: 446.22 MB
+[2026-10-01 16:36:07] [Binary (Direct IO)] [S100K] [C3_High] | Execution Time: 6849.155 ms | Memory: 253.28 MB
+[2026-10-01 16:36:08] [SQLite (Direct IO)] [S100K] [C3_High] | Execution Time: 743.382 ms | Memory: 19.87 MB

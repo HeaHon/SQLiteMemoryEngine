@@ -6,7 +6,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 1,
       "atk": 33,
-      "price": 26185
+      "price": 26185,
+      "Sql_item_id": 1
     },
     {
       "item_id": 2,
@@ -14,7 +15,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 54,
-      "price": 12940
+      "price": 12940,
+      "Sql_item_id": 2
     },
     {
       "item_id": 3,
@@ -22,7 +24,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 164,
-      "price": 28902
+      "price": 28902,
+      "Sql_item_id": 3
     },
     {
       "item_id": 4,
@@ -30,7 +33,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 3,
       "atk": 18,
-      "price": 35586
+      "price": 35586,
+      "Sql_item_id": 4
     },
     {
       "item_id": 5,
@@ -38,7 +42,8 @@
       "item_type": "WEAPON",
       "rarity": 1,
       "atk": 68,
-      "price": 29199
+      "price": 29199,
+      "Sql_item_id": 5
     },
     {
       "item_id": 6,
@@ -46,7 +51,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 2,
       "atk": 38,
-      "price": 1414
+      "price": 1414,
+      "Sql_item_id": 6
     },
     {
       "item_id": 7,
@@ -54,7 +60,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 65,
-      "price": 32442
+      "price": 32442,
+      "Sql_item_id": 7
     },
     {
       "item_id": 8,
@@ -62,7 +69,8 @@
       "item_type": "WEAPON",
       "rarity": 3,
       "atk": 144,
-      "price": 31460
+      "price": 31460,
+      "Sql_item_id": 8
     },
     {
       "item_id": 9,
@@ -70,7 +78,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 23,
-      "price": 23258
+      "price": 23258,
+      "Sql_item_id": 9
     },
     {
       "item_id": 10,
@@ -78,7 +87,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 167,
-      "price": 743
+      "price": 743,
+      "Sql_item_id": 10
     },
     {
       "item_id": 11,
@@ -86,7 +96,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 5,
       "atk": 97,
-      "price": 18829
+      "price": 18829,
+      "Sql_item_id": 11
     },
     {
       "item_id": 12,
@@ -94,7 +105,8 @@
       "item_type": "ARMOR",
       "rarity": 4,
       "atk": 111,
-      "price": 20094
+      "price": 20094,
+      "Sql_item_id": 12
     },
     {
       "item_id": 13,
@@ -102,7 +114,8 @@
       "item_type": "WEAPON",
       "rarity": 5,
       "atk": 191,
-      "price": 16708
+      "price": 16708,
+      "Sql_item_id": 13
     },
     {
       "item_id": 14,
@@ -110,7 +123,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 38,
-      "price": 6821
+      "price": 6821,
+      "Sql_item_id": 14
     },
     {
       "item_id": 15,
@@ -118,7 +132,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 4,
       "atk": 145,
-      "price": 14544
+      "price": 14544,
+      "Sql_item_id": 15
     },
     {
       "item_id": 16,
@@ -126,7 +141,8 @@
       "item_type": "ARMOR",
       "rarity": 5,
       "atk": 15,
-      "price": 11065
+      "price": 11065,
+      "Sql_item_id": 16
     },
     {
       "item_id": 17,
@@ -134,7 +150,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 198,
-      "price": 6157
+      "price": 6157,
+      "Sql_item_id": 17
     },
     {
       "item_id": 18,
@@ -142,7 +159,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 1,
       "atk": 17,
-      "price": 42040
+      "price": 42040,
+      "Sql_item_id": 18
     },
     {
       "item_id": 19,
@@ -150,7 +168,8 @@
       "item_type": "WEAPON",
       "rarity": 3,
       "atk": 130,
-      "price": 31303
+      "price": 31303,
+      "Sql_item_id": 19
     },
     {
       "item_id": 20,
@@ -158,7 +177,8 @@
       "item_type": "WEAPON",
       "rarity": 5,
       "atk": 197,
-      "price": 39103
+      "price": 39103,
+      "Sql_item_id": 20
     },
     {
       "item_id": 21,
@@ -166,7 +186,8 @@
       "item_type": "ARMOR",
       "rarity": 3,
       "atk": 145,
-      "price": 6184
+      "price": 6184,
+      "Sql_item_id": 21
     },
     {
       "item_id": 22,
@@ -174,7 +195,8 @@
       "item_type": "ARMOR",
       "rarity": 5,
       "atk": 98,
-      "price": 27196
+      "price": 27196,
+      "Sql_item_id": 22
     },
     {
       "item_id": 23,
@@ -182,7 +204,8 @@
       "item_type": "WEAPON",
       "rarity": 1,
       "atk": 188,
-      "price": 36032
+      "price": 36032,
+      "Sql_item_id": 23
     },
     {
       "item_id": 24,
@@ -190,7 +213,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 5,
       "atk": 179,
-      "price": 8714
+      "price": 8714,
+      "Sql_item_id": 24
     },
     {
       "item_id": 25,
@@ -198,7 +222,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 4,
       "atk": 63,
-      "price": 17050
+      "price": 17050,
+      "Sql_item_id": 25
     },
     {
       "item_id": 26,
@@ -206,7 +231,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 62,
-      "price": 11502
+      "price": 11502,
+      "Sql_item_id": 26
     },
     {
       "item_id": 27,
@@ -214,7 +240,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 5,
       "atk": 157,
-      "price": 47672
+      "price": 47672,
+      "Sql_item_id": 27
     },
     {
       "item_id": 28,
@@ -222,7 +249,8 @@
       "item_type": "WEAPON",
       "rarity": 3,
       "atk": 50,
-      "price": 31750
+      "price": 31750,
+      "Sql_item_id": 28
     },
     {
       "item_id": 29,
@@ -230,7 +258,8 @@
       "item_type": "ARMOR",
       "rarity": 3,
       "atk": 146,
-      "price": 10101
+      "price": 10101,
+      "Sql_item_id": 29
     },
     {
       "item_id": 30,
@@ -238,7 +267,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 1,
       "atk": 20,
-      "price": 10800
+      "price": 10800,
+      "Sql_item_id": 30
     },
     {
       "item_id": 31,
@@ -246,7 +276,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 3,
       "atk": 79,
-      "price": 22744
+      "price": 22744,
+      "Sql_item_id": 31
     },
     {
       "item_id": 32,
@@ -254,7 +285,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 2,
       "atk": 44,
-      "price": 46909
+      "price": 46909,
+      "Sql_item_id": 32
     },
     {
       "item_id": 33,
@@ -262,7 +294,8 @@
       "item_type": "WEAPON",
       "rarity": 3,
       "atk": 177,
-      "price": 15688
+      "price": 15688,
+      "Sql_item_id": 33
     },
     {
       "item_id": 34,
@@ -270,7 +303,8 @@
       "item_type": "WEAPON",
       "rarity": 3,
       "atk": 13,
-      "price": 44550
+      "price": 44550,
+      "Sql_item_id": 34
     },
     {
       "item_id": 35,
@@ -278,7 +312,8 @@
       "item_type": "WEAPON",
       "rarity": 5,
       "atk": 152,
-      "price": 1640
+      "price": 1640,
+      "Sql_item_id": 35
     },
     {
       "item_id": 36,
@@ -286,7 +321,8 @@
       "item_type": "ARMOR",
       "rarity": 2,
       "atk": 75,
-      "price": 11003
+      "price": 11003,
+      "Sql_item_id": 36
     },
     {
       "item_id": 37,
@@ -294,7 +330,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 35,
-      "price": 42143
+      "price": 42143,
+      "Sql_item_id": 37
     },
     {
       "item_id": 38,
@@ -302,7 +339,8 @@
       "item_type": "ARMOR",
       "rarity": 2,
       "atk": 39,
-      "price": 9239
+      "price": 9239,
+      "Sql_item_id": 38
     },
     {
       "item_id": 39,
@@ -310,7 +348,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 131,
-      "price": 32658
+      "price": 32658,
+      "Sql_item_id": 39
     },
     {
       "item_id": 40,
@@ -318,7 +357,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 160,
-      "price": 27763
+      "price": 27763,
+      "Sql_item_id": 40
     },
     {
       "item_id": 41,
@@ -326,7 +366,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 4,
       "atk": 52,
-      "price": 15637
+      "price": 15637,
+      "Sql_item_id": 41
     },
     {
       "item_id": 42,
@@ -334,7 +375,8 @@
       "item_type": "ARMOR",
       "rarity": 4,
       "atk": 95,
-      "price": 49491
+      "price": 49491,
+      "Sql_item_id": 42
     },
     {
       "item_id": 43,
@@ -342,7 +384,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 116,
-      "price": 20374
+      "price": 20374,
+      "Sql_item_id": 43
     },
     {
       "item_id": 44,
@@ -350,7 +393,8 @@
       "item_type": "ARMOR",
       "rarity": 4,
       "atk": 88,
-      "price": 4866
+      "price": 4866,
+      "Sql_item_id": 44
     },
     {
       "item_id": 45,
@@ -358,7 +402,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 3,
       "atk": 49,
-      "price": 47367
+      "price": 47367,
+      "Sql_item_id": 45
     },
     {
       "item_id": 46,
@@ -366,7 +411,8 @@
       "item_type": "ARMOR",
       "rarity": 2,
       "atk": 22,
-      "price": 5541
+      "price": 5541,
+      "Sql_item_id": 46
     },
     {
       "item_id": 47,
@@ -374,7 +420,8 @@
       "item_type": "WEAPON",
       "rarity": 2,
       "atk": 35,
-      "price": 18756
+      "price": 18756,
+      "Sql_item_id": 47
     },
     {
       "item_id": 48,
@@ -382,7 +429,8 @@
       "item_type": "WEAPON",
       "rarity": 5,
       "atk": 167,
-      "price": 41306
+      "price": 41306,
+      "Sql_item_id": 48
     },
     {
       "item_id": 49,
@@ -390,7 +438,8 @@
       "item_type": "WEAPON",
       "rarity": 3,
       "atk": 19,
-      "price": 152
+      "price": 152,
+      "Sql_item_id": 49
     },
     {
       "item_id": 50,
@@ -398,7 +447,8 @@
       "item_type": "ARMOR",
       "rarity": 4,
       "atk": 181,
-      "price": 33892
+      "price": 33892,
+      "Sql_item_id": 50
     },
     {
       "item_id": 51,
@@ -406,7 +456,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 5,
       "atk": 188,
-      "price": 40579
+      "price": 40579,
+      "Sql_item_id": 51
     },
     {
       "item_id": 52,
@@ -414,7 +465,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 1,
       "atk": 145,
-      "price": 48319
+      "price": 48319,
+      "Sql_item_id": 52
     },
     {
       "item_id": 53,
@@ -422,7 +474,8 @@
       "item_type": "WEAPON",
       "rarity": 2,
       "atk": 165,
-      "price": 18082
+      "price": 18082,
+      "Sql_item_id": 53
     },
     {
       "item_id": 54,
@@ -430,7 +483,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 2,
       "atk": 171,
-      "price": 19538
+      "price": 19538,
+      "Sql_item_id": 54
     },
     {
       "item_id": 55,
@@ -438,7 +492,8 @@
       "item_type": "ARMOR",
       "rarity": 5,
       "atk": 15,
-      "price": 27746
+      "price": 27746,
+      "Sql_item_id": 55
     },
     {
       "item_id": 56,
@@ -446,7 +501,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 1,
       "atk": 39,
-      "price": 23268
+      "price": 23268,
+      "Sql_item_id": 56
     },
     {
       "item_id": 57,
@@ -454,7 +510,8 @@
       "item_type": "WEAPON",
       "rarity": 5,
       "atk": 101,
-      "price": 30985
+      "price": 30985,
+      "Sql_item_id": 57
     },
     {
       "item_id": 58,
@@ -462,7 +519,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 5,
       "atk": 193,
-      "price": 15827
+      "price": 15827,
+      "Sql_item_id": 58
     },
     {
       "item_id": 59,
@@ -470,7 +528,8 @@
       "item_type": "WEAPON",
       "rarity": 5,
       "atk": 96,
-      "price": 41911
+      "price": 41911,
+      "Sql_item_id": 59
     },
     {
       "item_id": 60,
@@ -478,7 +537,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 126,
-      "price": 23039
+      "price": 23039,
+      "Sql_item_id": 60
     },
     {
       "item_id": 61,
@@ -486,7 +546,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 31,
-      "price": 5557
+      "price": 5557,
+      "Sql_item_id": 61
     },
     {
       "item_id": 62,
@@ -494,7 +555,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 1,
       "atk": 129,
-      "price": 38774
+      "price": 38774,
+      "Sql_item_id": 62
     },
     {
       "item_id": 63,
@@ -502,7 +564,8 @@
       "item_type": "WEAPON",
       "rarity": 2,
       "atk": 87,
-      "price": 27728
+      "price": 27728,
+      "Sql_item_id": 63
     },
     {
       "item_id": 64,
@@ -510,7 +573,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 4,
       "atk": 100,
-      "price": 45520
+      "price": 45520,
+      "Sql_item_id": 64
     },
     {
       "item_id": 65,
@@ -518,7 +582,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 190,
-      "price": 5034
+      "price": 5034,
+      "Sql_item_id": 65
     },
     {
       "item_id": 66,
@@ -526,7 +591,8 @@
       "item_type": "ARMOR",
       "rarity": 5,
       "atk": 39,
-      "price": 31511
+      "price": 31511,
+      "Sql_item_id": 66
     },
     {
       "item_id": 67,
@@ -534,7 +600,8 @@
       "item_type": "ARMOR",
       "rarity": 2,
       "atk": 43,
-      "price": 24268
+      "price": 24268,
+      "Sql_item_id": 67
     },
     {
       "item_id": 68,
@@ -542,7 +609,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 79,
-      "price": 44551
+      "price": 44551,
+      "Sql_item_id": 68
     },
     {
       "item_id": 69,
@@ -550,7 +618,8 @@
       "item_type": "WEAPON",
       "rarity": 1,
       "atk": 118,
-      "price": 33609
+      "price": 33609,
+      "Sql_item_id": 69
     },
     {
       "item_id": 70,
@@ -558,7 +627,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 5,
       "atk": 24,
-      "price": 6321
+      "price": 6321,
+      "Sql_item_id": 70
     },
     {
       "item_id": 71,
@@ -566,7 +636,8 @@
       "item_type": "WEAPON",
       "rarity": 1,
       "atk": 57,
-      "price": 7825
+      "price": 7825,
+      "Sql_item_id": 71
     },
     {
       "item_id": 72,
@@ -574,7 +645,8 @@
       "item_type": "ARMOR",
       "rarity": 4,
       "atk": 178,
-      "price": 28410
+      "price": 28410,
+      "Sql_item_id": 72
     },
     {
       "item_id": 73,
@@ -582,7 +654,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 2,
       "atk": 121,
-      "price": 5511
+      "price": 5511,
+      "Sql_item_id": 73
     },
     {
       "item_id": 74,
@@ -590,7 +663,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 120,
-      "price": 8914
+      "price": 8914,
+      "Sql_item_id": 74
     },
     {
       "item_id": 75,
@@ -598,7 +672,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 164,
-      "price": 44227
+      "price": 44227,
+      "Sql_item_id": 75
     },
     {
       "item_id": 76,
@@ -606,7 +681,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 3,
       "atk": 40,
-      "price": 7230
+      "price": 7230,
+      "Sql_item_id": 76
     },
     {
       "item_id": 77,
@@ -614,7 +690,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 43,
-      "price": 34930
+      "price": 34930,
+      "Sql_item_id": 77
     },
     {
       "item_id": 78,
@@ -622,7 +699,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 3,
       "atk": 185,
-      "price": 1976
+      "price": 1976,
+      "Sql_item_id": 78
     },
     {
       "item_id": 79,
@@ -630,7 +708,8 @@
       "item_type": "ARMOR",
       "rarity": 5,
       "atk": 193,
-      "price": 13108
+      "price": 13108,
+      "Sql_item_id": 79
     },
     {
       "item_id": 80,
@@ -638,7 +717,8 @@
       "item_type": "WEAPON",
       "rarity": 1,
       "atk": 82,
-      "price": 20727
+      "price": 20727,
+      "Sql_item_id": 80
     },
     {
       "item_id": 81,
@@ -646,7 +726,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 164,
-      "price": 421
+      "price": 421,
+      "Sql_item_id": 81
     },
     {
       "item_id": 82,
@@ -654,7 +735,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 3,
       "atk": 46,
-      "price": 37212
+      "price": 37212,
+      "Sql_item_id": 82
     },
     {
       "item_id": 83,
@@ -662,7 +744,8 @@
       "item_type": "ARMOR",
       "rarity": 4,
       "atk": 134,
-      "price": 510
+      "price": 510,
+      "Sql_item_id": 83
     },
     {
       "item_id": 84,
@@ -670,7 +753,8 @@
       "item_type": "WEAPON",
       "rarity": 1,
       "atk": 127,
-      "price": 26959
+      "price": 26959,
+      "Sql_item_id": 84
     },
     {
       "item_id": 85,
@@ -678,7 +762,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 130,
-      "price": 44003
+      "price": 44003,
+      "Sql_item_id": 85
     },
     {
       "item_id": 86,
@@ -686,7 +771,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 2,
       "atk": 110,
-      "price": 4485
+      "price": 4485,
+      "Sql_item_id": 86
     },
     {
       "item_id": 87,
@@ -694,7 +780,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 5,
       "atk": 191,
-      "price": 49483
+      "price": 49483,
+      "Sql_item_id": 87
     },
     {
       "item_id": 88,
@@ -702,7 +789,8 @@
       "item_type": "ARMOR",
       "rarity": 1,
       "atk": 163,
-      "price": 37835
+      "price": 37835,
+      "Sql_item_id": 88
     },
     {
       "item_id": 89,
@@ -710,7 +798,8 @@
       "item_type": "WEAPON",
       "rarity": 5,
       "atk": 32,
-      "price": 39616
+      "price": 39616,
+      "Sql_item_id": 89
     },
     {
       "item_id": 90,
@@ -718,7 +807,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 57,
-      "price": 6969
+      "price": 6969,
+      "Sql_item_id": 90
     },
     {
       "item_id": 91,
@@ -726,7 +816,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 149,
-      "price": 36151
+      "price": 36151,
+      "Sql_item_id": 91
     },
     {
       "item_id": 92,
@@ -734,7 +825,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 1,
       "atk": 96,
-      "price": 18045
+      "price": 18045,
+      "Sql_item_id": 92
     },
     {
       "item_id": 93,
@@ -742,7 +834,8 @@
       "item_type": "ARMOR",
       "rarity": 4,
       "atk": 16,
-      "price": 30423
+      "price": 30423,
+      "Sql_item_id": 93
     },
     {
       "item_id": 94,
@@ -750,7 +843,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 3,
       "atk": 177,
-      "price": 48005
+      "price": 48005,
+      "Sql_item_id": 94
     },
     {
       "item_id": 95,
@@ -758,7 +852,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 4,
       "atk": 151,
-      "price": 10263
+      "price": 10263,
+      "Sql_item_id": 95
     },
     {
       "item_id": 96,
@@ -766,7 +861,8 @@
       "item_type": "WEAPON",
       "rarity": 2,
       "atk": 174,
-      "price": 18328
+      "price": 18328,
+      "Sql_item_id": 96
     },
     {
       "item_id": 97,
@@ -774,7 +870,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 1,
       "atk": 146,
-      "price": 33261
+      "price": 33261,
+      "Sql_item_id": 97
     },
     {
       "item_id": 98,
@@ -782,7 +879,8 @@
       "item_type": "ARMOR",
       "rarity": 3,
       "atk": 171,
-      "price": 23656
+      "price": 23656,
+      "Sql_item_id": 98
     },
     {
       "item_id": 99,
@@ -790,7 +888,8 @@
       "item_type": "WEAPON",
       "rarity": 4,
       "atk": 122,
-      "price": 25381
+      "price": 25381,
+      "Sql_item_id": 99
     },
     {
       "item_id": 100,
@@ -798,7 +897,8 @@
       "item_type": "CONSUMABLE",
       "rarity": 3,
       "atk": 104,
-      "price": 33554
+      "price": 33554,
+      "Sql_item_id": 100
     }
   ],
   "characters": [
@@ -808,7 +908,8 @@
       "level": 17,
       "hp": 2699,
       "pos_x": 362.2042,
-      "pos_y": 256.4614
+      "pos_y": 256.4614,
+      "Sql_character_id": 1
     },
     {
       "character_id": 2,
@@ -816,7 +917,8 @@
       "level": 51,
       "hp": 3270,
       "pos_x": 190.4848,
-      "pos_y": 130.122314
+      "pos_y": 130.122314,
+      "Sql_character_id": 2
     },
     {
       "character_id": 3,
@@ -824,7 +926,8 @@
       "level": 40,
       "hp": 1606,
       "pos_x": 45.0563049,
-      "pos_y": 352.57605
+      "pos_y": 352.57605,
+      "Sql_character_id": 3
     },
     {
       "character_id": 4,
@@ -832,7 +935,8 @@
       "level": 15,
       "hp": 9071,
       "pos_x": 346.294861,
-      "pos_y": 258.206848
+      "pos_y": 258.206848,
+      "Sql_character_id": 4
     },
     {
       "character_id": 5,
@@ -840,7 +944,8 @@
       "level": 82,
       "hp": 139,
       "pos_x": 267.861023,
-      "pos_y": 402.592224
+      "pos_y": 402.592224,
+      "Sql_character_id": 5
     },
     {
       "character_id": 6,
@@ -848,7 +953,8 @@
       "level": 6,
       "hp": 7838,
       "pos_x": 313.22818,
-      "pos_y": 57.5881844
+      "pos_y": 57.5881844,
+      "Sql_character_id": 6
     },
     {
       "character_id": 7,
@@ -856,7 +962,8 @@
       "level": 15,
       "hp": 540,
       "pos_x": 302.279633,
-      "pos_y": 257.9567
+      "pos_y": 257.9567,
+      "Sql_character_id": 7
     },
     {
       "character_id": 8,
@@ -864,7 +971,8 @@
       "level": 22,
       "hp": 231,
       "pos_x": 182.580765,
-      "pos_y": 133.719208
+      "pos_y": 133.719208,
+      "Sql_character_id": 8
     },
     {
       "character_id": 9,
@@ -872,7 +980,8 @@
       "level": 2,
       "hp": 7998,
       "pos_x": 219.589737,
-      "pos_y": 256.7481
+      "pos_y": 256.7481,
+      "Sql_character_id": 9
     },
     {
       "character_id": 10,
@@ -880,7 +989,8 @@
       "level": 1,
       "hp": 731,
       "pos_x": 327.071564,
-      "pos_y": 17.269516
+      "pos_y": 17.269516,
+      "Sql_character_id": 10
     },
     {
       "character_id": 11,
@@ -888,7 +998,8 @@
       "level": 62,
       "hp": 539,
       "pos_x": 186.383621,
-      "pos_y": 70.94005
+      "pos_y": 70.94005,
+      "Sql_character_id": 11
     },
     {
       "character_id": 12,
@@ -896,7 +1007,8 @@
       "level": 30,
       "hp": 9081,
       "pos_x": 293.369476,
-      "pos_y": 367.552582
+      "pos_y": 367.552582,
+      "Sql_character_id": 12
     },
     {
       "character_id": 13,
@@ -904,7 +1016,8 @@
       "level": 71,
       "hp": 1707,
       "pos_x": 51.5714226,
-      "pos_y": 226.075745
+      "pos_y": 226.075745,
+      "Sql_character_id": 13
     },
     {
       "character_id": 14,
@@ -912,7 +1025,8 @@
       "level": 22,
       "hp": 5957,
       "pos_x": 256.419678,
-      "pos_y": 493.5108
+      "pos_y": 493.5108,
+      "Sql_character_id": 14
     },
     {
       "character_id": 15,
@@ -920,7 +1034,8 @@
       "level": 55,
       "hp": 9899,
       "pos_x": 325.416168,
-      "pos_y": 12.10851
+      "pos_y": 12.10851,
+      "Sql_character_id": 15
     },
     {
       "character_id": 16,
@@ -928,7 +1043,8 @@
       "level": 27,
       "hp": 480,
       "pos_x": 108.061852,
-      "pos_y": 296.16922
+      "pos_y": 296.16922,
+      "Sql_character_id": 16
     },
     {
       "character_id": 17,
@@ -936,7 +1052,8 @@
       "level": 11,
       "hp": 3280,
       "pos_x": 161.919525,
-      "pos_y": 375.575684
+      "pos_y": 375.575684,
+      "Sql_character_id": 17
     },
     {
       "character_id": 18,
@@ -944,7 +1061,8 @@
       "level": 89,
       "hp": 2456,
       "pos_x": 463.109833,
-      "pos_y": 422.6441
+      "pos_y": 422.6441,
+      "Sql_character_id": 18
     },
     {
       "character_id": 19,
@@ -952,7 +1070,8 @@
       "level": 20,
       "hp": 3042,
       "pos_x": 91.52257,
-      "pos_y": 14.7917919
+      "pos_y": 14.7917919,
+      "Sql_character_id": 19
     },
     {
       "character_id": 20,
@@ -960,7 +1079,8 @@
       "level": 14,
       "hp": 8845,
       "pos_x": 93.35389,
-      "pos_y": 147.384171
+      "pos_y": 147.384171,
+      "Sql_character_id": 20
     },
     {
       "character_id": 21,
@@ -968,7 +1088,8 @@
       "level": 60,
       "hp": 3975,
       "pos_x": 440.4636,
-      "pos_y": 222.457092
+      "pos_y": 222.457092,
+      "Sql_character_id": 21
     },
     {
       "character_id": 22,
@@ -976,7 +1097,8 @@
       "level": 94,
       "hp": 8122,
       "pos_x": 64.1611557,
-      "pos_y": 53.66693
+      "pos_y": 53.66693,
+      "Sql_character_id": 22
     },
     {
       "character_id": 23,
@@ -984,7 +1106,8 @@
       "level": 40,
       "hp": 5948,
       "pos_x": 200.01474,
-      "pos_y": 62.47491
+      "pos_y": 62.47491,
+      "Sql_character_id": 23
     },
     {
       "character_id": 24,
@@ -992,7 +1115,8 @@
       "level": 34,
       "hp": 5467,
       "pos_x": 307.965729,
-      "pos_y": 471.216156
+      "pos_y": 471.216156,
+      "Sql_character_id": 24
     },
     {
       "character_id": 25,
@@ -1000,7 +1124,8 @@
       "level": 53,
       "hp": 8062,
       "pos_x": 123.555206,
-      "pos_y": 444.000427
+      "pos_y": 444.000427,
+      "Sql_character_id": 25
     },
     {
       "character_id": 26,
@@ -1008,7 +1133,8 @@
       "level": 83,
       "hp": 6436,
       "pos_x": 40.91955,
-      "pos_y": 210.255814
+      "pos_y": 210.255814,
+      "Sql_character_id": 26
     },
     {
       "character_id": 27,
@@ -1016,7 +1142,8 @@
       "level": 94,
       "hp": 4719,
       "pos_x": 445.3819,
-      "pos_y": 484.59613
+      "pos_y": 484.59613,
+      "Sql_character_id": 27
     },
     {
       "character_id": 28,
@@ -1024,7 +1151,8 @@
       "level": 50,
       "hp": 7112,
       "pos_x": 55.516037,
-      "pos_y": 403.00116
+      "pos_y": 403.00116,
+      "Sql_character_id": 28
     },
     {
       "character_id": 29,
@@ -1032,7 +1160,8 @@
       "level": 53,
       "hp": 7907,
       "pos_x": 290.8699,
-      "pos_y": 99.27558
+      "pos_y": 99.27558,
+      "Sql_character_id": 29
     },
     {
       "character_id": 30,
@@ -1040,7 +1169,8 @@
       "level": 32,
       "hp": 1798,
       "pos_x": 145.66626,
-      "pos_y": 135.330124
+      "pos_y": 135.330124,
+      "Sql_character_id": 30
     },
     {
       "character_id": 31,
@@ -1048,7 +1178,8 @@
       "level": 76,
       "hp": 6659,
       "pos_x": 499.668549,
-      "pos_y": 177.86322
+      "pos_y": 177.86322,
+      "Sql_character_id": 31
     },
     {
       "character_id": 32,
@@ -1056,7 +1187,8 @@
       "level": 59,
       "hp": 6167,
       "pos_x": 193.549927,
-      "pos_y": 478.061218
+      "pos_y": 478.061218,
+      "Sql_character_id": 32
     },
     {
       "character_id": 33,
@@ -1064,7 +1196,8 @@
       "level": 92,
       "hp": 8825,
       "pos_x": 445.341919,
-      "pos_y": 8.25052
+      "pos_y": 8.25052,
+      "Sql_character_id": 33
     },
     {
       "character_id": 34,
@@ -1072,7 +1205,8 @@
       "level": 41,
       "hp": 6795,
       "pos_x": 327.7614,
-      "pos_y": 492.3313
+      "pos_y": 492.3313,
+      "Sql_character_id": 34
     },
     {
       "character_id": 35,
@@ -1080,7 +1214,8 @@
       "level": 34,
       "hp": 6606,
       "pos_x": 21.29717,
-      "pos_y": 342.650177
+      "pos_y": 342.650177,
+      "Sql_character_id": 35
     },
     {
       "character_id": 36,
@@ -1088,7 +1223,8 @@
       "level": 60,
       "hp": 6472,
       "pos_x": 302.749573,
-      "pos_y": 160.955292
+      "pos_y": 160.955292,
+      "Sql_character_id": 36
     },
     {
       "character_id": 37,
@@ -1096,7 +1232,8 @@
       "level": 29,
       "hp": 9791,
       "pos_x": 175.658066,
-      "pos_y": 0.325802237
+      "pos_y": 0.325802237,
+      "Sql_character_id": 37
     },
     {
       "character_id": 38,
@@ -1104,7 +1241,8 @@
       "level": 64,
       "hp": 1174,
       "pos_x": 472.400635,
-      "pos_y": 90.11544
+      "pos_y": 90.11544,
+      "Sql_character_id": 38
     },
     {
       "character_id": 39,
@@ -1112,7 +1250,8 @@
       "level": 86,
       "hp": 3626,
       "pos_x": 307.6607,
-      "pos_y": 210.643417
+      "pos_y": 210.643417,
+      "Sql_character_id": 39
     },
     {
       "character_id": 40,
@@ -1120,7 +1259,8 @@
       "level": 54,
       "hp": 6754,
       "pos_x": 205.68277,
-      "pos_y": 327.338776
+      "pos_y": 327.338776,
+      "Sql_character_id": 40
     },
     {
       "character_id": 41,
@@ -1128,7 +1268,8 @@
       "level": 54,
       "hp": 8148,
       "pos_x": 346.894165,
-      "pos_y": 158.633759
+      "pos_y": 158.633759,
+      "Sql_character_id": 41
     },
     {
       "character_id": 42,
@@ -1136,7 +1277,8 @@
       "level": 50,
       "hp": 8608,
       "pos_x": 20.6775265,
-      "pos_y": 206.668091
+      "pos_y": 206.668091,
+      "Sql_character_id": 42
     },
     {
       "character_id": 43,
@@ -1144,7 +1286,8 @@
       "level": 1,
       "hp": 9534,
       "pos_x": 230.645828,
-      "pos_y": 154.4837
+      "pos_y": 154.4837,
+      "Sql_character_id": 43
     },
     {
       "character_id": 44,
@@ -1152,7 +1295,8 @@
       "level": 19,
       "hp": 7989,
       "pos_x": 231.559021,
-      "pos_y": 453.5884
+      "pos_y": 453.5884,
+      "Sql_character_id": 44
     },
     {
       "character_id": 45,
@@ -1160,7 +1304,8 @@
       "level": 88,
       "hp": 6371,
       "pos_x": 319.911438,
-      "pos_y": 421.408875
+      "pos_y": 421.408875,
+      "Sql_character_id": 45
     },
     {
       "character_id": 46,
@@ -1168,7 +1313,8 @@
       "level": 90,
       "hp": 6292,
       "pos_x": 459.740051,
-      "pos_y": 284.5496
+      "pos_y": 284.5496,
+      "Sql_character_id": 46
     },
     {
       "character_id": 47,
@@ -1176,7 +1322,8 @@
       "level": 11,
       "hp": 150,
       "pos_x": 326.43454,
-      "pos_y": 10.8583479
+      "pos_y": 10.8583479,
+      "Sql_character_id": 47
     },
     {
       "character_id": 48,
@@ -1184,7 +1331,8 @@
       "level": 40,
       "hp": 6022,
       "pos_x": 64.43156,
-      "pos_y": 396.1674
+      "pos_y": 396.1674,
+      "Sql_character_id": 48
     },
     {
       "character_id": 49,
@@ -1192,7 +1340,8 @@
       "level": 65,
       "hp": 1031,
       "pos_x": 265.195526,
-      "pos_y": 393.3595
+      "pos_y": 393.3595,
+      "Sql_character_id": 49
     },
     {
       "character_id": 50,
@@ -1200,7 +1349,8 @@
       "level": 89,
       "hp": 3587,
       "pos_x": 202.126648,
-      "pos_y": 429.363129
+      "pos_y": 429.363129,
+      "Sql_character_id": 50
     },
     {
       "character_id": 51,
@@ -1208,7 +1358,8 @@
       "level": 66,
       "hp": 983,
       "pos_x": 398.860718,
-      "pos_y": 467.2783
+      "pos_y": 467.2783,
+      "Sql_character_id": 51
     },
     {
       "character_id": 52,
@@ -1216,7 +1367,8 @@
       "level": 80,
       "hp": 8159,
       "pos_x": 221.930054,
-      "pos_y": 453.396942
+      "pos_y": 453.396942,
+      "Sql_character_id": 52
     },
     {
       "character_id": 53,
@@ -1224,7 +1376,8 @@
       "level": 57,
       "hp": 9192,
       "pos_x": 459.045776,
-      "pos_y": 29.9343777
+      "pos_y": 29.9343777,
+      "Sql_character_id": 53
     },
     {
       "character_id": 54,
@@ -1232,7 +1385,8 @@
       "level": 11,
       "hp": 9759,
       "pos_x": 65.94917,
-      "pos_y": 441.591431
+      "pos_y": 441.591431,
+      "Sql_character_id": 54
     },
     {
       "character_id": 55,
@@ -1240,7 +1394,8 @@
       "level": 66,
       "hp": 3244,
       "pos_x": 64.81885,
-      "pos_y": 99.6073761
+      "pos_y": 99.6073761,
+      "Sql_character_id": 55
     },
     {
       "character_id": 56,
@@ -1248,7 +1403,8 @@
       "level": 38,
       "hp": 5684,
       "pos_x": 490.204,
-      "pos_y": 354.89093
+      "pos_y": 354.89093,
+      "Sql_character_id": 56
     },
     {
       "character_id": 57,
@@ -1256,7 +1412,8 @@
       "level": 53,
       "hp": 534,
       "pos_x": 141.697617,
-      "pos_y": 438.3571
+      "pos_y": 438.3571,
+      "Sql_character_id": 57
     },
     {
       "character_id": 58,
@@ -1264,7 +1421,8 @@
       "level": 24,
       "hp": 4140,
       "pos_x": 415.3649,
-      "pos_y": 436.114716
+      "pos_y": 436.114716,
+      "Sql_character_id": 58
     },
     {
       "character_id": 59,
@@ -1272,7 +1430,8 @@
       "level": 78,
       "hp": 8909,
       "pos_x": 125.038612,
-      "pos_y": 439.044281
+      "pos_y": 439.044281,
+      "Sql_character_id": 59
     },
     {
       "character_id": 60,
@@ -1280,7 +1439,8 @@
       "level": 76,
       "hp": 4592,
       "pos_x": 338.782349,
-      "pos_y": 141.361725
+      "pos_y": 141.361725,
+      "Sql_character_id": 60
     },
     {
       "character_id": 61,
@@ -1288,7 +1448,8 @@
       "level": 49,
       "hp": 5178,
       "pos_x": 175.7788,
-      "pos_y": 234.247482
+      "pos_y": 234.247482,
+      "Sql_character_id": 61
     },
     {
       "character_id": 62,
@@ -1296,7 +1457,8 @@
       "level": 35,
       "hp": 8163,
       "pos_x": 480.0245,
-      "pos_y": 169.227112
+      "pos_y": 169.227112,
+      "Sql_character_id": 62
     },
     {
       "character_id": 63,
@@ -1304,7 +1466,8 @@
       "level": 11,
       "hp": 1510,
       "pos_x": 463.188171,
-      "pos_y": 193.1089
+      "pos_y": 193.1089,
+      "Sql_character_id": 63
     },
     {
       "character_id": 64,
@@ -1312,7 +1475,8 @@
       "level": 43,
       "hp": 8254,
       "pos_x": 55.7204323,
-      "pos_y": 236.519485
+      "pos_y": 236.519485,
+      "Sql_character_id": 64
     },
     {
       "character_id": 65,
@@ -1320,7 +1484,8 @@
       "level": 30,
       "hp": 7241,
       "pos_x": 189.021011,
-      "pos_y": 270.926361
+      "pos_y": 270.926361,
+      "Sql_character_id": 65
     },
     {
       "character_id": 66,
@@ -1328,7 +1493,8 @@
       "level": 26,
       "hp": 4802,
       "pos_x": 262.428955,
-      "pos_y": 163.391373
+      "pos_y": 163.391373,
+      "Sql_character_id": 66
     },
     {
       "character_id": 67,
@@ -1336,7 +1502,8 @@
       "level": 5,
       "hp": 1326,
       "pos_x": 86.2948456,
-      "pos_y": 112.304146
+      "pos_y": 112.304146,
+      "Sql_character_id": 67
     },
     {
       "character_id": 68,
@@ -1344,7 +1511,8 @@
       "level": 4,
       "hp": 4469,
       "pos_x": 19.1837044,
-      "pos_y": 430.657379
+      "pos_y": 430.657379,
+      "Sql_character_id": 68
     },
     {
       "character_id": 69,
@@ -1352,7 +1520,8 @@
       "level": 86,
       "hp": 8625,
       "pos_x": 21.9024487,
-      "pos_y": 281.771423
+      "pos_y": 281.771423,
+      "Sql_character_id": 69
     },
     {
       "character_id": 70,
@@ -1360,7 +1529,8 @@
       "level": 98,
       "hp": 3039,
       "pos_x": 61.8034325,
-      "pos_y": 134.669571
+      "pos_y": 134.669571,
+      "Sql_character_id": 70
     },
     {
       "character_id": 71,
@@ -1368,7 +1538,8 @@
       "level": 65,
       "hp": 6308,
       "pos_x": 214.373276,
-      "pos_y": 40.1069756
+      "pos_y": 40.1069756,
+      "Sql_character_id": 71
     },
     {
       "character_id": 72,
@@ -1376,7 +1547,8 @@
       "level": 36,
       "hp": 4923,
       "pos_x": 253.3037,
-      "pos_y": 17.8737278
+      "pos_y": 17.8737278,
+      "Sql_character_id": 72
     },
     {
       "character_id": 73,
@@ -1384,7 +1556,8 @@
       "level": 90,
       "hp": 8547,
       "pos_x": 230.204483,
-      "pos_y": 400.0904
+      "pos_y": 400.0904,
+      "Sql_character_id": 73
     },
     {
       "character_id": 74,
@@ -1392,7 +1565,8 @@
       "level": 5,
       "hp": 574,
       "pos_x": 117.509636,
-      "pos_y": 458.5071
+      "pos_y": 458.5071,
+      "Sql_character_id": 74
     },
     {
       "character_id": 75,
@@ -1400,7 +1574,8 @@
       "level": 20,
       "hp": 8847,
       "pos_x": 106.217911,
-      "pos_y": 207.69191
+      "pos_y": 207.69191,
+      "Sql_character_id": 75
     },
     {
       "character_id": 76,
@@ -1408,7 +1583,8 @@
       "level": 97,
       "hp": 4816,
       "pos_x": 103.597588,
-      "pos_y": 207.82428
+      "pos_y": 207.82428,
+      "Sql_character_id": 76
     },
     {
       "character_id": 77,
@@ -1416,7 +1592,8 @@
       "level": 71,
       "hp": 250,
       "pos_x": 182.621017,
-      "pos_y": 112.602608
+      "pos_y": 112.602608,
+      "Sql_character_id": 77
     },
     {
       "character_id": 78,
@@ -1424,7 +1601,8 @@
       "level": 5,
       "hp": 2595,
       "pos_x": 16.4575233,
-      "pos_y": 230.601059
+      "pos_y": 230.601059,
+      "Sql_character_id": 78
     },
     {
       "character_id": 79,
@@ -1432,7 +1610,8 @@
       "level": 67,
       "hp": 6260,
       "pos_x": 421.650848,
-      "pos_y": 31.7699871
+      "pos_y": 31.7699871,
+      "Sql_character_id": 79
     },
     {
       "character_id": 80,
@@ -1440,7 +1619,8 @@
       "level": 69,
       "hp": 3243,
       "pos_x": 411.995575,
-      "pos_y": 377.519867
+      "pos_y": 377.519867,
+      "Sql_character_id": 80
     },
     {
       "character_id": 81,
@@ -1448,7 +1628,8 @@
       "level": 87,
       "hp": 5416,
       "pos_x": 103.562714,
-      "pos_y": 294.262
+      "pos_y": 294.262,
+      "Sql_character_id": 81
     },
     {
       "character_id": 82,
@@ -1456,7 +1637,8 @@
       "level": 96,
       "hp": 1830,
       "pos_x": 184.871979,
-      "pos_y": 236.663742
+      "pos_y": 236.663742,
+      "Sql_character_id": 82
     },
     {
       "character_id": 83,
@@ -1464,7 +1646,8 @@
       "level": 51,
       "hp": 9470,
       "pos_x": 370.343567,
-      "pos_y": 369.3742
+      "pos_y": 369.3742,
+      "Sql_character_id": 83
     },
     {
       "character_id": 84,
@@ -1472,7 +1655,8 @@
       "level": 63,
       "hp": 9523,
       "pos_x": 267.1586,
-      "pos_y": 186.505127
+      "pos_y": 186.505127,
+      "Sql_character_id": 84
     },
     {
       "character_id": 85,
@@ -1480,7 +1664,8 @@
       "level": 44,
       "hp": 361,
       "pos_x": 295.454773,
-      "pos_y": 475.714569
+      "pos_y": 475.714569,
+      "Sql_character_id": 85
     },
     {
       "character_id": 86,
@@ -1488,7 +1673,8 @@
       "level": 43,
       "hp": 1085,
       "pos_x": 51.6682243,
-      "pos_y": 452.166138
+      "pos_y": 452.166138,
+      "Sql_character_id": 86
     },
     {
       "character_id": 87,
@@ -1496,7 +1682,8 @@
       "level": 66,
       "hp": 8176,
       "pos_x": 121.12236,
-      "pos_y": 228.779587
+      "pos_y": 228.779587,
+      "Sql_character_id": 87
     },
     {
       "character_id": 88,
@@ -1504,7 +1691,8 @@
       "level": 91,
       "hp": 6721,
       "pos_x": 478.1851,
-      "pos_y": 389.27832
+      "pos_y": 389.27832,
+      "Sql_character_id": 88
     },
     {
       "character_id": 89,
@@ -1512,7 +1700,8 @@
       "level": 54,
       "hp": 4950,
       "pos_x": 18.4211483,
-      "pos_y": 215.671692
+      "pos_y": 215.671692,
+      "Sql_character_id": 89
     },
     {
       "character_id": 90,
@@ -1520,7 +1709,8 @@
       "level": 42,
       "hp": 6562,
       "pos_x": 155.13176,
-      "pos_y": 48.99414
+      "pos_y": 48.99414,
+      "Sql_character_id": 90
     },
     {
       "character_id": 91,
@@ -1528,7 +1718,8 @@
       "level": 99,
       "hp": 5492,
       "pos_x": 354.9771,
-      "pos_y": 404.473419
+      "pos_y": 404.473419,
+      "Sql_character_id": 91
     },
     {
       "character_id": 92,
@@ -1536,7 +1727,8 @@
       "level": 22,
       "hp": 8363,
       "pos_x": 16.62287,
-      "pos_y": 45.9902573
+      "pos_y": 45.9902573,
+      "Sql_character_id": 92
     },
     {
       "character_id": 93,
@@ -1544,7 +1736,8 @@
       "level": 98,
       "hp": 3183,
       "pos_x": 181.523254,
-      "pos_y": 155.981628
+      "pos_y": 155.981628,
+      "Sql_character_id": 93
     },
     {
       "character_id": 94,
@@ -1552,7 +1745,8 @@
       "level": 57,
       "hp": 1135,
       "pos_x": 20.6519966,
-      "pos_y": 386.161774
+      "pos_y": 386.161774,
+      "Sql_character_id": 94
     },
     {
       "character_id": 95,
@@ -1560,7 +1754,8 @@
       "level": 93,
       "hp": 2415,
       "pos_x": 391.128662,
-      "pos_y": 254.047409
+      "pos_y": 254.047409,
+      "Sql_character_id": 95
     },
     {
       "character_id": 96,
@@ -1568,7 +1763,8 @@
       "level": 4,
       "hp": 6804,
       "pos_x": 106.892509,
-      "pos_y": 137.81752
+      "pos_y": 137.81752,
+      "Sql_character_id": 96
     },
     {
       "character_id": 97,
@@ -1576,7 +1772,8 @@
       "level": 62,
       "hp": 7055,
       "pos_x": 58.73208,
-      "pos_y": 349.6523
+      "pos_y": 349.6523,
+      "Sql_character_id": 97
     },
     {
       "character_id": 98,
@@ -1584,7 +1781,8 @@
       "level": 66,
       "hp": 7524,
       "pos_x": 120.286835,
-      "pos_y": 410.732849
+      "pos_y": 410.732849,
+      "Sql_character_id": 98
     },
     {
       "character_id": 99,
@@ -1592,7 +1790,8 @@
       "level": 9,
       "hp": 8312,
       "pos_x": 79.75883,
-      "pos_y": 92.43105
+      "pos_y": 92.43105,
+      "Sql_character_id": 99
     },
     {
       "character_id": 100,
@@ -1600,7 +1799,8 @@
       "level": 45,
       "hp": 9977,
       "pos_x": 138.380554,
-      "pos_y": 97.81145
+      "pos_y": 97.81145,
+      "Sql_character_id": 100
     }
   ]
 }

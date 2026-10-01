@@ -10,24 +10,40 @@ using UnityEngine;
 [Table("Master_Item_C1")]
 public class Master_Item_C1
 {
-    [PrimaryKey][field: SerializeField] public int item_id { get; set; }
-    [field: SerializeField] public string name { get; set; }
-    [field: SerializeField] public string item_type { get; set; }
-    [field: SerializeField] public int rarity { get; set; }
-    [field: SerializeField] public int atk { get; set; }
-    [field: SerializeField] public int price { get; set; }
+    // 1. 유니티 / JSON / Binary / SO 직렬화용 순수 필드
+    public int item_id;
+    public string name;
+    public string item_type;
+    public int rarity;
+    public int atk;
+    public int price;
+
+    // 2. SQLite ORM 속성 매핑용 프로퍼티 (직렬화 필드로 연결)
+    [PrimaryKey]
+    public int Sql_item_id
+    {
+        get => item_id;
+        set => item_id = value;
+    }
 }
 
 [Serializable]
 [Table("Runtime_Character_C1")]
 public class Runtime_Character_C1
 {
-    [PrimaryKey][field: SerializeField] public int character_id { get; set; }
-    [field: SerializeField] public string name { get; set; }
-    [field: SerializeField] public int level { get; set; }
-    [field: SerializeField] public int hp { get; set; }
-    [field: SerializeField] public float pos_x { get; set; }
-    [field: SerializeField] public float pos_y { get; set; }
+    public int character_id;
+    public string name;
+    public int level;
+    public int hp;
+    public float pos_x;
+    public float pos_y;
+
+    [PrimaryKey]
+    public int Sql_character_id
+    {
+        get => character_id;
+        set => character_id = value;
+    }
 }
 
 // --- C2 Models ---
@@ -35,43 +51,92 @@ public class Runtime_Character_C1
 [Table("Master_Item_C2")]
 public class Master_Item_C2
 {
-    [PrimaryKey][field: SerializeField] public int item_id { get; set; }
-    [Unique][field: SerializeField] public string item_code { get; set; }
-    [field: SerializeField] public string name { get; set; }
-    [field: SerializeField] public string item_type { get; set; }
-    [field: SerializeField] public int rarity { get; set; }
-    [field: SerializeField] public int req_level { get; set; }
-    [field: SerializeField] public int base_atk { get; set; }
+    public int item_id;
+    public string item_code;
+    public string name;
+    public string item_type;
+    public int rarity;
+    public int req_level;
+    public int base_atk;
+
+    [PrimaryKey]
+    public int Sql_item_id
+    {
+        get => item_id;
+        set => item_id = value;
+    }
+
+    [Unique]
+    public string Sql_item_code
+    {
+        get => item_code;
+        set => item_code = value;
+    }
 }
 
 [Serializable]
 [Table("Item_Tag_C2")]
 public class Item_Tag_C2
 {
-    [Indexed(Name = "PK_Tag", Order = 1)][field: SerializeField] public int item_id { get; set; }
-    [Indexed(Name = "PK_Tag", Order = 2)][field: SerializeField] public string tag_name { get; set; }
+    public int item_id;
+    public string tag_name;
+
+    [Indexed(Name = "PK_Tag", Order = 1)]
+    public int Sql_item_id
+    {
+        get => item_id;
+        set => item_id = value;
+    }
+
+    [Indexed(Name = "PK_Tag", Order = 2)]
+    public string Sql_tag_name
+    {
+        get => tag_name;
+        set => tag_name = value;
+    }
 }
 
 [Serializable]
 [Table("Runtime_Character_C2")]
 public class Runtime_Character_C2
 {
-    [PrimaryKey][field: SerializeField] public int character_id { get; set; }
-    [field: SerializeField] public string name { get; set; }
-    [field: SerializeField] public int level { get; set; }
-    [field: SerializeField] public int cur_hp { get; set; }
-    [field: SerializeField] public float pos_x { get; set; }
-    [field: SerializeField] public float pos_y { get; set; }
+    public int character_id;
+    public string name;
+    public int level;
+    public int cur_hp;
+    public float pos_x;
+    public float pos_y;
+
+    [PrimaryKey]
+    public int Sql_character_id
+    {
+        get => character_id;
+        set => character_id = value;
+    }
 }
 
 [Serializable]
 [Table("Runtime_Inventory_C2")]
 public class Runtime_Inventory_C2
 {
-    [PrimaryKey, AutoIncrement][field: SerializeField] public int instance_id { get; set; }
-    [Indexed][field: SerializeField] public int character_id { get; set; }
-    [field: SerializeField] public int item_id { get; set; }
-    [field: SerializeField] public int quantity { get; set; }
+    public int instance_id;
+    public int character_id;
+    public int item_id;
+    public int quantity;
+
+    [PrimaryKey, AutoIncrement]
+    public int Sql_instance_id
+    {
+        get => instance_id;
+        set => instance_id = value;
+    }
+
+    [Indexed]
+    public int Sql_character_id
+    {
+        get => character_id;
+        set => character_id = value;
+    }
 }
 
 // --- C3 Models ---
@@ -79,55 +144,118 @@ public class Runtime_Inventory_C2
 [Table("System_User_C3")]
 public class System_User_C3
 {
-    [PrimaryKey][field: SerializeField] public int user_id { get; set; }
-    [field: SerializeField] public string account_name { get; set; }
-    [field: SerializeField] public long created_at { get; set; }
+    public int user_id;
+    public string account_name;
+    public long created_at;
+
+    [PrimaryKey]
+    public int Sql_user_id
+    {
+        get => user_id;
+        set => user_id = value;
+    }
 }
 
 [Serializable]
 [Table("Runtime_Character_C3")]
 public class Runtime_Character_C3
 {
-    [PrimaryKey][field: SerializeField] public int character_id { get; set; }
-    [Indexed][field: SerializeField] public int user_id { get; set; }
-    [field: SerializeField] public string name { get; set; }
-    [field: SerializeField] public int guild_id { get; set; }
+    public int character_id;
+    public int user_id;
+    public string name;
+    public int guild_id;
+
+    [PrimaryKey]
+    public int Sql_character_id
+    {
+        get => character_id;
+        set => character_id = value;
+    }
+
+    [Indexed]
+    public int Sql_user_id
+    {
+        get => user_id;
+        set => user_id = value;
+    }
 }
 
 [Serializable]
 [Table("Master_Item_C3")]
 public class Master_Item_C3
 {
-    [PrimaryKey][field: SerializeField] public int item_id { get; set; }
-    [field: SerializeField] public string name { get; set; }
-    [field: SerializeField] public int rarity { get; set; }
+    public int item_id;
+    public string name;
+    public int rarity;
+
+    [PrimaryKey]
+    public int Sql_item_id
+    {
+        get => item_id;
+        set => item_id = value;
+    }
 }
 
 [Serializable]
 [Table("Master_Effect_C3")]
 public class Master_Effect_C3
 {
-    [PrimaryKey][field: SerializeField] public int effect_id { get; set; }
-    [field: SerializeField] public string effect_type { get; set; }
-    [field: SerializeField] public int value { get; set; }
+    public int effect_id;
+    public string effect_type;
+    public int value;
+
+    [PrimaryKey]
+    public int Sql_effect_id
+    {
+        get => effect_id;
+        set => effect_id = value;
+    }
 }
 
 [Serializable]
 [Table("Item_Effect_Link_C3")]
 public class Item_Effect_Link_C3
 {
-    [Indexed(Name = "PK_Link", Order = 1)][field: SerializeField] public int item_id { get; set; }
-    [Indexed(Name = "PK_Link", Order = 2)][field: SerializeField] public int effect_id { get; set; }
+    public int item_id;
+    public int effect_id;
+
+    [Indexed(Name = "PK_Link", Order = 1)]
+    public int Sql_item_id
+    {
+        get => item_id;
+        set => item_id = value;
+    }
+
+    [Indexed(Name = "PK_Link", Order = 2)]
+    public int Sql_effect_id
+    {
+        get => effect_id;
+        set => effect_id = value;
+    }
 }
 
 [Serializable]
 [Table("Runtime_Inventory_C3")]
 public class Runtime_Inventory_C3
 {
-    [PrimaryKey, AutoIncrement][field: SerializeField] public int instance_id { get; set; }
-    [Indexed][field: SerializeField] public int character_id { get; set; }
-    [field: SerializeField] public int item_id { get; set; }
-    [field: SerializeField] public int durability { get; set; }
+    public int instance_id;
+    public int character_id;
+    public int item_id;
+    public int durability;
+
+    [PrimaryKey, AutoIncrement]
+    public int Sql_instance_id
+    {
+        get => instance_id;
+        set => instance_id = value;
+    }
+
+    [Indexed]
+    public int Sql_character_id
+    {
+        get => character_id;
+        set => character_id = value;
+    }
 }
 #endregion
 
