@@ -1,0 +1,1921 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: GameData_S100_C3_High
+  m_EditorClassIdentifier: Assembly-CSharp::SO_C3
+  data:
+    users:
+    - <user_id>k__BackingField: 1
+      <account_name>k__BackingField: User_1
+      <created_at>k__BackingField: 1700000001
+    - <user_id>k__BackingField: 2
+      <account_name>k__BackingField: User_2
+      <created_at>k__BackingField: 1700000002
+    - <user_id>k__BackingField: 3
+      <account_name>k__BackingField: User_3
+      <created_at>k__BackingField: 1700000003
+    - <user_id>k__BackingField: 4
+      <account_name>k__BackingField: User_4
+      <created_at>k__BackingField: 1700000004
+    - <user_id>k__BackingField: 5
+      <account_name>k__BackingField: User_5
+      <created_at>k__BackingField: 1700000005
+    - <user_id>k__BackingField: 6
+      <account_name>k__BackingField: User_6
+      <created_at>k__BackingField: 1700000006
+    - <user_id>k__BackingField: 7
+      <account_name>k__BackingField: User_7
+      <created_at>k__BackingField: 1700000007
+    - <user_id>k__BackingField: 8
+      <account_name>k__BackingField: User_8
+      <created_at>k__BackingField: 1700000008
+    - <user_id>k__BackingField: 9
+      <account_name>k__BackingField: User_9
+      <created_at>k__BackingField: 1700000009
+    - <user_id>k__BackingField: 10
+      <account_name>k__BackingField: User_10
+      <created_at>k__BackingField: 1700000010
+    - <user_id>k__BackingField: 11
+      <account_name>k__BackingField: User_11
+      <created_at>k__BackingField: 1700000011
+    - <user_id>k__BackingField: 12
+      <account_name>k__BackingField: User_12
+      <created_at>k__BackingField: 1700000012
+    - <user_id>k__BackingField: 13
+      <account_name>k__BackingField: User_13
+      <created_at>k__BackingField: 1700000013
+    - <user_id>k__BackingField: 14
+      <account_name>k__BackingField: User_14
+      <created_at>k__BackingField: 1700000014
+    - <user_id>k__BackingField: 15
+      <account_name>k__BackingField: User_15
+      <created_at>k__BackingField: 1700000015
+    - <user_id>k__BackingField: 16
+      <account_name>k__BackingField: User_16
+      <created_at>k__BackingField: 1700000016
+    - <user_id>k__BackingField: 17
+      <account_name>k__BackingField: User_17
+      <created_at>k__BackingField: 1700000017
+    - <user_id>k__BackingField: 18
+      <account_name>k__BackingField: User_18
+      <created_at>k__BackingField: 1700000018
+    - <user_id>k__BackingField: 19
+      <account_name>k__BackingField: User_19
+      <created_at>k__BackingField: 1700000019
+    - <user_id>k__BackingField: 20
+      <account_name>k__BackingField: User_20
+      <created_at>k__BackingField: 1700000020
+    - <user_id>k__BackingField: 21
+      <account_name>k__BackingField: User_21
+      <created_at>k__BackingField: 1700000021
+    - <user_id>k__BackingField: 22
+      <account_name>k__BackingField: User_22
+      <created_at>k__BackingField: 1700000022
+    - <user_id>k__BackingField: 23
+      <account_name>k__BackingField: User_23
+      <created_at>k__BackingField: 1700000023
+    - <user_id>k__BackingField: 24
+      <account_name>k__BackingField: User_24
+      <created_at>k__BackingField: 1700000024
+    - <user_id>k__BackingField: 25
+      <account_name>k__BackingField: User_25
+      <created_at>k__BackingField: 1700000025
+    - <user_id>k__BackingField: 26
+      <account_name>k__BackingField: User_26
+      <created_at>k__BackingField: 1700000026
+    - <user_id>k__BackingField: 27
+      <account_name>k__BackingField: User_27
+      <created_at>k__BackingField: 1700000027
+    - <user_id>k__BackingField: 28
+      <account_name>k__BackingField: User_28
+      <created_at>k__BackingField: 1700000028
+    - <user_id>k__BackingField: 29
+      <account_name>k__BackingField: User_29
+      <created_at>k__BackingField: 1700000029
+    - <user_id>k__BackingField: 30
+      <account_name>k__BackingField: User_30
+      <created_at>k__BackingField: 1700000030
+    - <user_id>k__BackingField: 31
+      <account_name>k__BackingField: User_31
+      <created_at>k__BackingField: 1700000031
+    - <user_id>k__BackingField: 32
+      <account_name>k__BackingField: User_32
+      <created_at>k__BackingField: 1700000032
+    - <user_id>k__BackingField: 33
+      <account_name>k__BackingField: User_33
+      <created_at>k__BackingField: 1700000033
+    - <user_id>k__BackingField: 34
+      <account_name>k__BackingField: User_34
+      <created_at>k__BackingField: 1700000034
+    - <user_id>k__BackingField: 35
+      <account_name>k__BackingField: User_35
+      <created_at>k__BackingField: 1700000035
+    - <user_id>k__BackingField: 36
+      <account_name>k__BackingField: User_36
+      <created_at>k__BackingField: 1700000036
+    - <user_id>k__BackingField: 37
+      <account_name>k__BackingField: User_37
+      <created_at>k__BackingField: 1700000037
+    - <user_id>k__BackingField: 38
+      <account_name>k__BackingField: User_38
+      <created_at>k__BackingField: 1700000038
+    - <user_id>k__BackingField: 39
+      <account_name>k__BackingField: User_39
+      <created_at>k__BackingField: 1700000039
+    - <user_id>k__BackingField: 40
+      <account_name>k__BackingField: User_40
+      <created_at>k__BackingField: 1700000040
+    - <user_id>k__BackingField: 41
+      <account_name>k__BackingField: User_41
+      <created_at>k__BackingField: 1700000041
+    - <user_id>k__BackingField: 42
+      <account_name>k__BackingField: User_42
+      <created_at>k__BackingField: 1700000042
+    - <user_id>k__BackingField: 43
+      <account_name>k__BackingField: User_43
+      <created_at>k__BackingField: 1700000043
+    - <user_id>k__BackingField: 44
+      <account_name>k__BackingField: User_44
+      <created_at>k__BackingField: 1700000044
+    - <user_id>k__BackingField: 45
+      <account_name>k__BackingField: User_45
+      <created_at>k__BackingField: 1700000045
+    - <user_id>k__BackingField: 46
+      <account_name>k__BackingField: User_46
+      <created_at>k__BackingField: 1700000046
+    - <user_id>k__BackingField: 47
+      <account_name>k__BackingField: User_47
+      <created_at>k__BackingField: 1700000047
+    - <user_id>k__BackingField: 48
+      <account_name>k__BackingField: User_48
+      <created_at>k__BackingField: 1700000048
+    - <user_id>k__BackingField: 49
+      <account_name>k__BackingField: User_49
+      <created_at>k__BackingField: 1700000049
+    - <user_id>k__BackingField: 50
+      <account_name>k__BackingField: User_50
+      <created_at>k__BackingField: 1700000050
+    - <user_id>k__BackingField: 51
+      <account_name>k__BackingField: User_51
+      <created_at>k__BackingField: 1700000051
+    - <user_id>k__BackingField: 52
+      <account_name>k__BackingField: User_52
+      <created_at>k__BackingField: 1700000052
+    - <user_id>k__BackingField: 53
+      <account_name>k__BackingField: User_53
+      <created_at>k__BackingField: 1700000053
+    - <user_id>k__BackingField: 54
+      <account_name>k__BackingField: User_54
+      <created_at>k__BackingField: 1700000054
+    - <user_id>k__BackingField: 55
+      <account_name>k__BackingField: User_55
+      <created_at>k__BackingField: 1700000055
+    - <user_id>k__BackingField: 56
+      <account_name>k__BackingField: User_56
+      <created_at>k__BackingField: 1700000056
+    - <user_id>k__BackingField: 57
+      <account_name>k__BackingField: User_57
+      <created_at>k__BackingField: 1700000057
+    - <user_id>k__BackingField: 58
+      <account_name>k__BackingField: User_58
+      <created_at>k__BackingField: 1700000058
+    - <user_id>k__BackingField: 59
+      <account_name>k__BackingField: User_59
+      <created_at>k__BackingField: 1700000059
+    - <user_id>k__BackingField: 60
+      <account_name>k__BackingField: User_60
+      <created_at>k__BackingField: 1700000060
+    - <user_id>k__BackingField: 61
+      <account_name>k__BackingField: User_61
+      <created_at>k__BackingField: 1700000061
+    - <user_id>k__BackingField: 62
+      <account_name>k__BackingField: User_62
+      <created_at>k__BackingField: 1700000062
+    - <user_id>k__BackingField: 63
+      <account_name>k__BackingField: User_63
+      <created_at>k__BackingField: 1700000063
+    - <user_id>k__BackingField: 64
+      <account_name>k__BackingField: User_64
+      <created_at>k__BackingField: 1700000064
+    - <user_id>k__BackingField: 65
+      <account_name>k__BackingField: User_65
+      <created_at>k__BackingField: 1700000065
+    - <user_id>k__BackingField: 66
+      <account_name>k__BackingField: User_66
+      <created_at>k__BackingField: 1700000066
+    - <user_id>k__BackingField: 67
+      <account_name>k__BackingField: User_67
+      <created_at>k__BackingField: 1700000067
+    - <user_id>k__BackingField: 68
+      <account_name>k__BackingField: User_68
+      <created_at>k__BackingField: 1700000068
+    - <user_id>k__BackingField: 69
+      <account_name>k__BackingField: User_69
+      <created_at>k__BackingField: 1700000069
+    - <user_id>k__BackingField: 70
+      <account_name>k__BackingField: User_70
+      <created_at>k__BackingField: 1700000070
+    - <user_id>k__BackingField: 71
+      <account_name>k__BackingField: User_71
+      <created_at>k__BackingField: 1700000071
+    - <user_id>k__BackingField: 72
+      <account_name>k__BackingField: User_72
+      <created_at>k__BackingField: 1700000072
+    - <user_id>k__BackingField: 73
+      <account_name>k__BackingField: User_73
+      <created_at>k__BackingField: 1700000073
+    - <user_id>k__BackingField: 74
+      <account_name>k__BackingField: User_74
+      <created_at>k__BackingField: 1700000074
+    - <user_id>k__BackingField: 75
+      <account_name>k__BackingField: User_75
+      <created_at>k__BackingField: 1700000075
+    - <user_id>k__BackingField: 76
+      <account_name>k__BackingField: User_76
+      <created_at>k__BackingField: 1700000076
+    - <user_id>k__BackingField: 77
+      <account_name>k__BackingField: User_77
+      <created_at>k__BackingField: 1700000077
+    - <user_id>k__BackingField: 78
+      <account_name>k__BackingField: User_78
+      <created_at>k__BackingField: 1700000078
+    - <user_id>k__BackingField: 79
+      <account_name>k__BackingField: User_79
+      <created_at>k__BackingField: 1700000079
+    - <user_id>k__BackingField: 80
+      <account_name>k__BackingField: User_80
+      <created_at>k__BackingField: 1700000080
+    - <user_id>k__BackingField: 81
+      <account_name>k__BackingField: User_81
+      <created_at>k__BackingField: 1700000081
+    - <user_id>k__BackingField: 82
+      <account_name>k__BackingField: User_82
+      <created_at>k__BackingField: 1700000082
+    - <user_id>k__BackingField: 83
+      <account_name>k__BackingField: User_83
+      <created_at>k__BackingField: 1700000083
+    - <user_id>k__BackingField: 84
+      <account_name>k__BackingField: User_84
+      <created_at>k__BackingField: 1700000084
+    - <user_id>k__BackingField: 85
+      <account_name>k__BackingField: User_85
+      <created_at>k__BackingField: 1700000085
+    - <user_id>k__BackingField: 86
+      <account_name>k__BackingField: User_86
+      <created_at>k__BackingField: 1700000086
+    - <user_id>k__BackingField: 87
+      <account_name>k__BackingField: User_87
+      <created_at>k__BackingField: 1700000087
+    - <user_id>k__BackingField: 88
+      <account_name>k__BackingField: User_88
+      <created_at>k__BackingField: 1700000088
+    - <user_id>k__BackingField: 89
+      <account_name>k__BackingField: User_89
+      <created_at>k__BackingField: 1700000089
+    - <user_id>k__BackingField: 90
+      <account_name>k__BackingField: User_90
+      <created_at>k__BackingField: 1700000090
+    - <user_id>k__BackingField: 91
+      <account_name>k__BackingField: User_91
+      <created_at>k__BackingField: 1700000091
+    - <user_id>k__BackingField: 92
+      <account_name>k__BackingField: User_92
+      <created_at>k__BackingField: 1700000092
+    - <user_id>k__BackingField: 93
+      <account_name>k__BackingField: User_93
+      <created_at>k__BackingField: 1700000093
+    - <user_id>k__BackingField: 94
+      <account_name>k__BackingField: User_94
+      <created_at>k__BackingField: 1700000094
+    - <user_id>k__BackingField: 95
+      <account_name>k__BackingField: User_95
+      <created_at>k__BackingField: 1700000095
+    - <user_id>k__BackingField: 96
+      <account_name>k__BackingField: User_96
+      <created_at>k__BackingField: 1700000096
+    - <user_id>k__BackingField: 97
+      <account_name>k__BackingField: User_97
+      <created_at>k__BackingField: 1700000097
+    - <user_id>k__BackingField: 98
+      <account_name>k__BackingField: User_98
+      <created_at>k__BackingField: 1700000098
+    - <user_id>k__BackingField: 99
+      <account_name>k__BackingField: User_99
+      <created_at>k__BackingField: 1700000099
+    - <user_id>k__BackingField: 100
+      <account_name>k__BackingField: User_100
+      <created_at>k__BackingField: 1700000100
+    characters:
+    - <character_id>k__BackingField: 1
+      <user_id>k__BackingField: 1
+      <name>k__BackingField: Hero_C3_1
+      <guild_id>k__BackingField: 33
+    - <character_id>k__BackingField: 2
+      <user_id>k__BackingField: 2
+      <name>k__BackingField: Hero_C3_2
+      <guild_id>k__BackingField: 13
+    - <character_id>k__BackingField: 3
+      <user_id>k__BackingField: 3
+      <name>k__BackingField: Hero_C3_3
+      <guild_id>k__BackingField: 12
+    - <character_id>k__BackingField: 4
+      <user_id>k__BackingField: 4
+      <name>k__BackingField: Hero_C3_4
+      <guild_id>k__BackingField: 13
+    - <character_id>k__BackingField: 5
+      <user_id>k__BackingField: 5
+      <name>k__BackingField: Hero_C3_5
+      <guild_id>k__BackingField: 20
+    - <character_id>k__BackingField: 6
+      <user_id>k__BackingField: 6
+      <name>k__BackingField: Hero_C3_6
+      <guild_id>k__BackingField: 27
+    - <character_id>k__BackingField: 7
+      <user_id>k__BackingField: 7
+      <name>k__BackingField: Hero_C3_7
+      <guild_id>k__BackingField: 34
+    - <character_id>k__BackingField: 8
+      <user_id>k__BackingField: 8
+      <name>k__BackingField: Hero_C3_8
+      <guild_id>k__BackingField: 29
+    - <character_id>k__BackingField: 9
+      <user_id>k__BackingField: 9
+      <name>k__BackingField: Hero_C3_9
+      <guild_id>k__BackingField: 37
+    - <character_id>k__BackingField: 10
+      <user_id>k__BackingField: 10
+      <name>k__BackingField: Hero_C3_10
+      <guild_id>k__BackingField: 39
+    - <character_id>k__BackingField: 11
+      <user_id>k__BackingField: 11
+      <name>k__BackingField: Hero_C3_11
+      <guild_id>k__BackingField: 15
+    - <character_id>k__BackingField: 12
+      <user_id>k__BackingField: 12
+      <name>k__BackingField: Hero_C3_12
+      <guild_id>k__BackingField: 26
+    - <character_id>k__BackingField: 13
+      <user_id>k__BackingField: 13
+      <name>k__BackingField: Hero_C3_13
+      <guild_id>k__BackingField: 11
+    - <character_id>k__BackingField: 14
+      <user_id>k__BackingField: 14
+      <name>k__BackingField: Hero_C3_14
+      <guild_id>k__BackingField: 36
+    - <character_id>k__BackingField: 15
+      <user_id>k__BackingField: 15
+      <name>k__BackingField: Hero_C3_15
+      <guild_id>k__BackingField: 22
+    - <character_id>k__BackingField: 16
+      <user_id>k__BackingField: 16
+      <name>k__BackingField: Hero_C3_16
+      <guild_id>k__BackingField: 1
+    - <character_id>k__BackingField: 17
+      <user_id>k__BackingField: 17
+      <name>k__BackingField: Hero_C3_17
+      <guild_id>k__BackingField: 45
+    - <character_id>k__BackingField: 18
+      <user_id>k__BackingField: 18
+      <name>k__BackingField: Hero_C3_18
+      <guild_id>k__BackingField: 3
+    - <character_id>k__BackingField: 19
+      <user_id>k__BackingField: 19
+      <name>k__BackingField: Hero_C3_19
+      <guild_id>k__BackingField: 27
+    - <character_id>k__BackingField: 20
+      <user_id>k__BackingField: 20
+      <name>k__BackingField: Hero_C3_20
+      <guild_id>k__BackingField: 37
+    - <character_id>k__BackingField: 21
+      <user_id>k__BackingField: 21
+      <name>k__BackingField: Hero_C3_21
+      <guild_id>k__BackingField: 35
+    - <character_id>k__BackingField: 22
+      <user_id>k__BackingField: 22
+      <name>k__BackingField: Hero_C3_22
+      <guild_id>k__BackingField: 39
+    - <character_id>k__BackingField: 23
+      <user_id>k__BackingField: 23
+      <name>k__BackingField: Hero_C3_23
+      <guild_id>k__BackingField: 26
+    - <character_id>k__BackingField: 24
+      <user_id>k__BackingField: 24
+      <name>k__BackingField: Hero_C3_24
+      <guild_id>k__BackingField: 15
+    - <character_id>k__BackingField: 25
+      <user_id>k__BackingField: 25
+      <name>k__BackingField: Hero_C3_25
+      <guild_id>k__BackingField: 17
+    - <character_id>k__BackingField: 26
+      <user_id>k__BackingField: 26
+      <name>k__BackingField: Hero_C3_26
+      <guild_id>k__BackingField: 2
+    - <character_id>k__BackingField: 27
+      <user_id>k__BackingField: 27
+      <name>k__BackingField: Hero_C3_27
+      <guild_id>k__BackingField: 49
+    - <character_id>k__BackingField: 28
+      <user_id>k__BackingField: 28
+      <name>k__BackingField: Hero_C3_28
+      <guild_id>k__BackingField: 37
+    - <character_id>k__BackingField: 29
+      <user_id>k__BackingField: 29
+      <name>k__BackingField: Hero_C3_29
+      <guild_id>k__BackingField: 44
+    - <character_id>k__BackingField: 30
+      <user_id>k__BackingField: 30
+      <name>k__BackingField: Hero_C3_30
+      <guild_id>k__BackingField: 27
+    - <character_id>k__BackingField: 31
+      <user_id>k__BackingField: 31
+      <name>k__BackingField: Hero_C3_31
+      <guild_id>k__BackingField: 9
+    - <character_id>k__BackingField: 32
+      <user_id>k__BackingField: 32
+      <name>k__BackingField: Hero_C3_32
+      <guild_id>k__BackingField: 39
+    - <character_id>k__BackingField: 33
+      <user_id>k__BackingField: 33
+      <name>k__BackingField: Hero_C3_33
+      <guild_id>k__BackingField: 28
+    - <character_id>k__BackingField: 34
+      <user_id>k__BackingField: 34
+      <name>k__BackingField: Hero_C3_34
+      <guild_id>k__BackingField: 20
+    - <character_id>k__BackingField: 35
+      <user_id>k__BackingField: 35
+      <name>k__BackingField: Hero_C3_35
+      <guild_id>k__BackingField: 23
+    - <character_id>k__BackingField: 36
+      <user_id>k__BackingField: 36
+      <name>k__BackingField: Hero_C3_36
+      <guild_id>k__BackingField: 6
+    - <character_id>k__BackingField: 37
+      <user_id>k__BackingField: 37
+      <name>k__BackingField: Hero_C3_37
+      <guild_id>k__BackingField: 20
+    - <character_id>k__BackingField: 38
+      <user_id>k__BackingField: 38
+      <name>k__BackingField: Hero_C3_38
+      <guild_id>k__BackingField: 48
+    - <character_id>k__BackingField: 39
+      <user_id>k__BackingField: 39
+      <name>k__BackingField: Hero_C3_39
+      <guild_id>k__BackingField: 31
+    - <character_id>k__BackingField: 40
+      <user_id>k__BackingField: 40
+      <name>k__BackingField: Hero_C3_40
+      <guild_id>k__BackingField: 17
+    - <character_id>k__BackingField: 41
+      <user_id>k__BackingField: 41
+      <name>k__BackingField: Hero_C3_41
+      <guild_id>k__BackingField: 33
+    - <character_id>k__BackingField: 42
+      <user_id>k__BackingField: 42
+      <name>k__BackingField: Hero_C3_42
+      <guild_id>k__BackingField: 32
+    - <character_id>k__BackingField: 43
+      <user_id>k__BackingField: 43
+      <name>k__BackingField: Hero_C3_43
+      <guild_id>k__BackingField: 39
+    - <character_id>k__BackingField: 44
+      <user_id>k__BackingField: 44
+      <name>k__BackingField: Hero_C3_44
+      <guild_id>k__BackingField: 48
+    - <character_id>k__BackingField: 45
+      <user_id>k__BackingField: 45
+      <name>k__BackingField: Hero_C3_45
+      <guild_id>k__BackingField: 25
+    - <character_id>k__BackingField: 46
+      <user_id>k__BackingField: 46
+      <name>k__BackingField: Hero_C3_46
+      <guild_id>k__BackingField: 26
+    - <character_id>k__BackingField: 47
+      <user_id>k__BackingField: 47
+      <name>k__BackingField: Hero_C3_47
+      <guild_id>k__BackingField: 29
+    - <character_id>k__BackingField: 48
+      <user_id>k__BackingField: 48
+      <name>k__BackingField: Hero_C3_48
+      <guild_id>k__BackingField: 11
+    - <character_id>k__BackingField: 49
+      <user_id>k__BackingField: 49
+      <name>k__BackingField: Hero_C3_49
+      <guild_id>k__BackingField: 44
+    - <character_id>k__BackingField: 50
+      <user_id>k__BackingField: 50
+      <name>k__BackingField: Hero_C3_50
+      <guild_id>k__BackingField: 33
+    - <character_id>k__BackingField: 51
+      <user_id>k__BackingField: 51
+      <name>k__BackingField: Hero_C3_51
+      <guild_id>k__BackingField: 9
+    - <character_id>k__BackingField: 52
+      <user_id>k__BackingField: 52
+      <name>k__BackingField: Hero_C3_52
+      <guild_id>k__BackingField: 47
+    - <character_id>k__BackingField: 53
+      <user_id>k__BackingField: 53
+      <name>k__BackingField: Hero_C3_53
+      <guild_id>k__BackingField: 46
+    - <character_id>k__BackingField: 54
+      <user_id>k__BackingField: 54
+      <name>k__BackingField: Hero_C3_54
+      <guild_id>k__BackingField: 29
+    - <character_id>k__BackingField: 55
+      <user_id>k__BackingField: 55
+      <name>k__BackingField: Hero_C3_55
+      <guild_id>k__BackingField: 33
+    - <character_id>k__BackingField: 56
+      <user_id>k__BackingField: 56
+      <name>k__BackingField: Hero_C3_56
+      <guild_id>k__BackingField: 2
+    - <character_id>k__BackingField: 57
+      <user_id>k__BackingField: 57
+      <name>k__BackingField: Hero_C3_57
+      <guild_id>k__BackingField: 26
+    - <character_id>k__BackingField: 58
+      <user_id>k__BackingField: 58
+      <name>k__BackingField: Hero_C3_58
+      <guild_id>k__BackingField: 32
+    - <character_id>k__BackingField: 59
+      <user_id>k__BackingField: 59
+      <name>k__BackingField: Hero_C3_59
+      <guild_id>k__BackingField: 7
+    - <character_id>k__BackingField: 60
+      <user_id>k__BackingField: 60
+      <name>k__BackingField: Hero_C3_60
+      <guild_id>k__BackingField: 1
+    - <character_id>k__BackingField: 61
+      <user_id>k__BackingField: 61
+      <name>k__BackingField: Hero_C3_61
+      <guild_id>k__BackingField: 32
+    - <character_id>k__BackingField: 62
+      <user_id>k__BackingField: 62
+      <name>k__BackingField: Hero_C3_62
+      <guild_id>k__BackingField: 10
+    - <character_id>k__BackingField: 63
+      <user_id>k__BackingField: 63
+      <name>k__BackingField: Hero_C3_63
+      <guild_id>k__BackingField: 31
+    - <character_id>k__BackingField: 64
+      <user_id>k__BackingField: 64
+      <name>k__BackingField: Hero_C3_64
+      <guild_id>k__BackingField: 28
+    - <character_id>k__BackingField: 65
+      <user_id>k__BackingField: 65
+      <name>k__BackingField: Hero_C3_65
+      <guild_id>k__BackingField: 48
+    - <character_id>k__BackingField: 66
+      <user_id>k__BackingField: 66
+      <name>k__BackingField: Hero_C3_66
+      <guild_id>k__BackingField: 40
+    - <character_id>k__BackingField: 67
+      <user_id>k__BackingField: 67
+      <name>k__BackingField: Hero_C3_67
+      <guild_id>k__BackingField: 23
+    - <character_id>k__BackingField: 68
+      <user_id>k__BackingField: 68
+      <name>k__BackingField: Hero_C3_68
+      <guild_id>k__BackingField: 21
+    - <character_id>k__BackingField: 69
+      <user_id>k__BackingField: 69
+      <name>k__BackingField: Hero_C3_69
+      <guild_id>k__BackingField: 1
+    - <character_id>k__BackingField: 70
+      <user_id>k__BackingField: 70
+      <name>k__BackingField: Hero_C3_70
+      <guild_id>k__BackingField: 36
+    - <character_id>k__BackingField: 71
+      <user_id>k__BackingField: 71
+      <name>k__BackingField: Hero_C3_71
+      <guild_id>k__BackingField: 23
+    - <character_id>k__BackingField: 72
+      <user_id>k__BackingField: 72
+      <name>k__BackingField: Hero_C3_72
+      <guild_id>k__BackingField: 47
+    - <character_id>k__BackingField: 73
+      <user_id>k__BackingField: 73
+      <name>k__BackingField: Hero_C3_73
+      <guild_id>k__BackingField: 25
+    - <character_id>k__BackingField: 74
+      <user_id>k__BackingField: 74
+      <name>k__BackingField: Hero_C3_74
+      <guild_id>k__BackingField: 31
+    - <character_id>k__BackingField: 75
+      <user_id>k__BackingField: 75
+      <name>k__BackingField: Hero_C3_75
+      <guild_id>k__BackingField: 7
+    - <character_id>k__BackingField: 76
+      <user_id>k__BackingField: 76
+      <name>k__BackingField: Hero_C3_76
+      <guild_id>k__BackingField: 2
+    - <character_id>k__BackingField: 77
+      <user_id>k__BackingField: 77
+      <name>k__BackingField: Hero_C3_77
+      <guild_id>k__BackingField: 20
+    - <character_id>k__BackingField: 78
+      <user_id>k__BackingField: 78
+      <name>k__BackingField: Hero_C3_78
+      <guild_id>k__BackingField: 27
+    - <character_id>k__BackingField: 79
+      <user_id>k__BackingField: 79
+      <name>k__BackingField: Hero_C3_79
+      <guild_id>k__BackingField: 26
+    - <character_id>k__BackingField: 80
+      <user_id>k__BackingField: 80
+      <name>k__BackingField: Hero_C3_80
+      <guild_id>k__BackingField: 34
+    - <character_id>k__BackingField: 81
+      <user_id>k__BackingField: 81
+      <name>k__BackingField: Hero_C3_81
+      <guild_id>k__BackingField: 39
+    - <character_id>k__BackingField: 82
+      <user_id>k__BackingField: 82
+      <name>k__BackingField: Hero_C3_82
+      <guild_id>k__BackingField: 5
+    - <character_id>k__BackingField: 83
+      <user_id>k__BackingField: 83
+      <name>k__BackingField: Hero_C3_83
+      <guild_id>k__BackingField: 35
+    - <character_id>k__BackingField: 84
+      <user_id>k__BackingField: 84
+      <name>k__BackingField: Hero_C3_84
+      <guild_id>k__BackingField: 45
+    - <character_id>k__BackingField: 85
+      <user_id>k__BackingField: 85
+      <name>k__BackingField: Hero_C3_85
+      <guild_id>k__BackingField: 29
+    - <character_id>k__BackingField: 86
+      <user_id>k__BackingField: 86
+      <name>k__BackingField: Hero_C3_86
+      <guild_id>k__BackingField: 18
+    - <character_id>k__BackingField: 87
+      <user_id>k__BackingField: 87
+      <name>k__BackingField: Hero_C3_87
+      <guild_id>k__BackingField: 7
+    - <character_id>k__BackingField: 88
+      <user_id>k__BackingField: 88
+      <name>k__BackingField: Hero_C3_88
+      <guild_id>k__BackingField: 28
+    - <character_id>k__BackingField: 89
+      <user_id>k__BackingField: 89
+      <name>k__BackingField: Hero_C3_89
+      <guild_id>k__BackingField: 37
+    - <character_id>k__BackingField: 90
+      <user_id>k__BackingField: 90
+      <name>k__BackingField: Hero_C3_90
+      <guild_id>k__BackingField: 28
+    - <character_id>k__BackingField: 91
+      <user_id>k__BackingField: 91
+      <name>k__BackingField: Hero_C3_91
+      <guild_id>k__BackingField: 24
+    - <character_id>k__BackingField: 92
+      <user_id>k__BackingField: 92
+      <name>k__BackingField: Hero_C3_92
+      <guild_id>k__BackingField: 43
+    - <character_id>k__BackingField: 93
+      <user_id>k__BackingField: 93
+      <name>k__BackingField: Hero_C3_93
+      <guild_id>k__BackingField: 12
+    - <character_id>k__BackingField: 94
+      <user_id>k__BackingField: 94
+      <name>k__BackingField: Hero_C3_94
+      <guild_id>k__BackingField: 41
+    - <character_id>k__BackingField: 95
+      <user_id>k__BackingField: 95
+      <name>k__BackingField: Hero_C3_95
+      <guild_id>k__BackingField: 13
+    - <character_id>k__BackingField: 96
+      <user_id>k__BackingField: 96
+      <name>k__BackingField: Hero_C3_96
+      <guild_id>k__BackingField: 23
+    - <character_id>k__BackingField: 97
+      <user_id>k__BackingField: 97
+      <name>k__BackingField: Hero_C3_97
+      <guild_id>k__BackingField: 18
+    - <character_id>k__BackingField: 98
+      <user_id>k__BackingField: 98
+      <name>k__BackingField: Hero_C3_98
+      <guild_id>k__BackingField: 26
+    - <character_id>k__BackingField: 99
+      <user_id>k__BackingField: 99
+      <name>k__BackingField: Hero_C3_99
+      <guild_id>k__BackingField: 31
+    - <character_id>k__BackingField: 100
+      <user_id>k__BackingField: 100
+      <name>k__BackingField: Hero_C3_100
+      <guild_id>k__BackingField: 17
+    items:
+    - <item_id>k__BackingField: 1
+      <name>k__BackingField: MasterItem_C3_1
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 2
+      <name>k__BackingField: MasterItem_C3_2
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 3
+      <name>k__BackingField: MasterItem_C3_3
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 4
+      <name>k__BackingField: MasterItem_C3_4
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 5
+      <name>k__BackingField: MasterItem_C3_5
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 6
+      <name>k__BackingField: MasterItem_C3_6
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 7
+      <name>k__BackingField: MasterItem_C3_7
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 8
+      <name>k__BackingField: MasterItem_C3_8
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 9
+      <name>k__BackingField: MasterItem_C3_9
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 10
+      <name>k__BackingField: MasterItem_C3_10
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 11
+      <name>k__BackingField: MasterItem_C3_11
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 12
+      <name>k__BackingField: MasterItem_C3_12
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 13
+      <name>k__BackingField: MasterItem_C3_13
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 14
+      <name>k__BackingField: MasterItem_C3_14
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 15
+      <name>k__BackingField: MasterItem_C3_15
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 16
+      <name>k__BackingField: MasterItem_C3_16
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 17
+      <name>k__BackingField: MasterItem_C3_17
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 18
+      <name>k__BackingField: MasterItem_C3_18
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 19
+      <name>k__BackingField: MasterItem_C3_19
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 20
+      <name>k__BackingField: MasterItem_C3_20
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 21
+      <name>k__BackingField: MasterItem_C3_21
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 22
+      <name>k__BackingField: MasterItem_C3_22
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 23
+      <name>k__BackingField: MasterItem_C3_23
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 24
+      <name>k__BackingField: MasterItem_C3_24
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 25
+      <name>k__BackingField: MasterItem_C3_25
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 26
+      <name>k__BackingField: MasterItem_C3_26
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 27
+      <name>k__BackingField: MasterItem_C3_27
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 28
+      <name>k__BackingField: MasterItem_C3_28
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 29
+      <name>k__BackingField: MasterItem_C3_29
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 30
+      <name>k__BackingField: MasterItem_C3_30
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 31
+      <name>k__BackingField: MasterItem_C3_31
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 32
+      <name>k__BackingField: MasterItem_C3_32
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 33
+      <name>k__BackingField: MasterItem_C3_33
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 34
+      <name>k__BackingField: MasterItem_C3_34
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 35
+      <name>k__BackingField: MasterItem_C3_35
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 36
+      <name>k__BackingField: MasterItem_C3_36
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 37
+      <name>k__BackingField: MasterItem_C3_37
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 38
+      <name>k__BackingField: MasterItem_C3_38
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 39
+      <name>k__BackingField: MasterItem_C3_39
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 40
+      <name>k__BackingField: MasterItem_C3_40
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 41
+      <name>k__BackingField: MasterItem_C3_41
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 42
+      <name>k__BackingField: MasterItem_C3_42
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 43
+      <name>k__BackingField: MasterItem_C3_43
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 44
+      <name>k__BackingField: MasterItem_C3_44
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 45
+      <name>k__BackingField: MasterItem_C3_45
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 46
+      <name>k__BackingField: MasterItem_C3_46
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 47
+      <name>k__BackingField: MasterItem_C3_47
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 48
+      <name>k__BackingField: MasterItem_C3_48
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 49
+      <name>k__BackingField: MasterItem_C3_49
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 50
+      <name>k__BackingField: MasterItem_C3_50
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 51
+      <name>k__BackingField: MasterItem_C3_51
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 52
+      <name>k__BackingField: MasterItem_C3_52
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 53
+      <name>k__BackingField: MasterItem_C3_53
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 54
+      <name>k__BackingField: MasterItem_C3_54
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 55
+      <name>k__BackingField: MasterItem_C3_55
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 56
+      <name>k__BackingField: MasterItem_C3_56
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 57
+      <name>k__BackingField: MasterItem_C3_57
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 58
+      <name>k__BackingField: MasterItem_C3_58
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 59
+      <name>k__BackingField: MasterItem_C3_59
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 60
+      <name>k__BackingField: MasterItem_C3_60
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 61
+      <name>k__BackingField: MasterItem_C3_61
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 62
+      <name>k__BackingField: MasterItem_C3_62
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 63
+      <name>k__BackingField: MasterItem_C3_63
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 64
+      <name>k__BackingField: MasterItem_C3_64
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 65
+      <name>k__BackingField: MasterItem_C3_65
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 66
+      <name>k__BackingField: MasterItem_C3_66
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 67
+      <name>k__BackingField: MasterItem_C3_67
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 68
+      <name>k__BackingField: MasterItem_C3_68
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 69
+      <name>k__BackingField: MasterItem_C3_69
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 70
+      <name>k__BackingField: MasterItem_C3_70
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 71
+      <name>k__BackingField: MasterItem_C3_71
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 72
+      <name>k__BackingField: MasterItem_C3_72
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 73
+      <name>k__BackingField: MasterItem_C3_73
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 74
+      <name>k__BackingField: MasterItem_C3_74
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 75
+      <name>k__BackingField: MasterItem_C3_75
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 76
+      <name>k__BackingField: MasterItem_C3_76
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 77
+      <name>k__BackingField: MasterItem_C3_77
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 78
+      <name>k__BackingField: MasterItem_C3_78
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 79
+      <name>k__BackingField: MasterItem_C3_79
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 80
+      <name>k__BackingField: MasterItem_C3_80
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 81
+      <name>k__BackingField: MasterItem_C3_81
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 82
+      <name>k__BackingField: MasterItem_C3_82
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 83
+      <name>k__BackingField: MasterItem_C3_83
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 84
+      <name>k__BackingField: MasterItem_C3_84
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 85
+      <name>k__BackingField: MasterItem_C3_85
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 86
+      <name>k__BackingField: MasterItem_C3_86
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 87
+      <name>k__BackingField: MasterItem_C3_87
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 88
+      <name>k__BackingField: MasterItem_C3_88
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 89
+      <name>k__BackingField: MasterItem_C3_89
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 90
+      <name>k__BackingField: MasterItem_C3_90
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 91
+      <name>k__BackingField: MasterItem_C3_91
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 92
+      <name>k__BackingField: MasterItem_C3_92
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 93
+      <name>k__BackingField: MasterItem_C3_93
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 94
+      <name>k__BackingField: MasterItem_C3_94
+      <rarity>k__BackingField: 3
+    - <item_id>k__BackingField: 95
+      <name>k__BackingField: MasterItem_C3_95
+      <rarity>k__BackingField: 5
+    - <item_id>k__BackingField: 96
+      <name>k__BackingField: MasterItem_C3_96
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 97
+      <name>k__BackingField: MasterItem_C3_97
+      <rarity>k__BackingField: 1
+    - <item_id>k__BackingField: 98
+      <name>k__BackingField: MasterItem_C3_98
+      <rarity>k__BackingField: 2
+    - <item_id>k__BackingField: 99
+      <name>k__BackingField: MasterItem_C3_99
+      <rarity>k__BackingField: 4
+    - <item_id>k__BackingField: 100
+      <name>k__BackingField: MasterItem_C3_100
+      <rarity>k__BackingField: 2
+    effects:
+    - <effect_id>k__BackingField: 1
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 54
+    - <effect_id>k__BackingField: 2
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 21
+    - <effect_id>k__BackingField: 3
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 35
+    - <effect_id>k__BackingField: 4
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 82
+    - <effect_id>k__BackingField: 5
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 71
+    - <effect_id>k__BackingField: 6
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 19
+    - <effect_id>k__BackingField: 7
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 8
+    - <effect_id>k__BackingField: 8
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 55
+    - <effect_id>k__BackingField: 9
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 7
+    - <effect_id>k__BackingField: 10
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 28
+    - <effect_id>k__BackingField: 11
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 9
+    - <effect_id>k__BackingField: 12
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 72
+    - <effect_id>k__BackingField: 13
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 30
+    - <effect_id>k__BackingField: 14
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 6
+    - <effect_id>k__BackingField: 15
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 5
+    - <effect_id>k__BackingField: 16
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 67
+    - <effect_id>k__BackingField: 17
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 40
+    - <effect_id>k__BackingField: 18
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 46
+    - <effect_id>k__BackingField: 19
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 91
+    - <effect_id>k__BackingField: 20
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 95
+    - <effect_id>k__BackingField: 21
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 47
+    - <effect_id>k__BackingField: 22
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 25
+    - <effect_id>k__BackingField: 23
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 68
+    - <effect_id>k__BackingField: 24
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 66
+    - <effect_id>k__BackingField: 25
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 25
+    - <effect_id>k__BackingField: 26
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 45
+    - <effect_id>k__BackingField: 27
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 35
+    - <effect_id>k__BackingField: 28
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 8
+    - <effect_id>k__BackingField: 29
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 85
+    - <effect_id>k__BackingField: 30
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 23
+    - <effect_id>k__BackingField: 31
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 93
+    - <effect_id>k__BackingField: 32
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 22
+    - <effect_id>k__BackingField: 33
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 16
+    - <effect_id>k__BackingField: 34
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 38
+    - <effect_id>k__BackingField: 35
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 81
+    - <effect_id>k__BackingField: 36
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 94
+    - <effect_id>k__BackingField: 37
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 16
+    - <effect_id>k__BackingField: 38
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 36
+    - <effect_id>k__BackingField: 39
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 75
+    - <effect_id>k__BackingField: 40
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 28
+    - <effect_id>k__BackingField: 41
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 26
+    - <effect_id>k__BackingField: 42
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 81
+    - <effect_id>k__BackingField: 43
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 49
+    - <effect_id>k__BackingField: 44
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 25
+    - <effect_id>k__BackingField: 45
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 81
+    - <effect_id>k__BackingField: 46
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 55
+    - <effect_id>k__BackingField: 47
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 9
+    - <effect_id>k__BackingField: 48
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 32
+    - <effect_id>k__BackingField: 49
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 48
+    - <effect_id>k__BackingField: 50
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 86
+    - <effect_id>k__BackingField: 51
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 63
+    - <effect_id>k__BackingField: 52
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 88
+    - <effect_id>k__BackingField: 53
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 6
+    - <effect_id>k__BackingField: 54
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 44
+    - <effect_id>k__BackingField: 55
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 94
+    - <effect_id>k__BackingField: 56
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 9
+    - <effect_id>k__BackingField: 57
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 25
+    - <effect_id>k__BackingField: 58
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 68
+    - <effect_id>k__BackingField: 59
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 97
+    - <effect_id>k__BackingField: 60
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 19
+    - <effect_id>k__BackingField: 61
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 22
+    - <effect_id>k__BackingField: 62
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 86
+    - <effect_id>k__BackingField: 63
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 23
+    - <effect_id>k__BackingField: 64
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 44
+    - <effect_id>k__BackingField: 65
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 34
+    - <effect_id>k__BackingField: 66
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 60
+    - <effect_id>k__BackingField: 67
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 86
+    - <effect_id>k__BackingField: 68
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 58
+    - <effect_id>k__BackingField: 69
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 34
+    - <effect_id>k__BackingField: 70
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 22
+    - <effect_id>k__BackingField: 71
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 52
+    - <effect_id>k__BackingField: 72
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 65
+    - <effect_id>k__BackingField: 73
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 15
+    - <effect_id>k__BackingField: 74
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 19
+    - <effect_id>k__BackingField: 75
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 5
+    - <effect_id>k__BackingField: 76
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 83
+    - <effect_id>k__BackingField: 77
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 80
+    - <effect_id>k__BackingField: 78
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 66
+    - <effect_id>k__BackingField: 79
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 73
+    - <effect_id>k__BackingField: 80
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 43
+    - <effect_id>k__BackingField: 81
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 82
+    - <effect_id>k__BackingField: 82
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 85
+    - <effect_id>k__BackingField: 83
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 82
+    - <effect_id>k__BackingField: 84
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 82
+    - <effect_id>k__BackingField: 85
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 10
+    - <effect_id>k__BackingField: 86
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 14
+    - <effect_id>k__BackingField: 87
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 96
+    - <effect_id>k__BackingField: 88
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 17
+    - <effect_id>k__BackingField: 89
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 49
+    - <effect_id>k__BackingField: 90
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 31
+    - <effect_id>k__BackingField: 91
+      <effect_type>k__BackingField: LIFESTEAL
+      <value>k__BackingField: 9
+    - <effect_id>k__BackingField: 92
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 96
+    - <effect_id>k__BackingField: 93
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 87
+    - <effect_id>k__BackingField: 94
+      <effect_type>k__BackingField: CRITICAL_UP
+      <value>k__BackingField: 79
+    - <effect_id>k__BackingField: 95
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 64
+    - <effect_id>k__BackingField: 96
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 69
+    - <effect_id>k__BackingField: 97
+      <effect_type>k__BackingField: BUFF_ATK
+      <value>k__BackingField: 15
+    - <effect_id>k__BackingField: 98
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 70
+    - <effect_id>k__BackingField: 99
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 82
+    - <effect_id>k__BackingField: 100
+      <effect_type>k__BackingField: BUFF_DEF
+      <value>k__BackingField: 43
+    links:
+    - <item_id>k__BackingField: 1
+      <effect_id>k__BackingField: 1
+    - <item_id>k__BackingField: 2
+      <effect_id>k__BackingField: 2
+    - <item_id>k__BackingField: 3
+      <effect_id>k__BackingField: 3
+    - <item_id>k__BackingField: 4
+      <effect_id>k__BackingField: 4
+    - <item_id>k__BackingField: 5
+      <effect_id>k__BackingField: 5
+    - <item_id>k__BackingField: 6
+      <effect_id>k__BackingField: 6
+    - <item_id>k__BackingField: 7
+      <effect_id>k__BackingField: 7
+    - <item_id>k__BackingField: 8
+      <effect_id>k__BackingField: 8
+    - <item_id>k__BackingField: 9
+      <effect_id>k__BackingField: 9
+    - <item_id>k__BackingField: 10
+      <effect_id>k__BackingField: 10
+    - <item_id>k__BackingField: 11
+      <effect_id>k__BackingField: 11
+    - <item_id>k__BackingField: 12
+      <effect_id>k__BackingField: 12
+    - <item_id>k__BackingField: 13
+      <effect_id>k__BackingField: 13
+    - <item_id>k__BackingField: 14
+      <effect_id>k__BackingField: 14
+    - <item_id>k__BackingField: 15
+      <effect_id>k__BackingField: 15
+    - <item_id>k__BackingField: 16
+      <effect_id>k__BackingField: 16
+    - <item_id>k__BackingField: 17
+      <effect_id>k__BackingField: 17
+    - <item_id>k__BackingField: 18
+      <effect_id>k__BackingField: 18
+    - <item_id>k__BackingField: 19
+      <effect_id>k__BackingField: 19
+    - <item_id>k__BackingField: 20
+      <effect_id>k__BackingField: 20
+    - <item_id>k__BackingField: 21
+      <effect_id>k__BackingField: 21
+    - <item_id>k__BackingField: 22
+      <effect_id>k__BackingField: 22
+    - <item_id>k__BackingField: 23
+      <effect_id>k__BackingField: 23
+    - <item_id>k__BackingField: 24
+      <effect_id>k__BackingField: 24
+    - <item_id>k__BackingField: 25
+      <effect_id>k__BackingField: 25
+    - <item_id>k__BackingField: 26
+      <effect_id>k__BackingField: 26
+    - <item_id>k__BackingField: 27
+      <effect_id>k__BackingField: 27
+    - <item_id>k__BackingField: 28
+      <effect_id>k__BackingField: 28
+    - <item_id>k__BackingField: 29
+      <effect_id>k__BackingField: 29
+    - <item_id>k__BackingField: 30
+      <effect_id>k__BackingField: 30
+    - <item_id>k__BackingField: 31
+      <effect_id>k__BackingField: 31
+    - <item_id>k__BackingField: 32
+      <effect_id>k__BackingField: 32
+    - <item_id>k__BackingField: 33
+      <effect_id>k__BackingField: 33
+    - <item_id>k__BackingField: 34
+      <effect_id>k__BackingField: 34
+    - <item_id>k__BackingField: 35
+      <effect_id>k__BackingField: 35
+    - <item_id>k__BackingField: 36
+      <effect_id>k__BackingField: 36
+    - <item_id>k__BackingField: 37
+      <effect_id>k__BackingField: 37
+    - <item_id>k__BackingField: 38
+      <effect_id>k__BackingField: 38
+    - <item_id>k__BackingField: 39
+      <effect_id>k__BackingField: 39
+    - <item_id>k__BackingField: 40
+      <effect_id>k__BackingField: 40
+    - <item_id>k__BackingField: 41
+      <effect_id>k__BackingField: 41
+    - <item_id>k__BackingField: 42
+      <effect_id>k__BackingField: 42
+    - <item_id>k__BackingField: 43
+      <effect_id>k__BackingField: 43
+    - <item_id>k__BackingField: 44
+      <effect_id>k__BackingField: 44
+    - <item_id>k__BackingField: 45
+      <effect_id>k__BackingField: 45
+    - <item_id>k__BackingField: 46
+      <effect_id>k__BackingField: 46
+    - <item_id>k__BackingField: 47
+      <effect_id>k__BackingField: 47
+    - <item_id>k__BackingField: 48
+      <effect_id>k__BackingField: 48
+    - <item_id>k__BackingField: 49
+      <effect_id>k__BackingField: 49
+    - <item_id>k__BackingField: 50
+      <effect_id>k__BackingField: 50
+    - <item_id>k__BackingField: 51
+      <effect_id>k__BackingField: 51
+    - <item_id>k__BackingField: 52
+      <effect_id>k__BackingField: 52
+    - <item_id>k__BackingField: 53
+      <effect_id>k__BackingField: 53
+    - <item_id>k__BackingField: 54
+      <effect_id>k__BackingField: 54
+    - <item_id>k__BackingField: 55
+      <effect_id>k__BackingField: 55
+    - <item_id>k__BackingField: 56
+      <effect_id>k__BackingField: 56
+    - <item_id>k__BackingField: 57
+      <effect_id>k__BackingField: 57
+    - <item_id>k__BackingField: 58
+      <effect_id>k__BackingField: 58
+    - <item_id>k__BackingField: 59
+      <effect_id>k__BackingField: 59
+    - <item_id>k__BackingField: 60
+      <effect_id>k__BackingField: 60
+    - <item_id>k__BackingField: 61
+      <effect_id>k__BackingField: 61
+    - <item_id>k__BackingField: 62
+      <effect_id>k__BackingField: 62
+    - <item_id>k__BackingField: 63
+      <effect_id>k__BackingField: 63
+    - <item_id>k__BackingField: 64
+      <effect_id>k__BackingField: 64
+    - <item_id>k__BackingField: 65
+      <effect_id>k__BackingField: 65
+    - <item_id>k__BackingField: 66
+      <effect_id>k__BackingField: 66
+    - <item_id>k__BackingField: 67
+      <effect_id>k__BackingField: 67
+    - <item_id>k__BackingField: 68
+      <effect_id>k__BackingField: 68
+    - <item_id>k__BackingField: 69
+      <effect_id>k__BackingField: 69
+    - <item_id>k__BackingField: 70
+      <effect_id>k__BackingField: 70
+    - <item_id>k__BackingField: 71
+      <effect_id>k__BackingField: 71
+    - <item_id>k__BackingField: 72
+      <effect_id>k__BackingField: 72
+    - <item_id>k__BackingField: 73
+      <effect_id>k__BackingField: 73
+    - <item_id>k__BackingField: 74
+      <effect_id>k__BackingField: 74
+    - <item_id>k__BackingField: 75
+      <effect_id>k__BackingField: 75
+    - <item_id>k__BackingField: 76
+      <effect_id>k__BackingField: 76
+    - <item_id>k__BackingField: 77
+      <effect_id>k__BackingField: 77
+    - <item_id>k__BackingField: 78
+      <effect_id>k__BackingField: 78
+    - <item_id>k__BackingField: 79
+      <effect_id>k__BackingField: 79
+    - <item_id>k__BackingField: 80
+      <effect_id>k__BackingField: 80
+    - <item_id>k__BackingField: 81
+      <effect_id>k__BackingField: 81
+    - <item_id>k__BackingField: 82
+      <effect_id>k__BackingField: 82
+    - <item_id>k__BackingField: 83
+      <effect_id>k__BackingField: 83
+    - <item_id>k__BackingField: 84
+      <effect_id>k__BackingField: 84
+    - <item_id>k__BackingField: 85
+      <effect_id>k__BackingField: 85
+    - <item_id>k__BackingField: 86
+      <effect_id>k__BackingField: 86
+    - <item_id>k__BackingField: 87
+      <effect_id>k__BackingField: 87
+    - <item_id>k__BackingField: 88
+      <effect_id>k__BackingField: 88
+    - <item_id>k__BackingField: 89
+      <effect_id>k__BackingField: 89
+    - <item_id>k__BackingField: 90
+      <effect_id>k__BackingField: 90
+    - <item_id>k__BackingField: 91
+      <effect_id>k__BackingField: 91
+    - <item_id>k__BackingField: 92
+      <effect_id>k__BackingField: 92
+    - <item_id>k__BackingField: 93
+      <effect_id>k__BackingField: 93
+    - <item_id>k__BackingField: 94
+      <effect_id>k__BackingField: 94
+    - <item_id>k__BackingField: 95
+      <effect_id>k__BackingField: 95
+    - <item_id>k__BackingField: 96
+      <effect_id>k__BackingField: 96
+    - <item_id>k__BackingField: 97
+      <effect_id>k__BackingField: 97
+    - <item_id>k__BackingField: 98
+      <effect_id>k__BackingField: 98
+    - <item_id>k__BackingField: 99
+      <effect_id>k__BackingField: 99
+    - <item_id>k__BackingField: 100
+      <effect_id>k__BackingField: 100
+    inventories:
+    - <instance_id>k__BackingField: 1
+      <character_id>k__BackingField: 1
+      <item_id>k__BackingField: 1
+      <durability>k__BackingField: 17
+    - <instance_id>k__BackingField: 2
+      <character_id>k__BackingField: 2
+      <item_id>k__BackingField: 2
+      <durability>k__BackingField: 76
+    - <instance_id>k__BackingField: 3
+      <character_id>k__BackingField: 3
+      <item_id>k__BackingField: 3
+      <durability>k__BackingField: 38
+    - <instance_id>k__BackingField: 4
+      <character_id>k__BackingField: 4
+      <item_id>k__BackingField: 4
+      <durability>k__BackingField: 58
+    - <instance_id>k__BackingField: 5
+      <character_id>k__BackingField: 5
+      <item_id>k__BackingField: 5
+      <durability>k__BackingField: 81
+    - <instance_id>k__BackingField: 6
+      <character_id>k__BackingField: 6
+      <item_id>k__BackingField: 6
+      <durability>k__BackingField: 90
+    - <instance_id>k__BackingField: 7
+      <character_id>k__BackingField: 7
+      <item_id>k__BackingField: 7
+      <durability>k__BackingField: 31
+    - <instance_id>k__BackingField: 8
+      <character_id>k__BackingField: 8
+      <item_id>k__BackingField: 8
+      <durability>k__BackingField: 80
+    - <instance_id>k__BackingField: 9
+      <character_id>k__BackingField: 9
+      <item_id>k__BackingField: 9
+      <durability>k__BackingField: 6
+    - <instance_id>k__BackingField: 10
+      <character_id>k__BackingField: 10
+      <item_id>k__BackingField: 10
+      <durability>k__BackingField: 77
+    - <instance_id>k__BackingField: 11
+      <character_id>k__BackingField: 11
+      <item_id>k__BackingField: 11
+      <durability>k__BackingField: 60
+    - <instance_id>k__BackingField: 12
+      <character_id>k__BackingField: 12
+      <item_id>k__BackingField: 12
+      <durability>k__BackingField: 63
+    - <instance_id>k__BackingField: 13
+      <character_id>k__BackingField: 13
+      <item_id>k__BackingField: 13
+      <durability>k__BackingField: 7
+    - <instance_id>k__BackingField: 14
+      <character_id>k__BackingField: 14
+      <item_id>k__BackingField: 14
+      <durability>k__BackingField: 79
+    - <instance_id>k__BackingField: 15
+      <character_id>k__BackingField: 15
+      <item_id>k__BackingField: 15
+      <durability>k__BackingField: 83
+    - <instance_id>k__BackingField: 16
+      <character_id>k__BackingField: 16
+      <item_id>k__BackingField: 16
+      <durability>k__BackingField: 4
+    - <instance_id>k__BackingField: 17
+      <character_id>k__BackingField: 17
+      <item_id>k__BackingField: 17
+      <durability>k__BackingField: 62
+    - <instance_id>k__BackingField: 18
+      <character_id>k__BackingField: 18
+      <item_id>k__BackingField: 18
+      <durability>k__BackingField: 79
+    - <instance_id>k__BackingField: 19
+      <character_id>k__BackingField: 19
+      <item_id>k__BackingField: 19
+      <durability>k__BackingField: 59
+    - <instance_id>k__BackingField: 20
+      <character_id>k__BackingField: 20
+      <item_id>k__BackingField: 20
+      <durability>k__BackingField: 33
+    - <instance_id>k__BackingField: 21
+      <character_id>k__BackingField: 21
+      <item_id>k__BackingField: 21
+      <durability>k__BackingField: 33
+    - <instance_id>k__BackingField: 22
+      <character_id>k__BackingField: 22
+      <item_id>k__BackingField: 22
+      <durability>k__BackingField: 59
+    - <instance_id>k__BackingField: 23
+      <character_id>k__BackingField: 23
+      <item_id>k__BackingField: 23
+      <durability>k__BackingField: 71
+    - <instance_id>k__BackingField: 24
+      <character_id>k__BackingField: 24
+      <item_id>k__BackingField: 24
+      <durability>k__BackingField: 3
+    - <instance_id>k__BackingField: 25
+      <character_id>k__BackingField: 25
+      <item_id>k__BackingField: 25
+      <durability>k__BackingField: 27
+    - <instance_id>k__BackingField: 26
+      <character_id>k__BackingField: 26
+      <item_id>k__BackingField: 26
+      <durability>k__BackingField: 10
+    - <instance_id>k__BackingField: 27
+      <character_id>k__BackingField: 27
+      <item_id>k__BackingField: 27
+      <durability>k__BackingField: 33
+    - <instance_id>k__BackingField: 28
+      <character_id>k__BackingField: 28
+      <item_id>k__BackingField: 28
+      <durability>k__BackingField: 84
+    - <instance_id>k__BackingField: 29
+      <character_id>k__BackingField: 29
+      <item_id>k__BackingField: 29
+      <durability>k__BackingField: 28
+    - <instance_id>k__BackingField: 30
+      <character_id>k__BackingField: 30
+      <item_id>k__BackingField: 30
+      <durability>k__BackingField: 30
+    - <instance_id>k__BackingField: 31
+      <character_id>k__BackingField: 31
+      <item_id>k__BackingField: 31
+      <durability>k__BackingField: 98
+    - <instance_id>k__BackingField: 32
+      <character_id>k__BackingField: 32
+      <item_id>k__BackingField: 32
+      <durability>k__BackingField: 30
+    - <instance_id>k__BackingField: 33
+      <character_id>k__BackingField: 33
+      <item_id>k__BackingField: 33
+      <durability>k__BackingField: 60
+    - <instance_id>k__BackingField: 34
+      <character_id>k__BackingField: 34
+      <item_id>k__BackingField: 34
+      <durability>k__BackingField: 96
+    - <instance_id>k__BackingField: 35
+      <character_id>k__BackingField: 35
+      <item_id>k__BackingField: 35
+      <durability>k__BackingField: 13
+    - <instance_id>k__BackingField: 36
+      <character_id>k__BackingField: 36
+      <item_id>k__BackingField: 36
+      <durability>k__BackingField: 72
+    - <instance_id>k__BackingField: 37
+      <character_id>k__BackingField: 37
+      <item_id>k__BackingField: 37
+      <durability>k__BackingField: 91
+    - <instance_id>k__BackingField: 38
+      <character_id>k__BackingField: 38
+      <item_id>k__BackingField: 38
+      <durability>k__BackingField: 54
+    - <instance_id>k__BackingField: 39
+      <character_id>k__BackingField: 39
+      <item_id>k__BackingField: 39
+      <durability>k__BackingField: 28
+    - <instance_id>k__BackingField: 40
+      <character_id>k__BackingField: 40
+      <item_id>k__BackingField: 40
+      <durability>k__BackingField: 88
+    - <instance_id>k__BackingField: 41
+      <character_id>k__BackingField: 41
+      <item_id>k__BackingField: 41
+      <durability>k__BackingField: 83
+    - <instance_id>k__BackingField: 42
+      <character_id>k__BackingField: 42
+      <item_id>k__BackingField: 42
+      <durability>k__BackingField: 88
+    - <instance_id>k__BackingField: 43
+      <character_id>k__BackingField: 43
+      <item_id>k__BackingField: 43
+      <durability>k__BackingField: 89
+    - <instance_id>k__BackingField: 44
+      <character_id>k__BackingField: 44
+      <item_id>k__BackingField: 44
+      <durability>k__BackingField: 63
+    - <instance_id>k__BackingField: 45
+      <character_id>k__BackingField: 45
+      <item_id>k__BackingField: 45
+      <durability>k__BackingField: 35
+    - <instance_id>k__BackingField: 46
+      <character_id>k__BackingField: 46
+      <item_id>k__BackingField: 46
+      <durability>k__BackingField: 79
+    - <instance_id>k__BackingField: 47
+      <character_id>k__BackingField: 47
+      <item_id>k__BackingField: 47
+      <durability>k__BackingField: 6
+    - <instance_id>k__BackingField: 48
+      <character_id>k__BackingField: 48
+      <item_id>k__BackingField: 48
+      <durability>k__BackingField: 27
+    - <instance_id>k__BackingField: 49
+      <character_id>k__BackingField: 49
+      <item_id>k__BackingField: 49
+      <durability>k__BackingField: 76
+    - <instance_id>k__BackingField: 50
+      <character_id>k__BackingField: 50
+      <item_id>k__BackingField: 50
+      <durability>k__BackingField: 31
+    - <instance_id>k__BackingField: 51
+      <character_id>k__BackingField: 51
+      <item_id>k__BackingField: 51
+      <durability>k__BackingField: 39
+    - <instance_id>k__BackingField: 52
+      <character_id>k__BackingField: 52
+      <item_id>k__BackingField: 52
+      <durability>k__BackingField: 31
+    - <instance_id>k__BackingField: 53
+      <character_id>k__BackingField: 53
+      <item_id>k__BackingField: 53
+      <durability>k__BackingField: 30
+    - <instance_id>k__BackingField: 54
+      <character_id>k__BackingField: 54
+      <item_id>k__BackingField: 54
+      <durability>k__BackingField: 67
+    - <instance_id>k__BackingField: 55
+      <character_id>k__BackingField: 55
+      <item_id>k__BackingField: 55
+      <durability>k__BackingField: 75
+    - <instance_id>k__BackingField: 56
+      <character_id>k__BackingField: 56
+      <item_id>k__BackingField: 56
+      <durability>k__BackingField: 68
+    - <instance_id>k__BackingField: 57
+      <character_id>k__BackingField: 57
+      <item_id>k__BackingField: 57
+      <durability>k__BackingField: 60
+    - <instance_id>k__BackingField: 58
+      <character_id>k__BackingField: 58
+      <item_id>k__BackingField: 58
+      <durability>k__BackingField: 10
+    - <instance_id>k__BackingField: 59
+      <character_id>k__BackingField: 59
+      <item_id>k__BackingField: 59
+      <durability>k__BackingField: 35
+    - <instance_id>k__BackingField: 60
+      <character_id>k__BackingField: 60
+      <item_id>k__BackingField: 60
+      <durability>k__BackingField: 19
+    - <instance_id>k__BackingField: 61
+      <character_id>k__BackingField: 61
+      <item_id>k__BackingField: 61
+      <durability>k__BackingField: 65
+    - <instance_id>k__BackingField: 62
+      <character_id>k__BackingField: 62
+      <item_id>k__BackingField: 62
+      <durability>k__BackingField: 36
+    - <instance_id>k__BackingField: 63
+      <character_id>k__BackingField: 63
+      <item_id>k__BackingField: 63
+      <durability>k__BackingField: 79
+    - <instance_id>k__BackingField: 64
+      <character_id>k__BackingField: 64
+      <item_id>k__BackingField: 64
+      <durability>k__BackingField: 65
+    - <instance_id>k__BackingField: 65
+      <character_id>k__BackingField: 65
+      <item_id>k__BackingField: 65
+      <durability>k__BackingField: 54
+    - <instance_id>k__BackingField: 66
+      <character_id>k__BackingField: 66
+      <item_id>k__BackingField: 66
+      <durability>k__BackingField: 75
+    - <instance_id>k__BackingField: 67
+      <character_id>k__BackingField: 67
+      <item_id>k__BackingField: 67
+      <durability>k__BackingField: 5
+    - <instance_id>k__BackingField: 68
+      <character_id>k__BackingField: 68
+      <item_id>k__BackingField: 68
+      <durability>k__BackingField: 41
+    - <instance_id>k__BackingField: 69
+      <character_id>k__BackingField: 69
+      <item_id>k__BackingField: 69
+      <durability>k__BackingField: 48
+    - <instance_id>k__BackingField: 70
+      <character_id>k__BackingField: 70
+      <item_id>k__BackingField: 70
+      <durability>k__BackingField: 79
+    - <instance_id>k__BackingField: 71
+      <character_id>k__BackingField: 71
+      <item_id>k__BackingField: 71
+      <durability>k__BackingField: 21
+    - <instance_id>k__BackingField: 72
+      <character_id>k__BackingField: 72
+      <item_id>k__BackingField: 72
+      <durability>k__BackingField: 84
+    - <instance_id>k__BackingField: 73
+      <character_id>k__BackingField: 73
+      <item_id>k__BackingField: 73
+      <durability>k__BackingField: 90
+    - <instance_id>k__BackingField: 74
+      <character_id>k__BackingField: 74
+      <item_id>k__BackingField: 74
+      <durability>k__BackingField: 38
+    - <instance_id>k__BackingField: 75
+      <character_id>k__BackingField: 75
+      <item_id>k__BackingField: 75
+      <durability>k__BackingField: 65
+    - <instance_id>k__BackingField: 76
+      <character_id>k__BackingField: 76
+      <item_id>k__BackingField: 76
+      <durability>k__BackingField: 82
+    - <instance_id>k__BackingField: 77
+      <character_id>k__BackingField: 77
+      <item_id>k__BackingField: 77
+      <durability>k__BackingField: 29
+    - <instance_id>k__BackingField: 78
+      <character_id>k__BackingField: 78
+      <item_id>k__BackingField: 78
+      <durability>k__BackingField: 10
+    - <instance_id>k__BackingField: 79
+      <character_id>k__BackingField: 79
+      <item_id>k__BackingField: 79
+      <durability>k__BackingField: 90
+    - <instance_id>k__BackingField: 80
+      <character_id>k__BackingField: 80
+      <item_id>k__BackingField: 80
+      <durability>k__BackingField: 86
+    - <instance_id>k__BackingField: 81
+      <character_id>k__BackingField: 81
+      <item_id>k__BackingField: 81
+      <durability>k__BackingField: 66
+    - <instance_id>k__BackingField: 82
+      <character_id>k__BackingField: 82
+      <item_id>k__BackingField: 82
+      <durability>k__BackingField: 19
+    - <instance_id>k__BackingField: 83
+      <character_id>k__BackingField: 83
+      <item_id>k__BackingField: 83
+      <durability>k__BackingField: 44
+    - <instance_id>k__BackingField: 84
+      <character_id>k__BackingField: 84
+      <item_id>k__BackingField: 84
+      <durability>k__BackingField: 36
+    - <instance_id>k__BackingField: 85
+      <character_id>k__BackingField: 85
+      <item_id>k__BackingField: 85
+      <durability>k__BackingField: 84
+    - <instance_id>k__BackingField: 86
+      <character_id>k__BackingField: 86
+      <item_id>k__BackingField: 86
+      <durability>k__BackingField: 97
+    - <instance_id>k__BackingField: 87
+      <character_id>k__BackingField: 87
+      <item_id>k__BackingField: 87
+      <durability>k__BackingField: 4
+    - <instance_id>k__BackingField: 88
+      <character_id>k__BackingField: 88
+      <item_id>k__BackingField: 88
+      <durability>k__BackingField: 20
+    - <instance_id>k__BackingField: 89
+      <character_id>k__BackingField: 89
+      <item_id>k__BackingField: 89
+      <durability>k__BackingField: 38
+    - <instance_id>k__BackingField: 90
+      <character_id>k__BackingField: 90
+      <item_id>k__BackingField: 90
+      <durability>k__BackingField: 99
+    - <instance_id>k__BackingField: 91
+      <character_id>k__BackingField: 91
+      <item_id>k__BackingField: 91
+      <durability>k__BackingField: 29
+    - <instance_id>k__BackingField: 92
+      <character_id>k__BackingField: 92
+      <item_id>k__BackingField: 92
+      <durability>k__BackingField: 32
+    - <instance_id>k__BackingField: 93
+      <character_id>k__BackingField: 93
+      <item_id>k__BackingField: 93
+      <durability>k__BackingField: 6
+    - <instance_id>k__BackingField: 94
+      <character_id>k__BackingField: 94
+      <item_id>k__BackingField: 94
+      <durability>k__BackingField: 89
+    - <instance_id>k__BackingField: 95
+      <character_id>k__BackingField: 95
+      <item_id>k__BackingField: 95
+      <durability>k__BackingField: 61
+    - <instance_id>k__BackingField: 96
+      <character_id>k__BackingField: 96
+      <item_id>k__BackingField: 96
+      <durability>k__BackingField: 28
+    - <instance_id>k__BackingField: 97
+      <character_id>k__BackingField: 97
+      <item_id>k__BackingField: 97
+      <durability>k__BackingField: 49
+    - <instance_id>k__BackingField: 98
+      <character_id>k__BackingField: 98
+      <item_id>k__BackingField: 98
+      <durability>k__BackingField: 16
+    - <instance_id>k__BackingField: 99
+      <character_id>k__BackingField: 99
+      <item_id>k__BackingField: 99
+      <durability>k__BackingField: 96
+    - <instance_id>k__BackingField: 100
+      <character_id>k__BackingField: 100
+      <item_id>k__BackingField: 100
+      <durability>k__BackingField: 55
