@@ -1,0 +1,131 @@
+﻿namespace GameData.Schema;
+
+// ==========================================
+// 1. C1 복잡도 스키마 정의 (Master Item & Runtime Character)
+// ==========================================
+table Item_C1_Table {
+    item_id: int;
+    name: string;
+    item_type: string;
+    rarity: int;
+    atk: int;
+    price: int;
+}
+
+table Character_C1_Table {
+    character_id: int;
+    name: string;
+    level: int;
+    hp: int;
+    pos_x: float;
+    pos_y: float;
+}
+
+table DataSet_C1_Schema {
+    items: [Item_C1_Table];
+    characters: [Character_C1_Table];
+}
+
+
+// ==========================================
+// 2. C2 복잡도 스키마 정의 (Master Item, Tag, Character, Inventory)
+// ==========================================
+table Item_C2_Table {
+    item_id: int;
+    item_code: string;
+    name: string;
+    item_type: string;
+    rarity: int;
+    req_level: int;
+    base_atk: int;
+}
+
+table ItemTag_C2_Table {
+    item_id: int;
+    tag_name: string;
+}
+
+table Character_C2_Table {
+    character_id: int;
+    name: string;
+    level: string;
+    cur_hp: int;
+    pos_x: float;
+    pos_y: float;
+}
+
+table Inventory_C2_Table {
+    instance_id: int;
+    character_id: int;
+    item_id: int;
+    quantity: int;
+}
+
+table DataSet_C2_Schema {
+    items: [Item_C2_Table];
+    tags: [ItemTag_C2_Table];
+    characters: [Character_C2_Table];
+    inventories: [Inventory_C2_Table];
+}
+
+
+// ==========================================
+// 3. C3 복잡도 스키마 정의 (User, Character, Master Item, Effect, Link, Inventory)
+// ==========================================
+table User_C3_Table {
+    user_id: int;
+    account_name: string;
+    created_at: long;
+}
+
+table Character_C3_Table {
+    character_id: int;
+    user_id: int;
+    name: string;
+    guild_id: int;
+}
+
+table Item_C3_Table {
+    item_id: int;
+    name: string;
+    rarity: int;
+}
+
+table Effect_C3_Table {
+    effect_id: int;
+    effect_type: string;
+    value: int;
+}
+
+table EffectLink_C3_Table {
+    item_id: int;
+    effect_id: int;
+}
+
+table Inventory_C3_Table {
+    instance_id: int;
+    character_id: int;
+    item_id: int;
+    durability: int;
+}
+
+table DataSet_C3_Schema {
+    users: [User_C3_Table];
+    characters: [Character_C3_Table];
+    items: [Item_C3_Table];
+    effects: [Effect_C3_Table];
+    links: [EffectLink_C3_Table];
+    inventories: [Inventory_C3_Table];
+}
+
+
+// ==========================================
+// 4. 통합 루트 타입 컨테이너 (Root Type)
+// ==========================================
+table MasterGameDataSet {
+    c1_data: DataSet_C1_Schema;
+    c2_data: DataSet_C2_Schema;
+    c3_data: DataSet_C3_Schema;
+}
+
+root_type MasterGameDataSet;

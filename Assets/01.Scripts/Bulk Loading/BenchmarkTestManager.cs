@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.IO;
 using UnityEngine;
 
@@ -22,10 +23,15 @@ public enum DataComplexity
 public enum TargetFormat
 {
     None = 0,
-    JSON = 1 << 0,
-    Binary = 1 << 1,
-    SQLite = 1 << 2,
-    All = JSON | Binary | SQLite 
+    SQLite_NativeC = 1 << 0,
+    SQLite_ORM = 1 << 1,
+    RocksDB = 1 << 2,
+    LiteDB = 1 << 3,
+    FlatBuffers = 1 << 4,
+    MessagePack = 1 << 5,
+    RawBinary = 1 << 6,
+    JSON = 1 << 7,
+    All = SQLite_NativeC | SQLite_ORM | RocksDB | LiteDB | FlatBuffers | MessagePack | RawBinary | JSON
 }
 #endregion
 
@@ -77,21 +83,77 @@ public class BenchmarkTestManager : MonoBehaviour
             ExecuteAndPrint(new JsonFileLoader<DataSet_C1>(), path);
         }
 
-        if (targetFormats.HasFlag(TargetFormat.Binary))
+        if (targetFormats.HasFlag(TargetFormat.RawBinary))
         {
             string path = Path.Combine(saRoot, "Binary", scaleStr, $"{fileName}.bytes");
-            ExecuteAndPrint(new BinaryFileLoader<DataSet_C1>(), path);
+            ExecuteAndPrint(new RawBinaryFileLoader<DataSet_C1>(), path);
         }
 
-        if (targetFormats.HasFlag(TargetFormat.SQLite))
+        if (targetFormats.HasFlag(TargetFormat.MessagePack))
+        {
+            string path = Path.Combine(saRoot, "MessagePack", scaleStr, $"{fileName}.mpk");
+            ExecuteAndPrint(new MessagePackLoader<DataSet_C1>(), path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.SQLite_ORM))
         {
             string path = Path.Combine(saRoot, "SQLite", scaleStr, $"{fileName}.db");
-            var loader = new SqliteFileLoader<DataSet_C1>((db, container) =>
+            var loader = new SqliteOrmLoader<DataSet_C1>((db, container) =>
             {
                 container.items = db.Table<Master_Item_C1>().ToList();
                 container.characters = db.Table<Runtime_Character_C1>().ToList();
             });
             ExecuteAndPrint(loader, path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.SQLite_NativeC))
+        {
+            string path = Path.Combine(saRoot, "SQLite", scaleStr, $"{fileName}.db");
+            var loader = new SqliteNativeLoader<DataSet_C1>((db, container) =>
+            {
+                db.ExecuteQuery("SELECT item_id, name, item_type, rarity, atk, price FROM Master_Item_C1", stmt =>
+                {
+                    container.items.Add(new Master_Item_C1
+                    {
+                        item_id = SqliteNativeConnection.GetInt(stmt, 0),
+                        name = SqliteNativeConnection.GetString(stmt, 1),
+                        item_type = SqliteNativeConnection.GetString(stmt, 2),
+                        rarity = SqliteNativeConnection.GetInt(stmt, 3),
+                        atk = SqliteNativeConnection.GetInt(stmt, 4),
+                        price = SqliteNativeConnection.GetInt(stmt, 5)
+                    });
+                });
+                db.ExecuteQuery("SELECT character_id, name, level, hp, pos_x, pos_y FROM Runtime_Character_C1", stmt =>
+                {
+                    container.characters.Add(new Runtime_Character_C1
+                    {
+                        character_id = SqliteNativeConnection.GetInt(stmt, 0),
+                        name = SqliteNativeConnection.GetString(stmt, 1),
+                        level = SqliteNativeConnection.GetInt(stmt, 2),
+                        hp = SqliteNativeConnection.GetInt(stmt, 3),
+                        pos_x = (float)SqliteNativeConnection.GetDouble(stmt, 4),
+                        pos_y = (float)SqliteNativeConnection.GetDouble(stmt, 5)
+                    });
+                });
+            });
+            ExecuteAndPrint(loader, path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.LiteDB))
+        {
+            string path = Path.Combine(saRoot, "LiteDB", scaleStr, $"{fileName}.db");
+            var loader = new LiteDbLoader<DataSet_C1>((db, container) =>
+            {
+                container.items = db.GetCollection<Master_Item_C1>("items").FindAll().ToList();
+                container.characters = db.GetCollection<Runtime_Character_C1>("characters").FindAll().ToList();
+            });
+            ExecuteAndPrint(loader, path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.RocksDB))
+        {
+            string path = Path.Combine(saRoot, "RocksDB", scaleStr, fileName);
+            ExecuteAndPrint(new RocksDbLoader_C1(), path);
         }
     }
     #endregion
@@ -105,16 +167,22 @@ public class BenchmarkTestManager : MonoBehaviour
             ExecuteAndPrint(new JsonFileLoader<DataSet_C2>(), path);
         }
 
-        if (targetFormats.HasFlag(TargetFormat.Binary))
+        if (targetFormats.HasFlag(TargetFormat.RawBinary))
         {
             string path = Path.Combine(saRoot, "Binary", scaleStr, $"{fileName}.bytes");
-            ExecuteAndPrint(new BinaryFileLoader<DataSet_C2>(), path);
+            ExecuteAndPrint(new RawBinaryFileLoader<DataSet_C2>(), path);
         }
 
-        if (targetFormats.HasFlag(TargetFormat.SQLite))
+        if (targetFormats.HasFlag(TargetFormat.MessagePack))
+        {
+            string path = Path.Combine(saRoot, "MessagePack", scaleStr, $"{fileName}.mpk");
+            ExecuteAndPrint(new MessagePackLoader<DataSet_C2>(), path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.SQLite_ORM))
         {
             string path = Path.Combine(saRoot, "SQLite", scaleStr, $"{fileName}.db");
-            var loader = new SqliteFileLoader<DataSet_C2>((db, container) =>
+            var loader = new SqliteOrmLoader<DataSet_C2>((db, container) =>
             {
                 container.items = db.Table<Master_Item_C2>().ToList();
                 container.tags = db.Table<Item_Tag_C2>().ToList();
@@ -122,6 +190,25 @@ public class BenchmarkTestManager : MonoBehaviour
                 container.inventories = db.Table<Runtime_Inventory_C2>().ToList();
             });
             ExecuteAndPrint(loader, path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.LiteDB))
+        {
+            string path = Path.Combine(saRoot, "LiteDB", scaleStr, $"{fileName}.db");
+            var loader = new LiteDbLoader<DataSet_C2>((db, container) =>
+            {
+                container.items = db.GetCollection<Master_Item_C2>("items").FindAll().ToList();
+                container.tags = db.GetCollection<Item_Tag_C2>("tags").FindAll().ToList();
+                container.characters = db.GetCollection<Runtime_Character_C2>("characters").FindAll().ToList();
+                container.inventories = db.GetCollection<Runtime_Inventory_C2>("inventories").FindAll().ToList();
+            });
+            ExecuteAndPrint(loader, path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.RocksDB))
+        {
+            string path = Path.Combine(saRoot, "RocksDB", scaleStr, fileName);
+            ExecuteAndPrint(new RocksDbLoader_C2(), path);
         }
     }
     #endregion
@@ -135,16 +222,22 @@ public class BenchmarkTestManager : MonoBehaviour
             ExecuteAndPrint(new JsonFileLoader<DataSet_C3>(), path);
         }
 
-        if (targetFormats.HasFlag(TargetFormat.Binary))
+        if (targetFormats.HasFlag(TargetFormat.RawBinary))
         {
             string path = Path.Combine(saRoot, "Binary", scaleStr, $"{fileName}.bytes");
-            ExecuteAndPrint(new BinaryFileLoader<DataSet_C3>(), path);
+            ExecuteAndPrint(new RawBinaryFileLoader<DataSet_C3>(), path);
         }
 
-        if (targetFormats.HasFlag(TargetFormat.SQLite))
+        if (targetFormats.HasFlag(TargetFormat.MessagePack))
+        {
+            string path = Path.Combine(saRoot, "MessagePack", scaleStr, $"{fileName}.mpk");
+            ExecuteAndPrint(new MessagePackLoader<DataSet_C3>(), path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.SQLite_ORM))
         {
             string path = Path.Combine(saRoot, "SQLite", scaleStr, $"{fileName}.db");
-            var loader = new SqliteFileLoader<DataSet_C3>((db, container) =>
+            var loader = new SqliteOrmLoader<DataSet_C3>((db, container) =>
             {
                 container.users = db.Table<System_User_C3>().ToList();
                 container.characters = db.Table<Runtime_Character_C3>().ToList();
@@ -154,6 +247,27 @@ public class BenchmarkTestManager : MonoBehaviour
                 container.inventories = db.Table<Runtime_Inventory_C3>().ToList();
             });
             ExecuteAndPrint(loader, path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.LiteDB))
+        {
+            string path = Path.Combine(saRoot, "LiteDB", scaleStr, $"{fileName}.db");
+            var loader = new LiteDbLoader<DataSet_C3>((db, container) =>
+            {
+                container.users = db.GetCollection<System_User_C3>("users").FindAll().ToList();
+                container.characters = db.GetCollection<Runtime_Character_C3>("characters").FindAll().ToList();
+                container.items = db.GetCollection<Master_Item_C3>("items").FindAll().ToList();
+                container.effects = db.GetCollection<Master_Effect_C3>("effects").FindAll().ToList();
+                container.links = db.GetCollection<Item_Effect_Link_C3>("links").FindAll().ToList();
+                container.inventories = db.GetCollection<Runtime_Inventory_C3>("inventories").FindAll().ToList();
+            });
+            ExecuteAndPrint(loader, path);
+        }
+
+        if (targetFormats.HasFlag(TargetFormat.RocksDB))
+        {
+            string path = Path.Combine(saRoot, "RocksDB", scaleStr, fileName);
+            ExecuteAndPrint(new RocksDbLoader_C3(), path);
         }
     }
     #endregion

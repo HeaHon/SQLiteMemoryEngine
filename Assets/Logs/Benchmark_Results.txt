@@ -13,3 +13,31 @@
 [2026-10-15 13:40:35] [JSON (Direct IO)] [S100K] [C3_High] | Execution Time: 7412.248 ms | Memory: 449.72 MB
 [2026-10-15 13:40:43] [Binary (Direct IO)] [S100K] [C3_High] | Execution Time: 6640.885 ms | Memory: 267.56 MB
 [2026-10-15 13:40:45] [SQLite (Direct IO)] [S100K] [C3_High] | Execution Time: 1143.197 ms | Memory: 19.56 MB
+[2026-10-15 23:55:40] [JSON (Newtonsoft)] [S100] [C1_Low] | Execution Time: 132.706 ms | Memory: 0.15 MB
+[2026-10-15 23:55:41] [Raw Binary (Byte Stream)] [S100] [C1_Low] | Execution Time: 3.115 ms | Memory: 0.00 MB
+[2026-10-15 23:55:42] [MessagePack (Cysharp)] [S100] [C1_Low] | Execution Time: 57.585 ms | Memory: 0.04 MB
+[2026-10-15 23:55:43] [SQLite (sqlite-net)] [S100] [C1_Low] | Execution Time: 37.980 ms | Memory: 0.00 MB
+[2026-10-15 23:59:40] [JSON (Newtonsoft)] [S100] [C1_Low] | Execution Time: 124.903 ms | Memory: 0.15 MB
+[2026-10-15 23:59:41] [Raw Binary (Byte Stream)] [S100] [C1_Low] | Execution Time: 3.066 ms | Memory: 0.00 MB
+[2026-10-15 23:59:42] [MessagePack (Cysharp)] [S100] [C1_Low] | Execution Time: 57.439 ms | Memory: 0.04 MB
+[2026-10-15 23:59:43] [SQLite (sqlite-net)] [S100] [C1_Low] | Execution Time: 39.540 ms | Memory: 0.00 MB
+[2026-10-16 00:04:26] [JSON (Newtonsoft)] [S100] [C1_Low] | Execution Time: 155.109 ms | Memory: 0.15 MB
+[2026-10-16 00:04:27] [Raw Binary (Byte Stream)] [S100] [C1_Low] | Execution Time: 5.504 ms | Memory: 0.00 MB
+[2026-10-16 00:04:28] [MessagePack (Cysharp)] [S100] [C1_Low] | Execution Time: 82.738 ms | Memory: 0.04 MB
+[2026-10-16 00:04:29] [SQLite (sqlite-net)] [S100] [C1_Low] | Execution Time: 47.223 ms | Memory: 0.00 MB
+[2026-10-16 00:04:30] [SQLite (Native C)] [S100] [C1_Low] | Execution Time: 5.295 ms | Memory: 0.00 MB
+[2026-10-16 00:04:31] [LiteDB] [S100] [C1_Low] | Execution Time: 150.714 ms | Memory: 0.16 MB
+[2026-10-16 00:04:32] [RocksDB (KV Store)] [S100] [C1_Low] | Execution Time: 376.713 ms | Memory: 0.55 MB
+[2026-10-16 00:07:09] [JSON (Newtonsoft)] [S100] [C3_High] | Execution Time: 148.802 ms | Memory: 0.27 MB
+[2026-10-16 00:07:10] [Raw Binary (Byte Stream)] [S100] [C3_High] | Execution Time: 5.496 ms | Memory: 0.00 MB
+[2026-10-16 00:07:11] [MessagePack (Cysharp)] [S100] [C3_High] | Execution Time: 79.875 ms | Memory: 0.05 MB
+[2026-10-16 00:07:12] [SQLite (sqlite-net)] [S100] [C3_High] | Execution Time: 56.282 ms | Memory: 0.00 MB
+[2026-10-16 00:07:13] [LiteDB] [S100] [C3_High] | Execution Time: 162.495 ms | Memory: 0.57 MB
+[2026-10-16 00:07:14] [RocksDB (KV Store)] [S100] [C3_High] | Execution Time: 350.152 ms | Memory: 0.55 MB
+[2026-10-16 00:07:50] [JSON (Newtonsoft)] [S100K] [C1_Low] | Execution Time: 3588.907 ms | Memory: 115.35 MB
+[2026-10-16 00:07:51] [Raw Binary (Byte Stream)] [S100K] [C1_Low] | Execution Time: 373.337 ms | Memory: 8.54 MB
+[2026-10-16 00:07:53] [MessagePack (Cysharp)] [S100K] [C1_Low] | Execution Time: 1246.395 ms | Memory: 21.96 MB
+[2026-10-16 00:07:55] [SQLite (sqlite-net)] [S100K] [C1_Low] | Execution Time: 925.443 ms | Memory: 11.08 MB
+[2026-10-16 00:07:56] [SQLite (Native C)] [S100K] [C1_Low] | Execution Time: 198.602 ms | Memory: 11.08 MB
+[2026-10-16 00:08:08] [LiteDB] [S100K] [C1_Low] | Execution Time: 11088.460 ms | Memory: 96.31 MB
+[2026-10-16 00:08:12] [RocksDB (KV Store)] [S100K] [C1_Low] | Execution Time: 2817.126 ms | Memory: 51.18 MB

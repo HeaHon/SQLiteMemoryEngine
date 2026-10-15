@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>RocksDbSharp</id>
+    <version>6.2.2</version>
+    <title>RocksDbSharp</title>
+    <authors>Warren Falk</authors>
+    <owners>Warren Falk</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">BSD-2-Clause</license>
+    <licenseUrl>https://licenses.nuget.org/BSD-2-Clause</licenseUrl>
+    <projectUrl>https://github.com/warrenfalk/rocksdb-sharp</projectUrl>
+    <iconUrl>http://rocksdb.org/static/logo.svg</iconUrl>
+    <description>.Net Bindings for RocksDb.  See the Project Site for more information.  (Note: Also install RocksDbNative package to have native binaries included with build)</description>
+    <releaseNotes>.Net Bindings for RocksDb.  See the Project Site for more information.  (Note: Also install RocksDbNative package to have native binaries included with build)</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>rocksdb leveldb embedded database</tags>
+    <repository url="https://github.com/warrenfalk/rocksdb-sharp.git" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.0" />
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="Microsoft.CSharp" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Reflection" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Reflection.Emit" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.InteropServices" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard1.6">
+        <dependency id="Microsoft.CSharp" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
+        <dependency id="System.Reflection" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Reflection.Emit" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.InteropServices" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

@@ -104,3 +104,13 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Unity StreamingAssets Benchmark Data
+Assets/StreamingAssets
+Assets/StreamingAssets/JSON/
+Assets/StreamingAssets/Binary/
+Assets/StreamingAssets/MessagePack/
+Assets/StreamingAssets/SQLite/
+Assets/StreamingAssets/LiteDB/
+Assets/StreamingAssets/RocksDB/
+Assets/StreamingAssets/FlatBuffers
