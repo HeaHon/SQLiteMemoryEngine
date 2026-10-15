@@ -1,4 +1,4 @@
-// Mono.Data.Sqlite 대신 프로젝트에서 사용 중인 SQLite-net 클래스를 사용합니다.
+﻿// Mono.Data.Sqlite 대신 프로젝트에서 사용 중인 SQLite-net 클래스를 사용합니다.
 using SQLite;
 using Newtonsoft.Json;
 using System.IO;
@@ -49,9 +49,6 @@ public class DBGenerator : EditorWindow
 
                 // 3. 동일한 객체를 Binary (.bytes) 파일로 내보내기
                 ExportToBinary(dataContainer, Path.Combine(binaryFolder, $"{baseFileName}.bytes"));
-
-                // 4. 동일한 객체를 ScriptableObject (.asset)로 내보내기
-                ExportToScriptableObject(dataContainer, compStr, $"Assets/Resources/SO/{scaleStr}/{baseFileName}.asset");
             }
         }
 
@@ -167,7 +164,7 @@ public class DBGenerator : EditorWindow
     }
     #endregion
 
-    #region Export 헬퍼 메서드 (JSON, Binary, SO)
+    #region Export 헬퍼 메서드 (JSON, Binary)
     private static void ExportToJson(object container, string path)
     {
         string json = JsonConvert.SerializeObject(container, Formatting.Indented);
@@ -179,37 +176,6 @@ public class DBGenerator : EditorWindow
         string json = JsonConvert.SerializeObject(container, Formatting.None);
         byte[] bytes = Encoding.UTF8.GetBytes(json);
         File.WriteAllBytes(path, bytes);
-    }
-
-    private static void ExportToScriptableObject(object container, string complexity, string assetPath)
-    {
-        ScriptableObject so = null;
-        if (complexity == "C1_Low")
-        {
-            var target = ScriptableObject.CreateInstance<SO_C1>();
-            string json = JsonConvert.SerializeObject(container);
-            target.data = JsonConvert.DeserializeObject<DataSet_C1>(json);
-            so = target;
-        }
-        else if (complexity == "C2_Mid")
-        {
-            var target = ScriptableObject.CreateInstance<SO_C2>();
-            string json = JsonConvert.SerializeObject(container);
-            target.data = JsonConvert.DeserializeObject<DataSet_C2>(json);
-            so = target;
-        }
-        else if (complexity == "C3_High")
-        {
-            var target = ScriptableObject.CreateInstance<SO_C3>();
-            string json = JsonConvert.SerializeObject(container);
-            target.data = JsonConvert.DeserializeObject<DataSet_C3>(json);
-            so = target;
-        }
-
-        if (so != null)
-        {
-            AssetDatabase.CreateAsset(so, assetPath);
-        }
     }
     #endregion
 }

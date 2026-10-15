@@ -10,3 +10,6 @@
 [2026-10-01 16:35:59] [JSON (Direct IO)] [S100K] [C3_High] | Execution Time: 7685.590 ms | Memory: 446.22 MB
 [2026-10-01 16:36:07] [Binary (Direct IO)] [S100K] [C3_High] | Execution Time: 6849.155 ms | Memory: 253.28 MB
 [2026-10-01 16:36:08] [SQLite (Direct IO)] [S100K] [C3_High] | Execution Time: 743.382 ms | Memory: 19.87 MB
+[2026-10-15 13:40:35] [JSON (Direct IO)] [S100K] [C3_High] | Execution Time: 7412.248 ms | Memory: 449.72 MB
+[2026-10-15 13:40:43] [Binary (Direct IO)] [S100K] [C3_High] | Execution Time: 6640.885 ms | Memory: 267.56 MB
+[2026-10-15 13:40:45] [SQLite (Direct IO)] [S100K] [C3_High] | Execution Time: 1143.197 ms | Memory: 19.56 MB

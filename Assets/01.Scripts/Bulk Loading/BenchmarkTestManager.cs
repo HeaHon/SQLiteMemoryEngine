@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using UnityEngine;
 
@@ -25,8 +25,7 @@ public enum TargetFormat
     JSON = 1 << 0,
     Binary = 1 << 1,
     SQLite = 1 << 2,
-    ScriptableObject = 1 << 3,
-    All = JSON | Binary | SQLite | ScriptableObject
+    All = JSON | Binary | SQLite 
 }
 #endregion
 
@@ -94,13 +93,6 @@ public class BenchmarkTestManager : MonoBehaviour
             });
             ExecuteAndPrint(loader, path);
         }
-
-        if (targetFormats.HasFlag(TargetFormat.ScriptableObject))
-        {
-            string resourcePath = $"SO/{scaleStr}/{fileName}";
-            var loader = new ScriptableObjectLoader<SO_C1, DataSet_C1>(so => so.data);
-            ExecuteAndPrint(loader, resourcePath);
-        }
     }
     #endregion
 
@@ -130,13 +122,6 @@ public class BenchmarkTestManager : MonoBehaviour
                 container.inventories = db.Table<Runtime_Inventory_C2>().ToList();
             });
             ExecuteAndPrint(loader, path);
-        }
-
-        if (targetFormats.HasFlag(TargetFormat.ScriptableObject))
-        {
-            string resourcePath = $"SO/{scaleStr}/{fileName}";
-            var loader = new ScriptableObjectLoader<SO_C2, DataSet_C2>(so => so.data);
-            ExecuteAndPrint(loader, resourcePath);
         }
     }
     #endregion
@@ -169,13 +154,6 @@ public class BenchmarkTestManager : MonoBehaviour
                 container.inventories = db.Table<Runtime_Inventory_C3>().ToList();
             });
             ExecuteAndPrint(loader, path);
-        }
-
-        if (targetFormats.HasFlag(TargetFormat.ScriptableObject))
-        {
-            string resourcePath = $"SO/{scaleStr}/{fileName}";
-            var loader = new ScriptableObjectLoader<SO_C3, DataSet_C3>(so => so.data);
-            ExecuteAndPrint(loader, resourcePath);
         }
     }
     #endregion

@@ -1,4 +1,4 @@
-// Mono.Data.Sqlite 대신 프로젝트에서 사용 중인 SQLite-net 클래스를 사용합니다.
+﻿// Mono.Data.Sqlite 대신 프로젝트에서 사용 중인 SQLite-net 클래스를 사용합니다.
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -286,10 +286,4 @@ public class DataSet_C3
     public List<Item_Effect_Link_C3> links = new List<Item_Effect_Link_C3>();
     public List<Runtime_Inventory_C3> inventories = new List<Runtime_Inventory_C3>();
 }
-#endregion
-
-#region ScriptableObject 에셋 용 스크립트
-public class SO_C1 : ScriptableObject { public DataSet_C1 data; }
-public class SO_C2 : ScriptableObject { public DataSet_C2 data; }
-public class SO_C3 : ScriptableObject { public DataSet_C3 data; }
 #endregion
