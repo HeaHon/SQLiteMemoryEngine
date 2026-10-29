@@ -30,7 +30,8 @@ public class FlatBuffersQueryEngine : IQueryEngine
         try
         {
             if (query.Operation == QueryOperation.RelationTraversal) ExecuteRelation(query, result);
-            else if (query.Operation == QueryOperation.PartialFieldAccess && TryExecutePartial(query, result)) { }
+            else if ((query.Operation == QueryOperation.PrimaryKeyLookup || query.Operation == QueryOperation.PartialFieldAccess) &&
+                     TryExecuteIndexedLookup(query, result)) { }
             else
             {
                 foreach (Dictionary<string, object> row in EnumerateTable(query.Table))
@@ -48,59 +49,132 @@ public class FlatBuffersQueryEngine : IQueryEngine
         return result;
     }
 
-    private bool TryExecutePartial(QuerySpec query, QueryResult result)
+    private bool TryExecuteIndexedLookup(QuerySpec query, QueryResult result)
     {
         object keyValue;
         int key;
-        if (query.Projection.Count != 1 || query.Predicates.Count != 1 || !query.TryGetEquality(query.PrimaryKeyField, out keyValue) ||
+        if (!query.TryGetEquality(query.PrimaryKeyField, out keyValue) ||
             !int.TryParse(Convert.ToString(keyValue), out key)) return false;
 
-        string field = query.Projection[0].Field;
+        bool partial = query.Operation == QueryOperation.PartialFieldAccess && query.Projection.Count == 1 && query.Predicates.Count == 1;
+        string field = partial ? query.Projection[0].Field : null;
         if (query.Table.IndexOf("Master_Item_C1", StringComparison.OrdinalIgnoreCase) >= 0 && rootDataSet.C1Data.HasValue)
         {
             var data = rootDataSet.C1Data.Value;
-            for (int i = 0; i < data.ItemsLength; i++)
-            {
-                var item = data.Items(i).Value;
-                if (item.ItemId != key) continue;
-                var row = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { ["item_id"] = item.ItemId };
-                AddItemField(row, field, item.Name, item.ItemType, item.Rarity, item.Atk, item.Price);
-                if (QueryRuntime.Matches(row, query.Predicates)) result.AddProjectedRow(query, row);
-                return true;
-            }
+            int index = FindItemC1(data, key);
+            if (index < 0) return true;
+            var item = data.Items(index).Value;
+            var row = partial ? CreatePartialC1Row(item, field) : CreateFullC1Row(item);
+            if (QueryRuntime.Matches(row, query.Predicates)) result.AddProjectedRow(query, row);
             return true;
         }
 
         if (query.Table.IndexOf("Master_Item_C2", StringComparison.OrdinalIgnoreCase) >= 0 && rootDataSet.C2Data.HasValue)
         {
             var data = rootDataSet.C2Data.Value;
-            for (int i = 0; i < data.ItemsLength; i++)
-            {
-                var item = data.Items(i).Value;
-                if (item.ItemId != key) continue;
-                var row = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { ["item_id"] = item.ItemId };
-                AddItemField(row, field, item.Name, item.ItemCode, item.Rarity, item.ReqLevel, item.BaseAtk);
-                if (QueryRuntime.Matches(row, query.Predicates)) result.AddProjectedRow(query, row);
-                return true;
-            }
+            int index = FindItemC2(data, key);
+            if (index < 0) return true;
+            var item = data.Items(index).Value;
+            var row = partial ? CreatePartialC2Row(item, field) : CreateFullC2Row(item);
+            if (QueryRuntime.Matches(row, query.Predicates)) result.AddProjectedRow(query, row);
             return true;
         }
 
         if (query.Table.IndexOf("Master_Item_C3", StringComparison.OrdinalIgnoreCase) >= 0 && rootDataSet.C3Data.HasValue)
         {
             var data = rootDataSet.C3Data.Value;
-            for (int i = 0; i < data.ItemsLength; i++)
+            int index = FindItemC3(data, key);
+            if (index < 0) return true;
+            var item = data.Items(index).Value;
+            var row = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
             {
-                var item = data.Items(i).Value;
-                if (item.ItemId != key) continue;
-                var row = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { ["item_id"] = item.ItemId, ["name"] = item.Name, ["rarity"] = item.Rarity };
-                if (QueryRuntime.Matches(row, query.Predicates)) result.AddProjectedRow(query, row);
-                return true;
-            }
+                ["item_id"] = item.ItemId,
+                ["name"] = item.Name,
+                ["rarity"] = item.Rarity
+            };
+            if (QueryRuntime.Matches(row, query.Predicates)) result.AddProjectedRow(query, row);
             return true;
         }
 
         return false;
+    }
+
+    private static int FindItemC1(DataSet_C1_Schema data, int key)
+    {
+        int low = 0;
+        int high = data.ItemsLength - 1;
+        while (low <= high)
+        {
+            int middle = low + ((high - low) / 2);
+            int value = data.Items(middle).Value.ItemId;
+            if (value == key) return middle;
+            if (value < key) low = middle + 1;
+            else high = middle - 1;
+        }
+        return -1;
+    }
+
+    private static int FindItemC2(DataSet_C2_Schema data, int key)
+    {
+        int low = 0;
+        int high = data.ItemsLength - 1;
+        while (low <= high)
+        {
+            int middle = low + ((high - low) / 2);
+            int value = data.Items(middle).Value.ItemId;
+            if (value == key) return middle;
+            if (value < key) low = middle + 1;
+            else high = middle - 1;
+        }
+        return -1;
+    }
+
+    private static int FindItemC3(DataSet_C3_Schema data, int key)
+    {
+        int low = 0;
+        int high = data.ItemsLength - 1;
+        while (low <= high)
+        {
+            int middle = low + ((high - low) / 2);
+            int value = data.Items(middle).Value.ItemId;
+            if (value == key) return middle;
+            if (value < key) low = middle + 1;
+            else high = middle - 1;
+        }
+        return -1;
+    }
+
+    private static Dictionary<string, object> CreateFullC1Row(Item_C1_Table item)
+    {
+        return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["item_id"] = item.ItemId, ["name"] = item.Name, ["item_type"] = item.ItemType,
+            ["rarity"] = item.Rarity, ["atk"] = item.Atk, ["price"] = item.Price
+        };
+    }
+
+    private static Dictionary<string, object> CreateFullC2Row(Item_C2_Table item)
+    {
+        return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["item_id"] = item.ItemId, ["item_code"] = item.ItemCode, ["name"] = item.Name,
+            ["item_type"] = item.ItemType, ["rarity"] = item.Rarity, ["req_level"] = item.ReqLevel,
+            ["base_atk"] = item.BaseAtk
+        };
+    }
+
+    private static Dictionary<string, object> CreatePartialC1Row(Item_C1_Table item, string field)
+    {
+        var row = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { ["item_id"] = item.ItemId };
+        AddItemField(row, field, item.Name, item.ItemType, item.Rarity, item.Atk, item.Price);
+        return row;
+    }
+
+    private static Dictionary<string, object> CreatePartialC2Row(Item_C2_Table item, string field)
+    {
+        var row = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { ["item_id"] = item.ItemId };
+        AddItemField(row, field, item.Name, item.ItemCode, item.Rarity, item.ReqLevel, item.BaseAtk);
+        return row;
     }
 
     private static void AddItemField(Dictionary<string, object> row, string field, object first, object second, object third, object fourth, object fifth)
@@ -274,13 +348,16 @@ public class FlatBuffersQueryEngine : IQueryEngine
 
         if (query.ComplexityLevel == 2)
         {
-            List<Dictionary<string, object>> characters = ToList(EnumerateTable("Runtime_Character_C2"));
-            List<Dictionary<string, object>> items = ToList(EnumerateTable("Master_Item_C2"));
-            foreach (Dictionary<string, object> inventory in EnumerateTable("Runtime_Inventory_C2"))
+            if (!rootDataSet.C2Data.HasValue) return;
+            var data = rootDataSet.C2Data.Value;
+            int characterId = Convert.ToInt32(anchor);
+            Dictionary<string, object> character = FindCharacterC2(data, characterId);
+            if (character == null) return;
+
+            foreach (Dictionary<string, object> inventory in EnumerateC2InventoriesByCharacter(data, characterId))
             {
-                if (!QueryRuntime.Compare(Value(inventory, "character_id"), anchor, QueryComparison.Equal)) continue;
-                Dictionary<string, object> character = FindById(characters, "character_id", Value(inventory, "character_id"));
-                Dictionary<string, object> item = FindById(items, "item_id", Value(inventory, "item_id"));
+                Dictionary<string, object> item = FindItemC2Row(data, Convert.ToInt32(Value(inventory, "item_id")));
+                if (item == null) continue;
                 var joined = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
                 {
                     ["character_id"] = Value(character, "character_id"), ["character_name"] = Value(character, "name"),
@@ -293,29 +370,30 @@ public class FlatBuffersQueryEngine : IQueryEngine
         }
 
         if (query.ComplexityLevel != 3) throw new NotSupportedException("C1에는 관계형 traversal 대상이 없습니다.");
-        List<Dictionary<string, object>> users = ToList(EnumerateTable("System_User_C3"));
-        List<Dictionary<string, object>> charactersC3 = ToList(EnumerateTable("Runtime_Character_C3"));
-        List<Dictionary<string, object>> itemsC3 = ToList(EnumerateTable("Master_Item_C3"));
-        List<Dictionary<string, object>> links = ToList(EnumerateTable("Item_Effect_Link_C3"));
-        List<Dictionary<string, object>> effects = ToList(EnumerateTable("Effect_C3"));
+        if (!rootDataSet.C3Data.HasValue) return;
+        var c3Data = rootDataSet.C3Data.Value;
+        int anchorId = Convert.ToInt32(anchor);
 
-        foreach (Dictionary<string, object> character in charactersC3)
+        IEnumerable<Dictionary<string, object>> matchedCharacters = query.RelationAnchorField.Equals("user_id", StringComparison.OrdinalIgnoreCase)
+            ? EnumerateC3CharactersByUser(c3Data, anchorId)
+            : EnumerateSingleCharacterC3(c3Data, anchorId);
+
+        foreach (Dictionary<string, object> character in matchedCharacters)
         {
-            object compareValue = query.RelationAnchorField.Equals("user_id", StringComparison.OrdinalIgnoreCase)
-                ? Value(character, "user_id") : Value(character, "character_id");
-            if (!QueryRuntime.Compare(compareValue, anchor, QueryComparison.Equal)) continue;
-            Dictionary<string, object> user = FindById(users, "user_id", Value(character, "user_id"));
+            Dictionary<string, object> user = FindUserC3(c3Data, Convert.ToInt32(Value(character, "user_id")));
+            if (user == null) continue;
 
-            foreach (Dictionary<string, object> inventory in EnumerateTable("Runtime_Inventory_C3"))
+            int characterId = Convert.ToInt32(Value(character, "character_id"));
+            foreach (Dictionary<string, object> inventory in EnumerateC3InventoriesByCharacter(c3Data, characterId))
             {
-                if (!QueryRuntime.Compare(Value(inventory, "character_id"), Value(character, "character_id"), QueryComparison.Equal)) continue;
-                Dictionary<string, object> item = FindById(itemsC3, "item_id", Value(inventory, "item_id"));
-                List<Dictionary<string, object>> itemLinks = FindAllById(links, "item_id", Value(item, "item_id"));
+                Dictionary<string, object> item = FindItemC3Row(c3Data, Convert.ToInt32(Value(inventory, "item_id")));
+                if (item == null) continue;
+                List<Dictionary<string, object>> itemLinks = ToList(EnumerateC3LinksByItem(c3Data, Convert.ToInt32(Value(item, "item_id"))));
                 if (itemLinks.Count == 0) itemLinks.Add(null);
 
                 foreach (Dictionary<string, object> link in itemLinks)
                 {
-                    Dictionary<string, object> effect = link == null ? null : FindById(effects, "effect_id", Value(link, "effect_id"));
+                    Dictionary<string, object> effect = link == null ? null : FindEffectC3(c3Data, Convert.ToInt32(Value(link, "effect_id")));
                     var joined = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
                     {
                         ["user_id"] = Value(user, "user_id"), ["account_name"] = Value(user, "account_name"),
@@ -326,6 +404,181 @@ public class FlatBuffersQueryEngine : IQueryEngine
                     if (QueryRuntime.Matches(joined, query.Predicates)) result.AddProjectedRow(query, joined);
                 }
             }
+        }
+    }
+
+    private static Dictionary<string, object> FindCharacterC2(DataSet_C2_Schema data, int key)
+    {
+        int low = 0;
+        int high = data.CharactersLength - 1;
+        while (low <= high)
+        {
+            int middle = low + ((high - low) / 2);
+            var value = data.Characters(middle).Value;
+            if (value.CharacterId == key)
+                return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["character_id"] = value.CharacterId, ["name"] = value.Name, ["level"] = value.Level,
+                    ["cur_hp"] = value.CurHp, ["pos_x"] = value.PosX, ["pos_y"] = value.PosY
+                };
+            if (value.CharacterId < key) low = middle + 1;
+            else high = middle - 1;
+        }
+        return null;
+    }
+
+    private static Dictionary<string, object> FindItemC2Row(DataSet_C2_Schema data, int key)
+    {
+        int low = 0;
+        int high = data.ItemsLength - 1;
+        while (low <= high)
+        {
+            int middle = low + ((high - low) / 2);
+            var value = data.Items(middle).Value;
+            if (value.ItemId == key)
+                return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["item_id"] = value.ItemId, ["item_code"] = value.ItemCode, ["name"] = value.Name,
+                    ["item_type"] = value.ItemType, ["rarity"] = value.Rarity, ["req_level"] = value.ReqLevel,
+                    ["base_atk"] = value.BaseAtk
+                };
+            if (value.ItemId < key) low = middle + 1;
+            else high = middle - 1;
+        }
+        return null;
+    }
+
+    private static IEnumerable<Dictionary<string, object>> EnumerateC2InventoriesByCharacter(DataSet_C2_Schema data, int characterId)
+    {
+        for (int i = 0; i < data.InventoriesLength; i++)
+        {
+            var value = data.Inventories(i).Value;
+            if (value.CharacterId != characterId) continue;
+            yield return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["instance_id"] = value.InstanceId, ["character_id"] = value.CharacterId,
+                ["item_id"] = value.ItemId, ["quantity"] = value.Quantity
+            };
+        }
+    }
+
+    private static Dictionary<string, object> FindUserC3(DataSet_C3_Schema data, int key)
+    {
+        int low = 0;
+        int high = data.UsersLength - 1;
+        while (low <= high)
+        {
+            int middle = low + ((high - low) / 2);
+            var value = data.Users(middle).Value;
+            if (value.UserId == key)
+                return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["user_id"] = value.UserId, ["account_name"] = value.AccountName, ["created_at"] = value.CreatedAt
+                };
+            if (value.UserId < key) low = middle + 1;
+            else high = middle - 1;
+        }
+        return null;
+    }
+
+    private static Dictionary<string, object> FindItemC3Row(DataSet_C3_Schema data, int key)
+    {
+        int low = 0;
+        int high = data.ItemsLength - 1;
+        while (low <= high)
+        {
+            int middle = low + ((high - low) / 2);
+            var value = data.Items(middle).Value;
+            if (value.ItemId == key)
+                return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["item_id"] = value.ItemId, ["name"] = value.Name, ["rarity"] = value.Rarity
+                };
+            if (value.ItemId < key) low = middle + 1;
+            else high = middle - 1;
+        }
+        return null;
+    }
+
+    private static Dictionary<string, object> FindEffectC3(DataSet_C3_Schema data, int key)
+    {
+        int low = 0;
+        int high = data.EffectsLength - 1;
+        while (low <= high)
+        {
+            int middle = low + ((high - low) / 2);
+            var value = data.Effects(middle).Value;
+            if (value.EffectId == key)
+                return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["effect_id"] = value.EffectId, ["effect_type"] = value.EffectType, ["value"] = value.Value
+                };
+            if (value.EffectId < key) low = middle + 1;
+            else high = middle - 1;
+        }
+        return null;
+    }
+
+    private static IEnumerable<Dictionary<string, object>> EnumerateC3CharactersByUser(DataSet_C3_Schema data, int userId)
+    {
+        for (int i = 0; i < data.CharactersLength; i++)
+        {
+            var value = data.Characters(i).Value;
+            if (value.UserId != userId) continue;
+            yield return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["character_id"] = value.CharacterId, ["user_id"] = value.UserId,
+                ["name"] = value.Name, ["guild_id"] = value.GuildId
+            };
+        }
+    }
+
+    private static IEnumerable<Dictionary<string, object>> EnumerateSingleCharacterC3(DataSet_C3_Schema data, int characterId)
+    {
+        int low = 0;
+        int high = data.CharactersLength - 1;
+        while (low <= high)
+        {
+            int middle = low + ((high - low) / 2);
+            var value = data.Characters(middle).Value;
+            if (value.CharacterId == characterId)
+            {
+                yield return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["character_id"] = value.CharacterId, ["user_id"] = value.UserId,
+                    ["name"] = value.Name, ["guild_id"] = value.GuildId
+                };
+                yield break;
+            }
+            if (value.CharacterId < characterId) low = middle + 1;
+            else high = middle - 1;
+        }
+    }
+
+    private static IEnumerable<Dictionary<string, object>> EnumerateC3InventoriesByCharacter(DataSet_C3_Schema data, int characterId)
+    {
+        for (int i = 0; i < data.InventoriesLength; i++)
+        {
+            var value = data.Inventories(i).Value;
+            if (value.CharacterId != characterId) continue;
+            yield return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["instance_id"] = value.InstanceId, ["character_id"] = value.CharacterId,
+                ["item_id"] = value.ItemId, ["durability"] = value.Durability
+            };
+        }
+    }
+
+    private static IEnumerable<Dictionary<string, object>> EnumerateC3LinksByItem(DataSet_C3_Schema data, int itemId)
+    {
+        for (int i = 0; i < data.LinksLength; i++)
+        {
+            var value = data.Links(i).Value;
+            if (value.ItemId != itemId) continue;
+            yield return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["item_id"] = value.ItemId, ["effect_id"] = value.EffectId
+            };
         }
     }
 

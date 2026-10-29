@@ -78,11 +78,14 @@ public class RocksDbQueryEngine : IQueryEngine, IDisposable
 
         if (query.ComplexityLevel == 2)
         {
-            foreach (Dictionary<string, object> inventory in EnumerateTable(db, "Runtime_Inventory_C2"))
+            int characterId = Convert.ToInt32(anchor);
+            Dictionary<string, object> character = ReadByPrimaryKey(db, "Runtime_Character_C2", characterId);
+            if (character == null) return;
+
+            foreach (Dictionary<string, object> inventory in EnumerateByKeyPrefix(db, $"inv_by_char_{characterId}_", "Runtime_Inventory_C2"))
             {
-                if (!QueryRuntime.Compare(Value(inventory, "character_id"), anchor, QueryComparison.Equal)) continue;
-                Dictionary<string, object> character = ReadByPrimaryKey(db, "Runtime_Character_C2", Convert.ToInt32(Value(inventory, "character_id")));
                 Dictionary<string, object> item = ReadByPrimaryKey(db, "Master_Item_C2", Convert.ToInt32(Value(inventory, "item_id")));
+                if (item == null) continue;
                 var row = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
                 {
                     ["character_id"] = Value(character, "character_id"),
@@ -99,25 +102,22 @@ public class RocksDbQueryEngine : IQueryEngine, IDisposable
 
         if (query.ComplexityLevel != 3) throw new NotSupportedException("C1에는 관계형 traversal 대상이 없습니다.");
 
-        var characters = new List<Dictionary<string, object>>();
-        foreach (Dictionary<string, object> character in EnumerateTable(db, "Runtime_Character_C3"))
-        {
-            string field = query.RelationAnchorField;
-            if (QueryRuntime.Compare(Value(character, field), anchor, QueryComparison.Equal)) characters.Add(character);
-        }
+        IEnumerable<Dictionary<string, object>> matchedCharacters;
+        int anchorId = Convert.ToInt32(anchor);
+        if (query.RelationAnchorField.Equals("user_id", StringComparison.OrdinalIgnoreCase))
+            matchedCharacters = EnumerateByKeyPrefix(db, $"char_by_user_{anchorId}_", "Runtime_Character_C3");
+        else
+            matchedCharacters = EnumerateSinglePrimary(db, "Runtime_Character_C3", anchorId);
 
-        foreach (Dictionary<string, object> character in characters)
+        foreach (Dictionary<string, object> character in matchedCharacters)
         {
             Dictionary<string, object> user = ReadByPrimaryKey(db, "System_User_C3", Convert.ToInt32(Value(character, "user_id")));
-            foreach (Dictionary<string, object> inventory in EnumerateTable(db, "Runtime_Inventory_C3"))
+            int characterId = Convert.ToInt32(Value(character, "character_id"));
+            foreach (Dictionary<string, object> inventory in EnumerateByKeyPrefix(db, $"inv_by_char_{characterId}_", "Runtime_Inventory_C3"))
             {
-                if (!QueryRuntime.Compare(Value(inventory, "character_id"), Value(character, "character_id"), QueryComparison.Equal)) continue;
                 Dictionary<string, object> item = ReadByPrimaryKey(db, "Master_Item_C3", Convert.ToInt32(Value(inventory, "item_id")));
-                var links = new List<Dictionary<string, object>>();
-                foreach (Dictionary<string, object> link in EnumerateTable(db, "Item_Effect_Link_C3"))
-                {
-                    if (QueryRuntime.Compare(Value(link, "item_id"), Value(item, "item_id"), QueryComparison.Equal)) links.Add(link);
-                }
+                if (item == null) continue;
+                var links = ToList(EnumerateByKeyPrefix(db, $"link_{Convert.ToInt32(Value(item, "item_id"))}_", "Item_Effect_Link_C3"));
                 if (links.Count == 0) links.Add(null);
 
                 foreach (Dictionary<string, object> link in links)
@@ -161,6 +161,26 @@ public class RocksDbQueryEngine : IQueryEngine, IDisposable
                 yield return ReadRowByTable(table, iterator.Value());
             }
         }
+    }
+
+    private static IEnumerable<Dictionary<string, object>> EnumerateByKeyPrefix(RocksDb db, string keyPrefix, string table)
+    {
+        byte[] prefixBytes = Encoding.UTF8.GetBytes(keyPrefix);
+        using (var iterator = db.NewIterator())
+        {
+            for (iterator.Seek(prefixBytes); iterator.Valid(); iterator.Next())
+            {
+                string key = Encoding.UTF8.GetString(iterator.Key());
+                if (!key.StartsWith(keyPrefix, StringComparison.Ordinal)) break;
+                yield return ReadRowByTable(table, iterator.Value());
+            }
+        }
+    }
+
+    private static IEnumerable<Dictionary<string, object>> EnumerateSinglePrimary(RocksDb db, string table, int id)
+    {
+        Dictionary<string, object> row = ReadByPrimaryKey(db, table, id);
+        if (row != null) yield return row;
     }
 
     private static Dictionary<string, object> ReadRowByTable(string table, byte[] bytes)
@@ -218,6 +238,13 @@ public class RocksDbQueryEngine : IQueryEngine, IDisposable
             }
         }
         return row;
+    }
+
+    private static List<Dictionary<string, object>> ToList(IEnumerable<Dictionary<string, object>> rows)
+    {
+        var list = new List<Dictionary<string, object>>();
+        foreach (Dictionary<string, object> row in rows) list.Add(row);
+        return list;
     }
 
     private static string GetKeyPrefix(string table)
