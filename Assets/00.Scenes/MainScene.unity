@@ -442,6 +442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1322369558}
   - component: {fileID: 1322369559}
+  - component: {fileID: 1322369560}
   m_Layer: 0
   m_Name: Bulk Loading Tester
   m_TagString: Untagged
@@ -476,9 +477,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64131a0033fb0ec48b0500788c1161e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BenchmarkTestManager
-  scale: 3
-  complexity: 2
-  targetFormats: -1
+  runtimeUI: {fileID: 1322369560}
+--- !u!114 &1322369560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322369556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e2357f7b73d84439da29c7680abeb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BenchmarkRuntimeUI
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

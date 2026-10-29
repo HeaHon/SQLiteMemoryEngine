@@ -27,6 +27,7 @@ public class SqliteFormatBuilder : IDataFormatBuilder
                 db.CreateTable<Runtime_Character_C1>();
                 db.InsertAll(c1.items);
                 db.InsertAll(c1.characters);
+                db.CreateIndex("idx_c1_rarity_atk", "Master_Item_C1", new[] { "rarity", "atk" }, false);
             }
             else if (complexity == "C2_Mid" && container is DataSet_C2 c2)
             {
@@ -38,6 +39,7 @@ public class SqliteFormatBuilder : IDataFormatBuilder
                 db.InsertAll(c2.tags);
                 db.InsertAll(c2.characters);
                 db.InsertAll(c2.inventories);
+                db.CreateIndex("idx_c2_req_level_rarity", "Master_Item_C2", new[] { "req_level", "rarity" }, false);
             }
             else if (complexity == "C3_High" && container is DataSet_C3 c3)
             {
@@ -53,6 +55,7 @@ public class SqliteFormatBuilder : IDataFormatBuilder
                 db.InsertAll(c3.effects);
                 db.InsertAll(c3.links);
                 db.InsertAll(c3.inventories);
+                db.CreateIndex("idx_c3_rarity", "Master_Item_C3", new[] { "rarity" }, false);
             }
             db.Commit();
         }
@@ -62,13 +65,13 @@ public class SqliteFormatBuilder : IDataFormatBuilder
 // LiteDB 포맷 빌더
 public class LiteDbFormatBuilder : IDataFormatBuilder
 {
+    private const int InsertBatchSize = 20000;
+
     public void Build(object container, string targetPath, string complexity)
     {
         if (File.Exists(targetPath))
         {
-            try { File.Delete(targetPath); } catch { }
-            System.GC.Collect();
-            System.GC.WaitForPendingFinalizers();
+            File.Delete(targetPath);
         }
 
         string connStr = $"Filename={targetPath};";
@@ -77,30 +80,60 @@ public class LiteDbFormatBuilder : IDataFormatBuilder
         {
             if (container is DataSet_C1 c1)
             {
-                db.GetCollection<Master_Item_C1>("items").InsertBulk(c1.items);
-                db.GetCollection<Runtime_Character_C1>("characters").InsertBulk(c1.characters);
+                var items = db.GetCollection<Master_Item_C1>("items");
+                var characters = db.GetCollection<Runtime_Character_C1>("characters");
+                items.InsertBulk(c1.items, InsertBatchSize);
+                items.EnsureIndex(item => item.item_id, true);
+                items.EnsureIndex(item => item.rarity);
+                items.EnsureIndex(item => item.atk);
+                characters.InsertBulk(c1.characters, InsertBatchSize);
             }
             else if (container is DataSet_C2 c2)
             {
-                db.GetCollection<Master_Item_C2>("items").InsertBulk(c2.items);
-                db.GetCollection<Item_Tag_C2>("tags").InsertBulk(c2.tags);
-                db.GetCollection<Runtime_Character_C2>("characters").InsertBulk(c2.characters);
-                db.GetCollection<Runtime_Inventory_C2>("inventories").InsertBulk(c2.inventories);
+                var items = db.GetCollection<Master_Item_C2>("items");
+                var tags = db.GetCollection<Item_Tag_C2>("tags");
+                var characters = db.GetCollection<Runtime_Character_C2>("characters");
+                var inventories = db.GetCollection<Runtime_Inventory_C2>("inventories");
+                items.InsertBulk(c2.items, InsertBatchSize);
+                tags.InsertBulk(c2.tags, InsertBatchSize);
+                characters.InsertBulk(c2.characters, InsertBatchSize);
+                inventories.InsertBulk(c2.inventories, InsertBatchSize);
+                items.EnsureIndex(item => item.item_id, true);
+                items.EnsureIndex(item => item.req_level);
+                items.EnsureIndex(item => item.rarity);
+                characters.EnsureIndex(character => character.character_id, true);
+                inventories.EnsureIndex(inventory => inventory.character_id);
             }
             else if (container is DataSet_C3 c3)
             {
-                db.GetCollection<System_User_C3>("users").InsertBulk(c3.users);
-                db.GetCollection<Runtime_Character_C3>("characters").InsertBulk(c3.characters);
-                db.GetCollection<Master_Item_C3>("items").InsertBulk(c3.items);
-                db.GetCollection<Master_Effect_C3>("effects").InsertBulk(c3.effects);
-                db.GetCollection<Item_Effect_Link_C3>("links").InsertBulk(c3.links);
-                db.GetCollection<Runtime_Inventory_C3>("inventories").InsertBulk(c3.inventories);
+                var users = db.GetCollection<System_User_C3>("users");
+                var characters = db.GetCollection<Runtime_Character_C3>("characters");
+                var items = db.GetCollection<Master_Item_C3>("items");
+                var effects = db.GetCollection<Master_Effect_C3>("effects");
+                var links = db.GetCollection<Item_Effect_Link_C3>("links");
+                var inventories = db.GetCollection<Runtime_Inventory_C3>("inventories");
+                users.InsertBulk(c3.users, InsertBatchSize);
+                characters.InsertBulk(c3.characters, InsertBatchSize);
+                items.InsertBulk(c3.items, InsertBatchSize);
+                effects.InsertBulk(c3.effects, InsertBatchSize);
+                links.InsertBulk(c3.links, InsertBatchSize);
+                inventories.InsertBulk(c3.inventories, InsertBatchSize);
+                users.EnsureIndex(user => user.user_id, true);
+                characters.EnsureIndex(character => character.character_id, true);
+                characters.EnsureIndex(character => character.user_id);
+                items.EnsureIndex(item => item.item_id, true);
+                items.EnsureIndex(item => item.rarity);
+                effects.EnsureIndex(effect => effect.effect_id, true);
+                links.EnsureIndex(link => link.item_id);
+                inventories.EnsureIndex(inventory => inventory.character_id);
             }
         }
     }
 }
 
-// RocksDB (KV Store) 포맷 빌더
+// ------- 단건/조건/연쇄 조회 최적화 포맷 빌더 -------
+
+// RocksDB (KV Store) 포맷 빌더: PK 및 관계 탐색용 키를 배치 기록
 public class RocksDbFormatBuilder : IDataFormatBuilder
 {
     public void Build(object container, string dbFolder, string complexity)
@@ -110,55 +143,202 @@ public class RocksDbFormatBuilder : IDataFormatBuilder
             Directory.Delete(dbFolder, true);
         }
 
-        // 1. RocksDB 엔진 옵션 설정
         var dbOptions = new DbOptions().SetCreateIfMissing(true);
-        var msgPackOptions = MessagePack.Resolvers.StandardResolver.Options;
 
         using (var db = RocksDb.Open(dbOptions, dbFolder))
         using (var writeBatch = new WriteBatch())
         {
-            if (container is DataSet_C1 c1)
+            if (complexity == "C1_Low" && container is DataSet_C1 c1)
             {
-                AddBatch(writeBatch, c1.items, item => $"item_{item.item_id}", msgPackOptions);
-                AddBatch(writeBatch, c1.characters, ch => $"char_{ch.character_id}", msgPackOptions);
+                foreach (var item in c1.items)
+                {
+                    // MessagePack 대신 BinaryWriter로 고정 바이트 페이로드 구성 (Case D 대응)
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(item.item_id);
+                        writer.Write(item.name ?? string.Empty);
+                        writer.Write(item.item_type ?? string.Empty);
+                        writer.Write(item.rarity);
+                        writer.Write(item.atk);
+                        writer.Write(item.price);
+                        valBytes = ms.ToArray();
+                    }
+
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"item_{item.item_id}"), valBytes);
+                }
+                foreach (var ch in c1.characters)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(ch.character_id);
+                        writer.Write(ch.name ?? string.Empty);
+                        writer.Write(ch.level);
+                        writer.Write(ch.hp);
+                        writer.Write(ch.pos_x);
+                        writer.Write(ch.pos_y);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"char_{ch.character_id}"), valBytes);
+                }
             }
-            else if (container is DataSet_C2 c2)
+            else if (complexity == "C2_Mid" && container is DataSet_C2 c2)
             {
-                AddBatch(writeBatch, c2.items, item => $"item_{item.item_id}", msgPackOptions);
-                AddBatch(writeBatch, c2.tags, tag => $"tag_{tag.item_id}_{tag.tag_name}", msgPackOptions);
-                AddBatch(writeBatch, c2.characters, ch => $"char_{ch.character_id}", msgPackOptions);
-                AddBatch(writeBatch, c2.inventories, inv => $"inv_{inv.instance_id}", msgPackOptions);
+                foreach (var item in c2.items)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(item.item_id);
+                        writer.Write(item.item_code ?? string.Empty);
+                        writer.Write(item.name ?? string.Empty);
+                        writer.Write(item.item_type ?? string.Empty);
+                        writer.Write(item.rarity);
+                        writer.Write(item.req_level);
+                        writer.Write(item.base_atk);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"item_{item.item_id}"), valBytes);
+                }
+                foreach (var tag in c2.tags)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(tag.item_id);
+                        writer.Write(tag.tag_name ?? string.Empty);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"tag_{tag.item_id}_{tag.tag_name}"), valBytes);
+                }
+                foreach (var ch in c2.characters)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(ch.character_id);
+                        writer.Write(ch.name ?? string.Empty);
+                        writer.Write(ch.level ?? string.Empty);
+                        writer.Write(ch.cur_hp);
+                        writer.Write(ch.pos_x);
+                        writer.Write(ch.pos_y);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"char_{ch.character_id}"), valBytes);
+                }
+                foreach (var inv in c2.inventories)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(inv.instance_id);
+                        writer.Write(inv.character_id);
+                        writer.Write(inv.item_id);
+                        writer.Write(inv.quantity);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"inv_{inv.instance_id}"), valBytes);
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"inv_by_char_{inv.character_id}_{inv.instance_id}"), valBytes);
+                }
             }
-            else if (container is DataSet_C3 c3)
+            else if (complexity == "C3_High" && container is DataSet_C3 c3)
             {
-                AddBatch(writeBatch, c3.users, user => $"user_{user.user_id}", msgPackOptions);
-                AddBatch(writeBatch, c3.characters, ch => $"char_{ch.character_id}", msgPackOptions);
-                AddBatch(writeBatch, c3.items, item => $"item_{item.item_id}", msgPackOptions);
-                AddBatch(writeBatch, c3.effects, eff => $"effect_{eff.effect_id}", msgPackOptions);
-                AddBatch(writeBatch, c3.links, link => $"link_{link.item_id}_{link.effect_id}", msgPackOptions);
-                AddBatch(writeBatch, c3.inventories, inv => $"inv_{ inv.instance_id}", msgPackOptions);
+                foreach (var user in c3.users)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(user.user_id);
+                        writer.Write(user.account_name ?? string.Empty);
+                        writer.Write(user.created_at);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"user_{user.user_id}"), valBytes);
+                }
+                foreach (var ch in c3.characters)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(ch.character_id);
+                        writer.Write(ch.user_id);
+                        writer.Write(ch.name ?? string.Empty);
+                        writer.Write(ch.guild_id);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"char_{ch.character_id}"), valBytes);
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"char_by_user_{ch.user_id}_{ch.character_id}"), valBytes);
+                }
+                foreach (var item in c3.items)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(item.item_id);
+                        writer.Write(item.name ?? string.Empty);
+                        writer.Write(item.rarity);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"item_{item.item_id}"), valBytes);
+                }
+                foreach (var eff in c3.effects)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(eff.effect_id);
+                        writer.Write(eff.effect_type ?? string.Empty);
+                        writer.Write(eff.value);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"effect_{eff.effect_id}"), valBytes);
+                }
+                foreach (var link in c3.links)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(link.item_id);
+                        writer.Write(link.effect_id);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"link_{link.item_id}_{link.effect_id}"), valBytes);
+                }
+                foreach (var inv in c3.inventories)
+                {
+                    byte[] valBytes;
+                    using (var ms = new MemoryStream())
+                    using (var writer = new BinaryWriter(ms, Encoding.UTF8))
+                    {
+                        writer.Write(inv.instance_id);
+                        writer.Write(inv.character_id);
+                        writer.Write(inv.item_id);
+                        writer.Write(inv.durability);
+                        valBytes = ms.ToArray();
+                    }
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"inv_{inv.instance_id}"), valBytes);
+                    writeBatch.Put(Encoding.UTF8.GetBytes($"inv_by_char_{inv.character_id}_{inv.instance_id}"), valBytes);
+                }
             }
 
-            // 일괄 배치 커밋 (디스크 쓰기 최적화)
             db.Write(writeBatch);
-        }
-    }
-
-    private void AddBatch<T>(WriteBatch batch, IEnumerable<T> items, Func<T, string> keySelector, MessagePackSerializerOptions options)
-    {
-        foreach (var item in items)
-        {
-            string keyStr = keySelector(item);
-            byte[] keyBytes = Encoding.UTF8.GetBytes(keyStr);
-            byte[] valueBytes = MessagePackSerializer.Serialize(item, options);
-
-            // RocksDB WriteBatch.Put 오버로드 규격에 맞게 바이트 배열 전달
-            batch.Put(keyBytes, valueBytes);
         }
     }
 }
 
-// FlatBuffers 포맷 빌더
+// FlatBuffers 포맷 빌더: 생성기에서 유지한 PK 순서의 벡터 구성
 public class FlatBuffersFormatBuilder : IDataFormatBuilder
 {
     public void Build(object container, string filePath, string complexity)
@@ -396,18 +576,7 @@ public class FlatBuffersFormatBuilder : IDataFormatBuilder
     }
 }
 
-// MessagePack 포맷 빌더
-public class MessagePackFormatBuilder : IDataFormatBuilder
-{
-    public void Build(object container, string filePath, string complexity)
-    {
-        var options = MessagePack.Resolvers.StandardResolver.Options;
-        byte[] bytes = MessagePackSerializer.Serialize(container.GetType(), container, options);
-        File.WriteAllBytes(filePath, bytes);
-    }
-}
-
-// Raw Binary 포맷 빌더
+// Raw Binary 포맷 빌더: 헤더 인덱스 테이블(O(1) Seek) 영역 사전 확보 및 Re-writing
 public class RawBinaryFormatBuilder : IDataFormatBuilder
 {
     public void Build(object container, string filePath, string complexity)
@@ -417,10 +586,20 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
         {
             if (complexity == "C1_Low" && container is DataSet_C1 c1)
             {
-                // 1. Items 직렬화
-                writer.Write(c1.items.Count);
+                int count = c1.items.Count;
+                writer.Write(count);
+
+                // 1. [Case A용] PK -> FileOffset 오프셋 인덱스 테이블 헤더 영역 사전 예장 (4바이트 ID + 8바이트 Offset)
+                long pkIndexHeaderPos = fs.Position;
+                writer.Write(new byte[count * 12]);
+
+                // 2. 실제 데이터 가공 및 바이트 위치 기록
+                var offsets = new Dictionary<int, long>();
                 foreach (var item in c1.items)
                 {
+                    long currentPos = fs.Position;
+                    offsets[item.item_id] = currentPos;
+
                     writer.Write(item.item_id);
                     writer.Write(item.name ?? string.Empty);
                     writer.Write(item.item_type ?? string.Empty);
@@ -429,7 +608,7 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(item.price);
                 }
 
-                // 2. Characters 직렬화
+                // 3. Characters 직렬화
                 writer.Write(c1.characters.Count);
                 foreach (var ch in c1.characters)
                 {
@@ -440,13 +619,32 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(ch.pos_x);
                     writer.Write(ch.pos_y);
                 }
+
+                long finalFileLength = fs.Position;
+
+                // 4. [Re-writing] 헤더 위치로 오프셋 인덱스 덮어쓰기
+                fs.Seek(pkIndexHeaderPos, SeekOrigin.Begin);
+                foreach (var pair in offsets)
+                {
+                    writer.Write(pair.Key);   // Item ID
+                    writer.Write(pair.Value); // Real File Offset
+                }
+                fs.Seek(finalFileLength, SeekOrigin.Begin);
             }
             else if (complexity == "C2_Mid" && container is DataSet_C2 c2)
             {
-                // 1. Items
-                writer.Write(c2.items.Count);
+                int itemCount = c2.items.Count;
+                writer.Write(itemCount);
+
+                long pkIndexHeaderPos = fs.Position;
+                writer.Write(new byte[itemCount * 12]);
+
+                var offsets = new Dictionary<int, long>();
                 foreach (var item in c2.items)
                 {
+                    long currentPos = fs.Position;
+                    offsets[item.item_id] = currentPos;
+
                     writer.Write(item.item_id);
                     writer.Write(item.item_code ?? string.Empty);
                     writer.Write(item.name ?? string.Empty);
@@ -456,7 +654,7 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(item.base_atk);
                 }
 
-                // 2. Tags
+                // Tags
                 writer.Write(c2.tags.Count);
                 foreach (var tag in c2.tags)
                 {
@@ -464,7 +662,7 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(tag.tag_name ?? string.Empty);
                 }
 
-                // 3. Characters
+                // Characters
                 writer.Write(c2.characters.Count);
                 foreach (var ch in c2.characters)
                 {
@@ -476,7 +674,7 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(ch.pos_y);
                 }
 
-                // 4. Inventories
+                // Inventories
                 writer.Write(c2.inventories.Count);
                 foreach (var inv in c2.inventories)
                 {
@@ -485,19 +683,36 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(inv.item_id);
                     writer.Write(inv.quantity);
                 }
+
+                long finalFileLength = fs.Position;
+                fs.Seek(pkIndexHeaderPos, SeekOrigin.Begin);
+                foreach (var pair in offsets)
+                {
+                    writer.Write(pair.Key);
+                    writer.Write(pair.Value);
+                }
+                fs.Seek(finalFileLength, SeekOrigin.Begin);
             }
             else if (complexity == "C3_High" && container is DataSet_C3 c3)
             {
-                // 1. Users
-                writer.Write(c3.users.Count);
+                int userCount = c3.users.Count;
+                writer.Write(userCount);
+
+                long userIndexHeaderPos = fs.Position;
+                writer.Write(new byte[userCount * 12]);
+
+                var userOffsets = new Dictionary<int, long>();
                 foreach (var user in c3.users)
                 {
+                    long currentPos = fs.Position;
+                    userOffsets[user.user_id] = currentPos;
+
                     writer.Write(user.user_id);
                     writer.Write(user.account_name ?? string.Empty);
                     writer.Write(user.created_at);
                 }
 
-                // 2. Characters
+                // Characters
                 writer.Write(c3.characters.Count);
                 foreach (var ch in c3.characters)
                 {
@@ -507,7 +722,7 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(ch.guild_id);
                 }
 
-                // 3. Items
+                // Items
                 writer.Write(c3.items.Count);
                 foreach (var item in c3.items)
                 {
@@ -516,7 +731,7 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(item.rarity);
                 }
 
-                // 4. Effects
+                // Effects
                 writer.Write(c3.effects.Count);
                 foreach (var eff in c3.effects)
                 {
@@ -525,7 +740,7 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(eff.value);
                 }
 
-                // 5. Links
+                // Links
                 writer.Write(c3.links.Count);
                 foreach (var link in c3.links)
                 {
@@ -533,7 +748,7 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(link.effect_id);
                 }
 
-                // 6. Inventories
+                // Inventories
                 writer.Write(c3.inventories.Count);
                 foreach (var inv in c3.inventories)
                 {
@@ -542,9 +757,30 @@ public class RawBinaryFormatBuilder : IDataFormatBuilder
                     writer.Write(inv.item_id);
                     writer.Write(inv.durability);
                 }
+
+                long finalFileLength = fs.Position;
+                fs.Seek(userIndexHeaderPos, SeekOrigin.Begin);
+                foreach (var pair in userOffsets)
+                {
+                    writer.Write(pair.Key);
+                    writer.Write(pair.Value);
+                }
+                fs.Seek(finalFileLength, SeekOrigin.Begin);
             }
         }
-    
+    }
+}
+
+// ------- 전체 로드만 가능한 포멧 ---------
+
+// MessagePack 포맷 빌더
+public class MessagePackFormatBuilder : IDataFormatBuilder
+{
+    public void Build(object container, string filePath, string complexity)
+    {
+        var options = MessagePack.Resolvers.StandardResolver.Options;
+        byte[] bytes = MessagePackSerializer.Serialize(container.GetType(), container, options);
+        File.WriteAllBytes(filePath, bytes);
     }
 }
 
