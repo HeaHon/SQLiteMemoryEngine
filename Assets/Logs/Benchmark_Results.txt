@@ -41,3 +41,209 @@
 [2026-10-16 00:07:56] [SQLite (Native C)] [S100K] [C1_Low] | Execution Time: 198.602 ms | Memory: 11.08 MB
 [2026-10-16 00:08:08] [LiteDB] [S100K] [C1_Low] | Execution Time: 11088.460 ms | Memory: 96.31 MB
 [2026-10-16 00:08:12] [RocksDB (KV Store)] [S100K] [C1_Low] | Execution Time: 2817.126 ms | Memory: 51.18 MB
+[2026-11-20 12:59:23] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.253 ms | Memory: 0.00 MB
+[2026-11-20 12:59:24] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.068 ms | Memory: 0.00 MB
+[2026-11-20 12:59:24] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 0.455 ms | Memory: 0.00 MB
+[2026-11-20 12:59:25] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 12:59:49] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.474 ms | Memory: 0.00 MB
+[2026-11-20 12:59:50] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.095 ms | Memory: 0.00 MB
+[2026-11-20 12:59:51] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 2.316 ms | Memory: 0.00 MB
+[2026-11-20 12:59:52] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.152 ms | Memory: 0.00 MB
+[2026-11-20 13:00:01] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.141 ms | Memory: 0.00 MB
+[2026-11-20 13:00:02] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.079 ms | Memory: 0.00 MB
+[2026-11-20 13:00:02] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 0.411 ms | Memory: 0.00 MB
+[2026-11-20 13:00:03] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:00:31] [SQLite (sqlite-net)/Document] [S1K] [C1_Low] | Execution Time: 0.244 ms | Memory: 0.00 MB
+[2026-11-20 13:00:31] [SQLite (Native C)/Document] [S1K] [C1_Low] | Execution Time: 0.066 ms | Memory: 0.00 MB
+[2026-11-20 13:00:32] [LiteDB/Document] [S1K] [C1_Low] | Execution Time: 0.483 ms | Memory: 0.00 MB
+[2026-11-20 13:00:33] [RocksDB/Document] [S1K] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:00:47] [SQLite (sqlite-net)/Document] [S1K] [C1_Low] | Execution Time: 0.281 ms | Memory: 0.00 MB
+[2026-11-20 13:00:47] [SQLite (Native C)/Document] [S1K] [C1_Low] | Execution Time: 0.077 ms | Memory: 0.00 MB
+[2026-11-20 13:00:48] [LiteDB/Document] [S1K] [C1_Low] | Execution Time: 0.534 ms | Memory: 0.00 MB
+[2026-11-20 13:00:49] [RocksDB/Document] [S1K] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:01:06] [SQLite (sqlite-net)/Document] [S1K] [C1_Low] | Execution Time: 2.120 ms | Memory: 0.00 MB
+[2026-11-20 13:01:07] [SQLite (Native C)/Document] [S1K] [C1_Low] | Execution Time: 0.366 ms | Memory: 0.00 MB
+[2026-11-20 13:01:10] [LiteDB/Document] [S1K] [C1_Low] | Execution Time: 24.233 ms | Memory: 0.00 MB
+[2026-11-20 13:01:11] [RocksDB/Document] [S1K] [C1_Low] | Execution Time: 1.558 ms | Memory: 0.00 MB
+[2026-11-20 13:01:28] [LiteDB/Relational] [S1K] [C1_Low] | Execution Time: 19.120 ms | Memory: 0.00 MB
+[2026-11-20 13:01:28] [RocksDB/Relational] [S1K] [C1_Low] | Execution Time: 0.005 ms | Memory: 0.00 MB
+[2026-11-20 13:01:33] [SQLite (sqlite-net)/Relational] [S1K] [C1_Low] | Execution Time: 1.910 ms | Memory: 0.00 MB
+[2026-11-20 13:01:34] [SQLite (Native C)/Relational] [S1K] [C1_Low] | Execution Time: 0.308 ms | Memory: 0.00 MB
+[2026-11-20 13:01:36] [LiteDB/Relational] [S1K] [C1_Low] | Execution Time: 19.301 ms | Memory: 0.00 MB
+[2026-11-20 13:01:37] [RocksDB/Relational] [S1K] [C1_Low] | Execution Time: 1.514 ms | Memory: 0.00 MB
+[2026-11-20 13:01:46] [SQLite (sqlite-net)/Relational] [S1K] [C1_Low] | Execution Time: 0.246 ms | Memory: 0.00 MB
+[2026-11-20 13:01:47] [SQLite (Native C)/Relational] [S1K] [C1_Low] | Execution Time: 0.067 ms | Memory: 0.00 MB
+[2026-11-20 13:01:48] [LiteDB/Relational] [S1K] [C1_Low] | Execution Time: 0.478 ms | Memory: 0.00 MB
+[2026-11-20 13:01:48] [RocksDB/Relational] [S1K] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:01:59] [SQLite (sqlite-net)/Relational] [S1K] [C2_Mid] | Execution Time: 0.376 ms | Memory: 0.00 MB
+[2026-11-20 13:02:00] [SQLite (Native C)/Relational] [S1K] [C2_Mid] | Execution Time: 0.089 ms | Memory: 0.00 MB
+[2026-11-20 13:02:01] [LiteDB/Relational] [S1K] [C2_Mid] | Execution Time: 1.576 ms | Memory: 0.00 MB
+[2026-11-20 13:02:02] [RocksDB/Relational] [S1K] [C2_Mid] | Execution Time: 5.656 ms | Memory: 0.00 MB
+[2026-11-20 13:02:17] [SQLite (sqlite-net)/Document] [S1K] [C2_Mid] | Execution Time: 2.134 ms | Memory: 0.00 MB
+[2026-11-20 13:02:17] [SQLite (Native C)/Document] [S1K] [C2_Mid] | Execution Time: 0.307 ms | Memory: 0.00 MB
+[2026-11-20 13:02:26] [LiteDB/Document] [S1K] [C2_Mid] | Execution Time: 76.859 ms | Memory: 0.00 MB
+[2026-11-20 13:02:27] [RocksDB/Document] [S1K] [C2_Mid] | Execution Time: 1.875 ms | Memory: 0.00 MB
+[2026-11-20 13:02:32] [SQLite (sqlite-net)/Document] [S1K] [C2_Mid] | Execution Time: 0.307 ms | Memory: 0.00 MB
+[2026-11-20 13:02:33] [SQLite (Native C)/Document] [S1K] [C2_Mid] | Execution Time: 0.086 ms | Memory: 0.00 MB
+[2026-11-20 13:02:33] [LiteDB/Document] [S1K] [C2_Mid] | Execution Time: 0.622 ms | Memory: 0.00 MB
+[2026-11-20 13:02:34] [RocksDB/Document] [S1K] [C2_Mid] | Execution Time: 1.938 ms | Memory: 0.00 MB
+[2026-11-20 13:06:25] [LiteDB/Document] [S100] [C1_Low] | Execution Time: 2.845 ms | Memory: 0.00 MB
+[2026-11-20 13:06:26] [RocksDB/Document] [S100] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:06:30] [SQLite (sqlite-net)/Document] [S100] [C1_Low] | Execution Time: 0.227 ms | Memory: 0.00 MB
+[2026-11-20 13:06:31] [SQLite (Native C)/Document] [S100] [C1_Low] | Execution Time: 0.067 ms | Memory: 0.00 MB
+[2026-11-20 13:06:32] [LiteDB/Document] [S100] [C1_Low] | Execution Time: 0.445 ms | Memory: 0.00 MB
+[2026-11-20 13:06:32] [RocksDB/Document] [S100] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:08:28] [LiteDB/Document] [S1K] [C2_Mid] | Execution Time: 0.023 ms | Memory: 0.00 MB
+[2026-11-20 13:08:29] [RocksDB/Document] [S1K] [C2_Mid] | Execution Time: 0.003 ms | Memory: 0.00 MB
+[2026-11-20 13:08:34] [SQLite (sqlite-net)/Document] [S1K] [C2_Mid] | Execution Time: 2.124 ms | Memory: 0.00 MB
+[2026-11-20 13:08:35] [SQLite (Native C)/Document] [S1K] [C2_Mid] | Execution Time: 0.292 ms | Memory: 0.00 MB
+[2026-11-20 13:08:44] [LiteDB/Document] [S1K] [C2_Mid] | Execution Time: 78.309 ms | Memory: 0.00 MB
+[2026-11-20 13:08:45] [RocksDB/Document] [S1K] [C2_Mid] | Execution Time: 1.858 ms | Memory: 0.00 MB
+[2026-11-20 13:16:40] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.277 ms | Memory: 0.00 MB
+[2026-11-20 13:16:40] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.069 ms | Memory: 0.00 MB
+[2026-11-20 13:16:41] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 0.477 ms | Memory: 0.00 MB
+[2026-11-20 13:16:42] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:16:51] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.461 ms | Memory: 0.00 MB
+[2026-11-20 13:16:52] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.088 ms | Memory: 0.00 MB
+[2026-11-20 13:16:53] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 2.310 ms | Memory: 0.00 MB
+[2026-11-20 13:16:53] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.155 ms | Memory: 0.00 MB
+[2026-11-20 13:17:04] [SQLite (sqlite-net)/Document] [S1K] [C1_Low] | Execution Time: 2.004 ms | Memory: 0.00 MB
+[2026-11-20 13:17:05] [SQLite (Native C)/Document] [S1K] [C1_Low] | Execution Time: 0.384 ms | Memory: 0.00 MB
+[2026-11-20 13:17:08] [LiteDB/Document] [S1K] [C1_Low] | Execution Time: 23.932 ms | Memory: 0.00 MB
+[2026-11-20 13:17:09] [RocksDB/Document] [S1K] [C1_Low] | Execution Time: 1.600 ms | Memory: 0.00 MB
+[2026-11-20 13:17:18] [SQLite (sqlite-net)/Document] [S1K] [C1_Low] | Execution Time: 0.234 ms | Memory: 0.00 MB
+[2026-11-20 13:17:18] [SQLite (Native C)/Document] [S1K] [C1_Low] | Execution Time: 0.083 ms | Memory: 0.00 MB
+[2026-11-20 13:17:19] [LiteDB/Document] [S1K] [C1_Low] | Execution Time: 0.474 ms | Memory: 0.00 MB
+[2026-11-20 13:17:20] [RocksDB/Document] [S1K] [C1_Low] | Execution Time: 1.537 ms | Memory: 0.00 MB
+[2026-11-20 13:17:25] [SQLite (sqlite-net)/Document] [S1K] [C1_Low] | Execution Time: 0.151 ms | Memory: 0.00 MB
+[2026-11-20 13:17:25] [SQLite (Native C)/Document] [S1K] [C1_Low] | Execution Time: 0.064 ms | Memory: 0.00 MB
+[2026-11-20 13:17:26] [LiteDB/Document] [S1K] [C1_Low] | Execution Time: 0.523 ms | Memory: 0.00 MB
+[2026-11-20 13:17:27] [RocksDB/Document] [S1K] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:26:42] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.250 ms | Memory: 0.00 MB
+[2026-11-20 13:26:42] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.067 ms | Memory: 0.00 MB
+[2026-11-20 13:26:43] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 0.499 ms | Memory: 0.00 MB
+[2026-11-20 13:26:44] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:26:48] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.465 ms | Memory: 0.00 MB
+[2026-11-20 13:26:49] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.095 ms | Memory: 0.00 MB
+[2026-11-20 13:26:50] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 2.453 ms | Memory: 0.00 MB
+[2026-11-20 13:26:51] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.156 ms | Memory: 0.00 MB
+[2026-11-20 13:26:54] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.147 ms | Memory: 0.00 MB
+[2026-11-20 13:26:55] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.065 ms | Memory: 0.00 MB
+[2026-11-20 13:26:56] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 0.426 ms | Memory: 0.00 MB
+[2026-11-20 13:26:56] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:27:03] [SQLite (sqlite-net)/Relational] [S100] [C2_Mid] | Execution Time: 0.350 ms | Memory: 0.00 MB
+[2026-11-20 13:27:04] [SQLite (Native C)/Relational] [S100] [C2_Mid] | Execution Time: 0.094 ms | Memory: 0.00 MB
+[2026-11-20 13:27:05] [LiteDB/Relational] [S100] [C2_Mid] | Execution Time: 1.887 ms | Memory: 0.00 MB
+[2026-11-20 13:27:06] [RocksDB/Relational] [S100] [C2_Mid] | Execution Time: 0.547 ms | Memory: 0.00 MB
+[2026-11-20 13:27:13] [SQLite (sqlite-net)/Document] [S100] [C2_Mid] | Execution Time: 0.239 ms | Memory: 0.00 MB
+[2026-11-20 13:27:13] [SQLite (Native C)/Document] [S100] [C2_Mid] | Execution Time: 0.068 ms | Memory: 0.00 MB
+[2026-11-20 13:27:14] [LiteDB/Document] [S100] [C2_Mid] | Execution Time: 0.669 ms | Memory: 0.00 MB
+[2026-11-20 13:27:15] [RocksDB/Document] [S100] [C2_Mid] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:27:18] [SQLite (sqlite-net)/Document] [S100] [C2_Mid] | Execution Time: 0.450 ms | Memory: 0.00 MB
+[2026-11-20 13:27:18] [SQLite (Native C)/Document] [S100] [C2_Mid] | Execution Time: 0.090 ms | Memory: 0.00 MB
+[2026-11-20 13:27:20] [LiteDB/Document] [S100] [C2_Mid] | Execution Time: 7.958 ms | Memory: 0.00 MB
+[2026-11-20 13:27:20] [RocksDB/Document] [S100] [C2_Mid] | Execution Time: 0.187 ms | Memory: 0.00 MB
+[2026-11-20 13:27:25] [SQLite (sqlite-net)/Document] [S100] [C2_Mid] | Execution Time: 0.312 ms | Memory: 0.00 MB
+[2026-11-20 13:27:26] [SQLite (Native C)/Document] [S100] [C2_Mid] | Execution Time: 0.087 ms | Memory: 0.00 MB
+[2026-11-20 13:27:27] [LiteDB/Document] [S100] [C2_Mid] | Execution Time: 0.546 ms | Memory: 0.00 MB
+[2026-11-20 13:27:27] [RocksDB/Document] [S100] [C2_Mid] | Execution Time: 0.177 ms | Memory: 0.00 MB
+[2026-11-20 13:27:32] [SQLite (sqlite-net)/Document] [S100] [C2_Mid] | Execution Time: 0.147 ms | Memory: 0.00 MB
+[2026-11-20 13:27:33] [SQLite (Native C)/Document] [S100] [C2_Mid] | Execution Time: 0.071 ms | Memory: 0.00 MB
+[2026-11-20 13:27:34] [LiteDB/Document] [S100] [C2_Mid] | Execution Time: 0.654 ms | Memory: 0.00 MB
+[2026-11-20 13:27:34] [RocksDB/Document] [S100] [C2_Mid] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:27:40] [SQLite (sqlite-net)/Sparse] [S100] [C2_Mid] | Execution Time: 0.176 ms | Memory: 0.00 MB
+[2026-11-20 13:27:40] [SQLite (Native C)/Sparse] [S100] [C2_Mid] | Execution Time: 0.066 ms | Memory: 0.00 MB
+[2026-11-20 13:27:41] [LiteDB/Sparse] [S100] [C2_Mid] | Execution Time: 0.607 ms | Memory: 0.00 MB
+[2026-11-20 13:27:42] [RocksDB/Sparse] [S100] [C2_Mid] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:27:46] [SQLite (sqlite-net)/Sparse] [S100] [C2_Mid] | Execution Time: 0.310 ms | Memory: 0.00 MB
+[2026-11-20 13:27:47] [SQLite (Native C)/Sparse] [S100] [C2_Mid] | Execution Time: 0.082 ms | Memory: 0.00 MB
+[2026-11-20 13:27:48] [LiteDB/Sparse] [S100] [C2_Mid] | Execution Time: 1.838 ms | Memory: 0.00 MB
+[2026-11-20 13:27:48] [RocksDB/Sparse] [S100] [C2_Mid] | Execution Time: 0.328 ms | Memory: 0.00 MB
+[2026-11-20 13:27:53] [SQLite (sqlite-net)/Sparse] [S100] [C2_Mid] | Execution Time: 0.277 ms | Memory: 0.00 MB
+[2026-11-20 13:27:54] [SQLite (Native C)/Sparse] [S100] [C2_Mid] | Execution Time: 0.078 ms | Memory: 0.00 MB
+[2026-11-20 13:27:54] [LiteDB/Sparse] [S100] [C2_Mid] | Execution Time: 0.401 ms | Memory: 0.00 MB
+[2026-11-20 13:27:55] [RocksDB/Sparse] [S100] [C2_Mid] | Execution Time: 0.303 ms | Memory: 0.00 MB
+[2026-11-20 13:28:01] [SQLite (sqlite-net)/Sparse] [S100] [C2_Mid] | Execution Time: 0.149 ms | Memory: 0.00 MB
+[2026-11-20 13:28:01] [SQLite (Native C)/Sparse] [S100] [C2_Mid] | Execution Time: 0.069 ms | Memory: 0.00 MB
+[2026-11-20 13:28:02] [LiteDB/Sparse] [S100] [C2_Mid] | Execution Time: 0.469 ms | Memory: 0.00 MB
+[2026-11-20 13:28:03] [RocksDB/Sparse] [S100] [C2_Mid] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:28:08] [SQLite (sqlite-net)/Sparse] [S100] [C2_Mid] | Execution Time: 0.220 ms | Memory: 0.00 MB
+[2026-11-20 13:28:09] [SQLite (Native C)/Sparse] [S100] [C2_Mid] | Execution Time: 0.083 ms | Memory: 0.00 MB
+[2026-11-20 13:28:09] [LiteDB/Sparse] [S100] [C2_Mid] | Execution Time: 0.412 ms | Memory: 0.00 MB
+[2026-11-20 13:28:10] [RocksDB/Sparse] [S100] [C2_Mid] | Execution Time: 0.315 ms | Memory: 0.00 MB
+[2026-11-20 13:37:15] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.274 ms | Memory: 0.00 MB
+[2026-11-20 13:37:16] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.067 ms | Memory: 0.00 MB
+[2026-11-20 13:37:16] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 0.477 ms | Memory: 0.00 MB
+[2026-11-20 13:37:17] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:37:22] [SQLite (sqlite-net)/Relational] [S100] [C1_Low] | Execution Time: 0.492 ms | Memory: 0.00 MB
+[2026-11-20 13:37:23] [SQLite (Native C)/Relational] [S100] [C1_Low] | Execution Time: 0.093 ms | Memory: 0.00 MB
+[2026-11-20 13:37:23] [LiteDB/Relational] [S100] [C1_Low] | Execution Time: 2.229 ms | Memory: 0.00 MB
+[2026-11-20 13:37:24] [RocksDB/Relational] [S100] [C1_Low] | Execution Time: 0.158 ms | Memory: 0.00 MB
+[2026-11-20 13:37:30] [SQLite (sqlite-net)/Relational] [S100] [C2_Mid] | Execution Time: 0.299 ms | Memory: 0.00 MB
+[2026-11-20 13:37:31] [SQLite (Native C)/Relational] [S100] [C2_Mid] | Execution Time: 0.096 ms | Memory: 0.00 MB
+[2026-11-20 13:37:31] [LiteDB/Relational] [S100] [C2_Mid] | Execution Time: 1.740 ms | Memory: 0.00 MB
+[2026-11-20 13:37:32] [RocksDB/Relational] [S100] [C2_Mid] | Execution Time: 0.571 ms | Memory: 0.00 MB
+[2026-11-20 13:37:38] [SQLite (sqlite-net)/Relational] [S100] [C2_Mid] | Execution Time: 0.211 ms | Memory: 0.00 MB
+[2026-11-20 13:37:38] [SQLite (Native C)/Relational] [S100] [C2_Mid] | Execution Time: 0.067 ms | Memory: 0.00 MB
+[2026-11-20 13:37:39] [LiteDB/Relational] [S100] [C2_Mid] | Execution Time: 0.550 ms | Memory: 0.00 MB
+[2026-11-20 13:37:39] [RocksDB/Relational] [S100] [C2_Mid] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:37:44] [SQLite (sqlite-net)/Relational] [S100] [C2_Mid] | Execution Time: 0.300 ms | Memory: 0.00 MB
+[2026-11-20 13:37:44] [SQLite (Native C)/Relational] [S100] [C2_Mid] | Execution Time: 0.097 ms | Memory: 0.00 MB
+[2026-11-20 13:37:50] [SQLite (sqlite-net)/Relational] [S100] [C2_Mid] | Execution Time: 0.252 ms | Memory: 0.00 MB
+[2026-11-20 13:37:51] [SQLite (Native C)/Relational] [S100] [C2_Mid] | Execution Time: 0.071 ms | Memory: 0.00 MB
+[2026-11-20 13:37:51] [LiteDB/Relational] [S100] [C2_Mid] | Execution Time: 1.786 ms | Memory: 0.00 MB
+[2026-11-20 13:37:52] [RocksDB/Relational] [S100] [C2_Mid] | Execution Time: 0.008 ms | Memory: 0.00 MB
+[2026-11-20 13:37:56] [SQLite (sqlite-net)/Relational] [S100] [C2_Mid] | Execution Time: 0.356 ms | Memory: 0.00 MB
+[2026-11-20 13:37:57] [SQLite (Native C)/Relational] [S100] [C2_Mid] | Execution Time: 0.094 ms | Memory: 0.00 MB
+[2026-11-20 13:38:10] [SQLite (sqlite-net)/Document] [S100] [C2_Mid] | Execution Time: 1.138 ms | Memory: 0.00 MB
+[2026-11-20 13:38:10] [SQLite (Native C)/Document] [S100] [C2_Mid] | Execution Time: 0.171 ms | Memory: 0.00 MB
+[2026-11-20 13:38:12] [LiteDB/Document] [S100] [C2_Mid] | Execution Time: 14.416 ms | Memory: 0.00 MB
+[2026-11-20 13:38:13] [RocksDB/Document] [S100] [C2_Mid] | Execution Time: 0.185 ms | Memory: 0.00 MB
+[2026-11-20 13:38:18] [SQLite (sqlite-net)/Document] [S100] [C2_Mid] | Execution Time: 0.404 ms | Memory: 0.00 MB
+[2026-11-20 13:38:18] [SQLite (Native C)/Document] [S100] [C2_Mid] | Execution Time: 0.085 ms | Memory: 0.00 MB
+[2026-11-20 13:38:20] [LiteDB/Document] [S100] [C2_Mid] | Execution Time: 7.416 ms | Memory: 0.00 MB
+[2026-11-20 13:38:20] [RocksDB/Document] [S100] [C2_Mid] | Execution Time: 0.173 ms | Memory: 0.00 MB
+[2026-11-20 13:38:29] [SQLite (sqlite-net)/Document] [S100] [C2_Mid] | Execution Time: 0.404 ms | Memory: 0.00 MB
+[2026-11-20 13:38:30] [SQLite (Native C)/Document] [S100] [C2_Mid] | Execution Time: 0.087 ms | Memory: 0.00 MB
+[2026-11-20 13:38:31] [LiteDB/Document] [S100] [C2_Mid] | Execution Time: 7.435 ms | Memory: 0.00 MB
+[2026-11-20 13:38:32] [RocksDB/Document] [S100] [C2_Mid] | Execution Time: 0.182 ms | Memory: 0.00 MB
+[2026-11-20 13:38:46] [SQLite (sqlite-net)/Document] [S100] [C2_Mid] | Execution Time: 1.185 ms | Memory: 0.00 MB
+[2026-11-20 13:38:46] [SQLite (Native C)/Document] [S100] [C2_Mid] | Execution Time: 0.173 ms | Memory: 0.00 MB
+[2026-11-20 13:38:48] [LiteDB/Document] [S100] [C2_Mid] | Execution Time: 14.377 ms | Memory: 0.00 MB
+[2026-11-20 13:38:49] [RocksDB/Document] [S100] [C2_Mid] | Execution Time: 0.173 ms | Memory: 0.00 MB
+[2026-11-20 13:38:57] [LiteDB/Relational] [S100] [C2_Mid] | Execution Time: 3.305 ms | Memory: 0.00 MB
+[2026-11-20 13:38:58] [RocksDB/Relational] [S100] [C2_Mid] | Execution Time: 0.004 ms | Memory: 0.00 MB
+[2026-11-20 13:39:02] [SQLite (sqlite-net)/Relational] [S100] [C2_Mid] | Execution Time: 0.366 ms | Memory: 0.00 MB
+[2026-11-20 13:39:03] [SQLite (Native C)/Relational] [S100] [C2_Mid] | Execution Time: 0.100 ms | Memory: 0.00 MB
+[2026-11-20 13:39:09] [SQLite (sqlite-net)/Relational] [S100] [C2_Mid] | Execution Time: 0.151 ms | Memory: 0.00 MB
+[2026-11-20 13:39:10] [SQLite (Native C)/Relational] [S100] [C2_Mid] | Execution Time: 0.065 ms | Memory: 0.00 MB
+[2026-11-20 13:39:11] [LiteDB/Relational] [S100] [C2_Mid] | Execution Time: 0.584 ms | Memory: 0.00 MB
+[2026-11-20 13:39:11] [RocksDB/Relational] [S100] [C2_Mid] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:39:14] [SQLite (sqlite-net)/Relational] [S100] [C2_Mid] | Execution Time: 0.338 ms | Memory: 0.00 MB
+[2026-11-20 13:39:15] [SQLite (Native C)/Relational] [S100] [C2_Mid] | Execution Time: 0.094 ms | Memory: 0.00 MB
+[2026-11-20 13:57:15] [SQLite (sqlite-net)/Relational] [S100] [C3_High] | Execution Time: 0.549 ms | Memory: 0.00 MB
+[2026-11-20 13:57:16] [SQLite (Native C)/Relational] [S100] [C3_High] | Execution Time: 0.130 ms | Memory: 0.00 MB
+[2026-11-20 13:57:17] [LiteDB/Relational] [S100] [C3_High] | Execution Time: 4.483 ms | Memory: 0.00 MB
+[2026-11-20 13:57:18] [RocksDB/Relational] [S100] [C3_High] | Execution Time: 0.084 ms | Memory: 0.00 MB
+[2026-11-20 13:57:29] [LiteDB/Document] [S100] [C3_High] | Execution Time: 0.138 ms | Memory: 0.00 MB
+[2026-11-20 13:57:30] [RocksDB/Document] [S100] [C3_High] | Execution Time: 0.003 ms | Memory: 0.00 MB
+[2026-11-20 13:57:34] [SQLite (sqlite-net)/Document] [S100] [C3_High] | Execution Time: 0.283 ms | Memory: 0.00 MB
+[2026-11-20 13:57:35] [SQLite (Native C)/Document] [S100] [C3_High] | Execution Time: 0.083 ms | Memory: 0.00 MB
+[2026-11-20 13:57:35] [LiteDB/Document] [S100] [C3_High] | Execution Time: 0.507 ms | Memory: 0.00 MB
+[2026-11-20 13:57:36] [RocksDB/Document] [S100] [C3_High] | Execution Time: 0.129 ms | Memory: 0.00 MB
+[2026-11-20 13:57:50] [SQLite (sqlite-net)/Document] [S1K] [C3_High] | Execution Time: 0.286 ms | Memory: 0.00 MB
+[2026-11-20 13:57:51] [SQLite (Native C)/Document] [S1K] [C3_High] | Execution Time: 0.089 ms | Memory: 0.00 MB
+[2026-11-20 13:57:52] [LiteDB/Document] [S1K] [C3_High] | Execution Time: 0.482 ms | Memory: 0.00 MB
+[2026-11-20 13:57:53] [RocksDB/Document] [S1K] [C3_High] | Execution Time: 2.473 ms | Memory: 0.00 MB
+[2026-11-20 13:58:03] [SQLite (sqlite-net)/Document] [S1K] [C3_High] | Execution Time: 0.152 ms | Memory: 0.00 MB
+[2026-11-20 13:58:04] [SQLite (Native C)/Document] [S1K] [C3_High] | Execution Time: 0.066 ms | Memory: 0.00 MB
+[2026-11-20 13:58:04] [LiteDB/Document] [S1K] [C3_High] | Execution Time: 0.486 ms | Memory: 0.00 MB
+[2026-11-20 13:58:05] [RocksDB/Document] [S1K] [C3_High] | Execution Time: 0.002 ms | Memory: 0.00 MB
+[2026-11-20 13:58:11] [SQLite (sqlite-net)/Document] [S1K] [C3_High] | Execution Time: 0.303 ms | Memory: 0.00 MB
+[2026-11-20 13:58:11] [SQLite (Native C)/Document] [S1K] [C3_High] | Execution Time: 0.077 ms | Memory: 0.00 MB
+[2026-11-20 13:58:12] [LiteDB/Document] [S1K] [C3_High] | Execution Time: 5.391 ms | Memory: 0.00 MB
+[2026-11-20 13:58:13] [RocksDB/Document] [S1K] [C3_High] | Execution Time: 1.682 ms | Memory: 0.00 MB
+[2026-11-20 13:58:23] [SQLite (sqlite-net)/Sparse] [S1K] [C3_High] | Execution Time: 0.245 ms | Memory: 0.00 MB
+[2026-11-20 13:58:23] [SQLite (Native C)/Sparse] [S1K] [C3_High] | Execution Time: 0.085 ms | Memory: 0.00 MB
+[2026-11-20 13:58:24] [LiteDB/Sparse] [S1K] [C3_High] | Execution Time: 0.500 ms | Memory: 0.00 MB
+[2026-11-20 13:58:25] [RocksDB/Sparse] [S1K] [C3_High] | Execution Time: 1.642 ms | Memory: 0.00 MB

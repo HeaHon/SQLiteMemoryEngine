@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -25,10 +25,8 @@ public class QueryResult
             string orderField = QuerySpecParser.NormalizeField(query.OrderByExpression);
             Rows.Sort((left, right) =>
             {
-                object leftValue;
-                object rightValue;
-                QueryRuntime.TryGetValue(left, orderField, out leftValue);
-                QueryRuntime.TryGetValue(right, orderField, out rightValue);
+                QueryRuntime.TryGetValue(left, orderField, out object leftValue);
+                QueryRuntime.TryGetValue(right, orderField, out object rightValue);
                 if (QueryRuntime.Compare(leftValue, rightValue, QueryComparison.Equal)) return 0;
                 bool greater = QueryRuntime.Compare(leftValue, rightValue, QueryComparison.GreaterThan);
                 if (greater) return query.OrderByDescending ? -1 : 1;
@@ -38,30 +36,71 @@ public class QueryResult
 
         if (query.SelectAll || query.Projection.Count != 1 || Rows.Count != 1) return;
 
-        object value;
-        if (Rows[0].TryGetValue(query.Projection[0].Name, out value)) ScalarValue = value;
+        if (Rows[0].TryGetValue(query.Projection[0].Name, out object value)) ScalarValue = value;
     }
 
     public bool IsEquivalentTo(QueryResult other)
     {
-        if (other == null || !IsSuccess || !other.IsSuccess) return false;
-        if (!ValueEquals(ScalarValue, other.ScalarValue) || Rows.Count != other.Rows.Count) return false;
+        return IsEquivalentTo(other, out _);
+    }
 
-        var leftRows = Rows.Select(CanonicalRow).OrderBy(value => value, StringComparer.Ordinal).ToList();
-        var rightRows = other.Rows.Select(CanonicalRow).OrderBy(value => value, StringComparer.Ordinal).ToList();
+    public bool IsEquivalentTo(QueryResult other, out string diffReason)
+    {
+        diffReason = null;
+        if (other == null || !IsSuccess || !other.IsSuccess)
+        {
+            diffReason = "쿼리 실패 상태";
+            return false;
+        }
+
+        if (!ValueEquals(ScalarValue, other.ScalarValue))
+        {
+            diffReason = $"Scalar 불일치 ({CanonicalValue(ScalarValue)} vs {CanonicalValue(other.ScalarValue)})";
+            return false;
+        }
+
+        if (Rows.Count != other.Rows.Count)
+        {
+            diffReason = $"행 개수 불일치 ({Rows.Count} vs {other.Rows.Count})";
+            return false;
+        }
+
+        if (Rows.Count == 0) return true;
+
+        // 두 결과 집합에 공통으로 존재하는 컬럼만 추출 (NoSQL 임베디드 배열/딕셔너리 컬럼 제외)
+        var myKeys = new HashSet<string>(Rows[0].Keys, StringComparer.OrdinalIgnoreCase);
+        var otherKeys = new HashSet<string>(other.Rows[0].Keys, StringComparer.OrdinalIgnoreCase);
+        myKeys.IntersectWith(otherKeys);
+
+        if (myKeys.Count == 0)
+        {
+            diffReason = "공통 컬럼 없음";
+            return false;
+        }
+
+        var sharedColumns = myKeys.OrderBy(k => k, StringComparer.OrdinalIgnoreCase).ToList();
+        var leftRows = Rows.Select(r => CanonicalRow(r, sharedColumns)).OrderBy(v => v, StringComparer.Ordinal).ToList();
+        var rightRows = other.Rows.Select(r => CanonicalRow(r, sharedColumns)).OrderBy(v => v, StringComparer.Ordinal).ToList();
+
         for (int i = 0; i < leftRows.Count; i++)
         {
-            if (!leftRows[i].Equals(rightRows[i], StringComparison.Ordinal)) return false;
+            if (!leftRows[i].Equals(rightRows[i], StringComparison.Ordinal))
+            {
+                diffReason = $"Row[{i}] 값 불일치 ({leftRows[i]} vs {rightRows[i]})";
+                return false;
+            }
         }
         return true;
     }
 
-    private static string CanonicalRow(Dictionary<string, object> row)
+    private static string CanonicalRow(Dictionary<string, object> row, List<string> columns)
     {
         var builder = new StringBuilder();
-        foreach (KeyValuePair<string, object> pair in row.OrderBy(item => item.Key, StringComparer.OrdinalIgnoreCase))
+        for (int i = 0; i < columns.Count; i++)
         {
-            builder.Append(pair.Key.ToLowerInvariant()).Append('=').Append(CanonicalValue(pair.Value)).Append(';');
+            string col = columns[i];
+            QueryRuntime.TryGetValue(row, col, out object val);
+            builder.Append(col.ToLowerInvariant()).Append('=').Append(CanonicalValue(val)).Append(';');
         }
         return builder.ToString();
     }
@@ -70,6 +109,8 @@ public class QueryResult
     {
         if (value == null) return "<null>";
         if (value is byte[] bytes) return Convert.ToBase64String(bytes);
+        if (value is float f) return f.ToString("G6", CultureInfo.InvariantCulture);
+        if (value is double d) return d.ToString("G6", CultureInfo.InvariantCulture);
         return Convert.ToString(value, CultureInfo.InvariantCulture) ?? "<null>";
     }
 

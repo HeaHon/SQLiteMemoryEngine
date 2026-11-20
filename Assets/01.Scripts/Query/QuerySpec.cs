@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -111,21 +111,25 @@ public sealed class QuerySpec
     {
         if (string.IsNullOrEmpty(table)) return "item_id";
         if (table.IndexOf("USER", StringComparison.OrdinalIgnoreCase) >= 0) return "user_id";
-        if (table.IndexOf("CHARACTER", StringComparison.OrdinalIgnoreCase) >= 0) return "character_id";
-        if (table.IndexOf("INVENTORY", StringComparison.OrdinalIgnoreCase) >= 0) return "instance_id";
-        if (table.IndexOf("EFFECT", StringComparison.OrdinalIgnoreCase) >= 0 &&
+        if (table.IndexOf("CHAR", StringComparison.OrdinalIgnoreCase) >= 0) return "character_id";
+        if (table.IndexOf("INV", StringComparison.OrdinalIgnoreCase) >= 0) return "instance_id";
+        if (table.IndexOf("ENTITY", StringComparison.OrdinalIgnoreCase) >= 0) return "entity_id";
+        if (table.IndexOf("EVENT", StringComparison.OrdinalIgnoreCase) >= 0) return "event_id";
+        if (table.IndexOf("EFF", StringComparison.OrdinalIgnoreCase) >= 0 &&
             table.IndexOf("LINK", StringComparison.OrdinalIgnoreCase) < 0) return "effect_id";
         return "item_id";
     }
 
     public static string GetCollectionName(string table)
     {
-        if (table.IndexOf("ITEM_EFFECT_LINK", StringComparison.OrdinalIgnoreCase) >= 0) return "links";
-        if (table.IndexOf("ITEM_TAG", StringComparison.OrdinalIgnoreCase) >= 0) return "tags";
-        if (table.IndexOf("INVENTORY", StringComparison.OrdinalIgnoreCase) >= 0) return "inventories";
-        if (table.IndexOf("CHARACTER", StringComparison.OrdinalIgnoreCase) >= 0) return "characters";
+        if (table.IndexOf("LINK", StringComparison.OrdinalIgnoreCase) >= 0) return "links";
+        if (table.IndexOf("TAG", StringComparison.OrdinalIgnoreCase) >= 0) return "tags";
+        if (table.IndexOf("INV", StringComparison.OrdinalIgnoreCase) >= 0) return "inventories";
+        if (table.IndexOf("CHAR", StringComparison.OrdinalIgnoreCase) >= 0) return "characters";
         if (table.IndexOf("USER", StringComparison.OrdinalIgnoreCase) >= 0) return "users";
-        if (table.IndexOf("EFFECT", StringComparison.OrdinalIgnoreCase) >= 0) return "effects";
+        if (table.IndexOf("EFF", StringComparison.OrdinalIgnoreCase) >= 0) return "effects";
+        if (table.IndexOf("ENTITY", StringComparison.OrdinalIgnoreCase) >= 0) return "entities";
+        if (table.IndexOf("EVENT", StringComparison.OrdinalIgnoreCase) >= 0) return "events";
         return "items";
     }
 
@@ -266,7 +270,7 @@ public static class QuerySpecParser
     private static QueryOperation InferOperation(QuerySpec spec)
     {
         if (spec.Joins.Count > 0) return QueryOperation.RelationTraversal;
-        if (spec.Table.IndexOf("INVENTORY", StringComparison.OrdinalIgnoreCase) >= 0 && spec.RelationAnchorField.Length > 0)
+        if (spec.Table.IndexOf("INV", StringComparison.OrdinalIgnoreCase) >= 0 && spec.RelationAnchorField.Length > 0)
             return QueryOperation.RelationTraversal;
 
         object primaryKey;

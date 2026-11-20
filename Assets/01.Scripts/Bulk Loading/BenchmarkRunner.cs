@@ -1,31 +1,40 @@
 ﻿using System;
 using System.Diagnostics;
-using UnityEngine;
 
-// 1. 공통 데이터 로더 인터페이스 (DIP)
 public interface IDataLoader<T>
 {
     string FormatName { get; }
     T LoadData(string filePath);
 }
 
-// 2. 측정 결과 데이터 구조체
 public struct BenchmarkResult
 {
     public string FormatName;
-    public double ExecutionTimeMs;  // 소요 시간 (ms)
-    public long AllocatedMemoryBytes; // 로딩 전후 메모리 증가량 (Bytes)
-    public int CollectionCount;     // 발생한 GC 횟수
-
-    public object CustomData { get; set; } // 벤치마크 수행 중 획득한 결과물(QueryResult 등)을 담는 필드
+    public double ExecutionTimeMs;
+    public long AllocatedMemoryBytes;
+    public int CollectionCount;
+    public object CustomData { get; set; }
 }
 
-// 3. 부하 측정 전담 클래스 (SRP)
+public struct BenchmarkQueryStats
+{
+    public string FormatName;
+    public int Iterations;
+    public int RowCount;
+    public double AvgMs;
+    public double MinMs;
+    public double MaxMs;
+    public double P95Ms;
+    public long AllocBytesPerOp;
+    public int TotalGcCount;
+    public bool IsSuccess;
+    public string ErrorMessage;
+}
+
 public static class BenchmarkRunner
 {
     public static BenchmarkResult Measure<T>(IDataLoader<T> loader, string filePath)
     {
-        // 측정 전 GC 정리를 통해 정확한 메모리 오버헤드 측정 준비
         GC.Collect();
         GC.WaitForPendingFinalizers();
         GC.Collect();
@@ -34,13 +43,9 @@ public static class BenchmarkRunner
         int gcCountBefore = GC.CollectionCount(0);
 
         Stopwatch sw = Stopwatch.StartNew();
-
-        // 벌크 로딩 실행
         T data = loader.LoadData(filePath);
-
         sw.Stop();
 
-        // 데이터 로드 실패 시 (null일 때) 0ms 결과 반환 또는 처리
         if (data == null)
         {
             return new BenchmarkResult
@@ -64,12 +69,10 @@ public static class BenchmarkRunner
         };
     }
 
-    // 벤치마크 측정과 동시에 반환된 데이터(QueryResult 등)를 추출하는 메서드
     public static BenchmarkResult MeasureWithData<T>(IDataLoader<T> loader, string filePath, out T outputData)
     {
         var result = new BenchmarkResult { FormatName = loader.FormatName };
 
-        // 쿼리 측정도 전체 로드 측정과 동일한 GC 기준점에서 시작한다.
         GC.Collect();
         GC.WaitForPendingFinalizers();
         GC.Collect();
@@ -79,12 +82,10 @@ public static class BenchmarkRunner
         int gcBefore1 = GC.CollectionCount(1);
         int gcBefore2 = GC.CollectionCount(2);
 
-        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-
+        var stopwatch = Stopwatch.StartNew();
         T data = default;
         try
         {
-            // 실제 로드 및 쿼리 실행
             data = loader.LoadData(filePath);
         }
         catch (Exception ex)
@@ -107,5 +108,73 @@ public static class BenchmarkRunner
 
         outputData = data;
         return result;
+    }
+
+    public static BenchmarkQueryStats MeasureQuerySession(
+        IQueryBenchmarkSession session,
+        QuerySpec query,
+        int warmupIterations = 5,
+        int measureIterations = 100)
+    {
+        var stats = new BenchmarkQueryStats
+        {
+            FormatName = session.FormatName,
+            Iterations = measureIterations,
+            IsSuccess = true
+        };
+
+        try
+        {
+            session.Prepare(query);
+
+            // Warmup (JIT + 페이지 캐시 예열)
+            for (int i = 0; i < warmupIterations; i++)
+            {
+                _ = session.ExecuteNoAlloc(query);
+            }
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+
+            double[] samples = new double[measureIterations];
+            int gcBefore = GC.CollectionCount(0) + GC.CollectionCount(1) + GC.CollectionCount(2);
+            long allocBefore = GC.GetAllocatedBytesForCurrentThread();
+
+            int lastRowCount = 0;
+            var sw = new Stopwatch();
+
+            for (int i = 0; i < measureIterations; i++)
+            {
+                sw.Restart();
+                lastRowCount = session.ExecuteNoAlloc(query);
+                sw.Stop();
+                samples[i] = sw.Elapsed.TotalMilliseconds;
+            }
+
+            long allocAfter = GC.GetAllocatedBytesForCurrentThread();
+            int gcAfter = GC.CollectionCount(0) + GC.CollectionCount(1) + GC.CollectionCount(2);
+
+            Array.Sort(samples);
+            double sum = 0;
+            for (int i = 0; i < measureIterations; i++) sum += samples[i];
+
+            int p95Index = Math.Min(measureIterations - 1, (int)(measureIterations * 0.95));
+
+            stats.RowCount = lastRowCount;
+            stats.AvgMs = sum / measureIterations;
+            stats.MinMs = samples[0];
+            stats.MaxMs = samples[measureIterations - 1];
+            stats.P95Ms = samples[p95Index];
+            stats.AllocBytesPerOp = Math.Max(0, (allocAfter - allocBefore) / measureIterations);
+            stats.TotalGcCount = Math.Max(0, gcAfter - gcBefore);
+        }
+        catch (Exception ex)
+        {
+            stats.IsSuccess = false;
+            stats.ErrorMessage = ex.Message;
+        }
+
+        return stats;
     }
 }

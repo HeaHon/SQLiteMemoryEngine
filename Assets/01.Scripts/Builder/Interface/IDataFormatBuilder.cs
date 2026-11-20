@@ -1,4 +1,8 @@
 ﻿public interface IDataFormatBuilder
 {
-    void Build(object container, string targetPathOrFolder, string complexity);
+    string FormatName { get; }
+    bool IsLegacyFormat { get; }
+    bool Supports(DataShape shape);
+    string GetTargetPath(string formatShapeScaleDir, BenchmarkDataSpec spec);
+    void Build(object container, string targetPathOrFolder, BenchmarkDataSpec spec);
 }

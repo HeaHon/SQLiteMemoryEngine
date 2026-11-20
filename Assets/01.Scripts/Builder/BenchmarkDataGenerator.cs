@@ -1,160 +1,216 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using UnityEngine;
+
+public class BenchmarkGenerationRequest
+{
+    public TargetFormat Formats { get; set; } = TargetFormat.SQLite_NativeC | TargetFormat.SQLite_ORM | TargetFormat.RocksDB | TargetFormat.LiteDB;
+    public TargetShape Shapes { get; set; } = TargetShape.All;
+    public TargetScale Scales { get; set; } = TargetScale.All;
+    public TargetComplexity Complexities { get; set; } = TargetComplexity.All;
+    public int Seed { get; set; } = 42;
+    public int MinChildrenPerEntity { get; set; } = 0;
+    public int MaxChildrenPerEntity { get; set; } = 10;
+}
 
 public static class BenchmarkDataGenerator
 {
-    private static readonly string[] Scales = { "S100", "S1K", "S10K", "S100K" };
-    private static readonly int[] ScaleCounts = { 100, 1000, 10000, 100000 };
-    private static readonly string[] Complexities = { "C1_Low", "C2_Mid", "C3_High" };
-    private static readonly int Seed = 42;
-
-    // SQL 쿼리 벤치마크 포맷을 먼저 배치하고, 레거시 포맷은 옵션으로 추가 생성한다.
-    // SQLite Native C는 SQLite 파일을 공유하므로 별도 파일 생성이 필요 없다.
-    private static readonly Dictionary<string, IDataFormatBuilder> Builders = new Dictionary<string, IDataFormatBuilder>
+    private static readonly Dictionary<DataShape, IDataSetGenerator> Generators = new Dictionary<DataShape, IDataSetGenerator>
     {
-        { "SQLite", new SqliteFormatBuilder() },
-        { "LiteDB", new LiteDbFormatBuilder() },
-        { "RocksDB", new RocksDbFormatBuilder() },
-        { "FlatBuffers", new FlatBuffersFormatBuilder() },
-        { "Binary", new RawBinaryFormatBuilder() },
-        { "MessagePack", new MessagePackFormatBuilder() },
-        { "JSON", new JsonFormatBuilder() }
+        { DataShape.Relational, new RelationalDataSetGenerator() },
+        { DataShape.Document, new DocumentDataSetGenerator() },
+        { DataShape.Sparse, new SparseDataSetGenerator() }
     };
 
-    public static void ExecuteGeneration(bool includeLegacyFormats = false)
+    private static readonly List<IDataFormatBuilder> Builders = new List<IDataFormatBuilder>
     {
+        new SqliteFormatBuilder(),
+        new LiteDbFormatBuilder(),
+        new RocksDbFormatBuilder(),
+        new FlatBuffersFormatBuilder(),
+        new RawBinaryFormatBuilder(),
+        new MessagePackFormatBuilder(),
+        new JsonFormatBuilder()
+    };
+
+    public static void RegisterGenerator(IDataSetGenerator generator)
+    {
+        if (generator != null) Generators[generator.Shape] = generator;
+    }
+
+    public static void RegisterBuilder(IDataFormatBuilder builder)
+    {
+        if (builder != null && !Builders.Contains(builder)) Builders.Add(builder);
+    }
+
+    /// <summary>
+    /// 기존 호출부 호환용 오버로드
+    /// </summary>
+    public static void ExecuteGeneration(bool includeLegacyFormats = false, DataShape[] targetShapes = null)
+    {
+        var formats = TargetFormat.SQLite_NativeC | TargetFormat.SQLite_ORM | TargetFormat.RocksDB | TargetFormat.LiteDB | TargetFormat.FlatBuffers | TargetFormat.RawBinary;
+        if (includeLegacyFormats)
+        {
+            formats |= TargetFormat.MessagePack | TargetFormat.JSON;
+        }
+
+        TargetShape shapes = TargetShape.None;
+        if (targetShapes == null)
+        {
+            shapes = TargetShape.All;
+        }
+        else
+        {
+            foreach (var s in targetShapes)
+            {
+                if (s == DataShape.Relational) shapes |= TargetShape.Relational;
+                else if (s == DataShape.Document) shapes |= TargetShape.Document;
+                else if (s == DataShape.Sparse) shapes |= TargetShape.Sparse;
+            }
+        }
+
+        ExecuteGeneration(new BenchmarkGenerationRequest
+        {
+            Formats = formats,
+            Shapes = shapes,
+            Scales = TargetScale.All,
+            Complexities = TargetComplexity.All
+        });
+    }
+
+    /// <summary>
+    /// 다중 선택 필터 기반 생성 진입점
+    /// </summary>
+    public static void ExecuteGeneration(BenchmarkGenerationRequest request, Action<string, float> onProgress = null)
+    {
+        if (request == null) return;
+
+        var selectedShapes = ExtractShapes(request.Shapes);
+        var selectedScales = ExtractScales(request.Scales);
+        var selectedComplexities = ExtractComplexities(request.Complexities);
+        var selectedBuilders = ResolveBuilders(request.Formats);
+
+        if (selectedShapes.Count == 0 || selectedScales.Count == 0 || selectedComplexities.Count == 0 || selectedBuilders.Count == 0)
+        {
+            UnityEngine.Debug.LogWarning("[BenchmarkDataGenerator] 선택된 대상이 없어 생성을 건너뜁니다.");
+            return;
+        }
+
         string saRoot = Path.Combine(Application.dataPath, "StreamingAssets");
+        int totalSteps = selectedShapes.Count * selectedScales.Count * selectedComplexities.Count;
+        int currentStep = 0;
         Stopwatch totalStopwatch = Stopwatch.StartNew();
 
-        for (int i = 0; i < Scales.Length; i++)
+        foreach (var shape in selectedShapes)
         {
-            string scaleStr = Scales[i];
-            int count = ScaleCounts[i];
-
-            for (int j = 0; j < Complexities.Length; j++)
+            if (!Generators.TryGetValue(shape, out var generator))
             {
-                string compStr = Complexities[j];
-                string baseFileName = $"GameData_{scaleStr}_{compStr}";
+                UnityEngine.Debug.LogWarning($"[BenchmarkDataGenerator] 등록된 생성기 없음: {shape}");
+                currentStep += selectedScales.Count * selectedComplexities.Count;
+                continue;
+            }
 
-                // 1. 공통 인메모리 데이터 생성 (단일 책임: 데이터 팩토리)
-                Stopwatch dataStopwatch = Stopwatch.StartNew();
-                object dataContainer = GenerateInMemoryData(count, compStr);
-                if (dataContainer == null) continue;
-                UnityEngine.Debug.Log($"[BenchmarkDataGenerator] {baseFileName} 데이터 생성: {dataStopwatch.Elapsed.TotalSeconds:F2}s");
-
-                // 2. 각 포맷별 빌더 위임 (전략 패턴 적용)
-                foreach (var pair in Builders)
+            foreach (var scale in selectedScales)
+            {
+                foreach (var complexity in selectedComplexities)
                 {
-                    string formatName = pair.Key;
-                    if (!includeLegacyFormats && (formatName == "MessagePack" || formatName == "JSON")) continue;
-                    var builder = pair.Value;
+                    currentStep++;
+                    if (!generator.Supports(complexity)) continue;
 
-                    string formatDir = EnsureDirectory(Path.Combine(saRoot, formatName, scaleStr));
-                    string targetPath = formatName == "RocksDB"
-                        ? EnsureDirectory(Path.Combine(formatDir, baseFileName))
-                        : Path.Combine(formatDir, $"{baseFileName}.{GetExtension(formatName)}");
+                    var spec = new BenchmarkDataSpec
+                    {
+                        Scale = scale,
+                        Complexity = complexity,
+                        Shape = shape,
+                        Seed = request.Seed,
+                        MinChildrenPerEntity = request.MinChildrenPerEntity,
+                        MaxChildrenPerEntity = request.MaxChildrenPerEntity
+                    };
 
-                    Stopwatch buildStopwatch = Stopwatch.StartNew();
-                    builder.Build(dataContainer, targetPath, compStr);
-                    UnityEngine.Debug.Log($"[BenchmarkDataGenerator] {baseFileName}/{formatName} 저장: {buildStopwatch.Elapsed.TotalSeconds:F2}s");
+                    onProgress?.Invoke($"{spec.BaseFileName} 생성 중... ({currentStep}/{totalSteps})", (float)currentStep / totalSteps);
+
+                    Stopwatch dataStopwatch = Stopwatch.StartNew();
+                    object dataContainer = generator.Generate(spec);
+                    if (dataContainer == null) continue;
+                    UnityEngine.Debug.Log($"[BenchmarkDataGenerator] {spec.BaseFileName} 데이터 생성: {dataStopwatch.Elapsed.TotalSeconds:F2}s");
+
+                    foreach (var builder in selectedBuilders)
+                    {
+                        if (!builder.Supports(spec.Shape)) continue;
+
+                        string formatShapeScaleDir = EnsureDirectory(
+                            Path.Combine(saRoot, builder.FormatName, spec.ShapeStr, spec.ScaleStr));
+                        string targetPath = builder.GetTargetPath(formatShapeScaleDir, spec);
+
+                        Stopwatch buildStopwatch = Stopwatch.StartNew();
+                        builder.Build(dataContainer, targetPath, spec);
+                        UnityEngine.Debug.Log($"[BenchmarkDataGenerator] {spec.BaseFileName}/{builder.FormatName} 저장: {buildStopwatch.Elapsed.TotalSeconds:F2}s");
+                    }
                 }
             }
         }
-        UnityEngine.Debug.Log($"[BenchmarkDataGenerator] 전체 생성 완료: {totalStopwatch.Elapsed.TotalMinutes:F2}분");
+
+        UnityEngine.Debug.Log($"[BenchmarkDataGenerator] 선택 생성 완료: {totalStopwatch.Elapsed.TotalMinutes:F2}분");
+    }
+
+    public static List<IDataFormatBuilder> ResolveBuilders(TargetFormat formatFlags)
+    {
+        var activeNames = new HashSet<string>();
+
+        // SQLite Native C와 ORM은 동일한 .db 파일을 공유하므로 중복 빌드 방지
+        if ((formatFlags & (TargetFormat.SQLite_NativeC | TargetFormat.SQLite_ORM)) != 0)
+            activeNames.Add("SQLite");
+        if ((formatFlags & TargetFormat.RocksDB) != 0) activeNames.Add("RocksDB");
+        if ((formatFlags & TargetFormat.LiteDB) != 0) activeNames.Add("LiteDB");
+        if ((formatFlags & TargetFormat.FlatBuffers) != 0) activeNames.Add("FlatBuffers");
+        if ((formatFlags & TargetFormat.RawBinary) != 0) activeNames.Add("Binary");
+        if ((formatFlags & TargetFormat.MessagePack) != 0) activeNames.Add("MessagePack");
+        if ((formatFlags & TargetFormat.JSON) != 0) activeNames.Add("JSON");
+
+        var result = new List<IDataFormatBuilder>();
+        foreach (var builder in Builders)
+        {
+            if (activeNames.Contains(builder.FormatName))
+            {
+                result.Add(builder);
+            }
+        }
+        return result;
+    }
+
+    private static List<DataShape> ExtractShapes(TargetShape flags)
+    {
+        var list = new List<DataShape>();
+        if ((flags & TargetShape.Relational) != 0) list.Add(DataShape.Relational);
+        if ((flags & TargetShape.Document) != 0) list.Add(DataShape.Document);
+        if ((flags & TargetShape.Sparse) != 0) list.Add(DataShape.Sparse);
+        return list;
+    }
+
+    private static List<DataScale> ExtractScales(TargetScale flags)
+    {
+        var list = new List<DataScale>();
+        if ((flags & TargetScale.S100) != 0) list.Add(DataScale.S100);
+        if ((flags & TargetScale.S1K) != 0) list.Add(DataScale.S1K);
+        if ((flags & TargetScale.S10K) != 0) list.Add(DataScale.S10K);
+        if ((flags & TargetScale.S100K) != 0) list.Add(DataScale.S100K);
+        return list;
+    }
+
+    private static List<DataComplexity> ExtractComplexities(TargetComplexity flags)
+    {
+        var list = new List<DataComplexity>();
+        if ((flags & TargetComplexity.C1_Low) != 0) list.Add(DataComplexity.C1_Low);
+        if ((flags & TargetComplexity.C2_Mid) != 0) list.Add(DataComplexity.C2_Mid);
+        if ((flags & TargetComplexity.C3_High) != 0) list.Add(DataComplexity.C3_High);
+        return list;
     }
 
     private static string EnsureDirectory(string path)
     {
         if (!Directory.Exists(path)) Directory.CreateDirectory(path);
         return path;
-    }
-
-    private static string GetExtension(string formatName)
-    {
-        switch (formatName)
-        {
-            case "SQLite": return "db";
-            case "LiteDB": return "db";
-            case "FlatBuffers": return "bytes";
-            case "MessagePack": return "mpk";
-            case "Binary": return "bytes";
-            case "JSON": return "json";
-            default: return "dat";
-        }
-    }
-
-    private static object GenerateInMemoryData(int count, string complexity)
-    {
-        var random = new System.Random(Seed);
-
-        switch (complexity)
-        {
-            case "C1_Low":
-                {
-                    var container = new DataSet_C1
-                    {
-                        items = new List<Master_Item_C1>(count),
-                        characters = new List<Runtime_Character_C1>(count)
-                    };
-                    var types = new[] { "WEAPON", "ARMOR", "CONSUMABLE" };
-                    for (int i = 1; i <= count; i++)
-                    {
-                        container.items.Add(new Master_Item_C1 { item_id = i, name = $"Item_C1_{i}", item_type = types[random.Next(types.Length)], rarity = random.Next(1, 6), atk = random.Next(10, 200), price = random.Next(100, 50000) });
-                        container.characters.Add(new Runtime_Character_C1 { character_id = i, name = $"Hero_{i}", level = random.Next(1, 100), hp = random.Next(100, 10000), pos_x = (float)(random.NextDouble() * 500.0), pos_y = (float)(random.NextDouble() * 500.0) });
-                    }
-                    return container;
-                }
-            case "C2_Mid":
-                {
-                    var container = new DataSet_C2
-                    {
-                        items = new List<Master_Item_C2>(count),
-                        tags = new List<Item_Tag_C2>(count),
-                        characters = new List<Runtime_Character_C2>(count),
-                        inventories = new List<Runtime_Inventory_C2>(count * 2)
-                    };
-                    var types = new[] { "WEAPON", "ARMOR", "CONSUMABLE" };
-                    var tags = new[] { "MELEE", "RANGED", "ELEMENT_FIRE", "ELEMENT_ICE", "BLESSING", "HEAL" };
-                    for (int i = 1; i <= count; i++)
-                    {
-                        container.items.Add(new Master_Item_C2 { item_id = i, item_code = $"ITM_{i:D6}", name = $"Item_C2_{i}", item_type = types[random.Next(types.Length)], rarity = random.Next(1, 6), req_level = random.Next(1, 80), base_atk = random.Next(10, 300) });
-                        container.tags.Add(new Item_Tag_C2 { item_id = i, tag_name = tags[i % tags.Length] });
-                        container.characters.Add(new Runtime_Character_C2 { character_id = i, name = $"Hero_{i}", level = random.Next(1, 100).ToString(), cur_hp = random.Next(100, 10000), pos_x = (float)(random.NextDouble() * 500.0), pos_y = (float)(random.NextDouble() * 500.0) });
-                        container.inventories.Add(new Runtime_Inventory_C2 { instance_id = i, character_id = i, item_id = i, quantity = random.Next(1, 99) });
-                        container.inventories.Add(new Runtime_Inventory_C2 { instance_id = count + i, character_id = i, item_id = i, quantity = random.Next(1, 99) });
-                    }
-                    return container;
-                }
-            case "C3_High":
-                {
-                    var container = new DataSet_C3
-                    {
-                        users = new List<System_User_C3>(count),
-                        characters = new List<Runtime_Character_C3>(count * 2),
-                        items = new List<Master_Item_C3>(count),
-                        effects = new List<Master_Effect_C3>(count),
-                        links = new List<Item_Effect_Link_C3>(count),
-                        inventories = new List<Runtime_Inventory_C3>(count * 2)
-                    };
-                    var effectTypes = new[] { "BUFF_ATK", "BUFF_DEF", "LIFESTEAL", "CRITICAL_UP" };
-                    for (int i = 1; i <= count; i++)
-                    {
-                        container.users.Add(new System_User_C3 { user_id = i, account_name = $"User_{i}", created_at = 1700000000 + i });
-                        int firstCharacterId = i * 2 - 1;
-                        int secondCharacterId = i * 2;
-                        container.characters.Add(new Runtime_Character_C3 { character_id = firstCharacterId, user_id = i, name = $"Hero_C3_{firstCharacterId}", guild_id = random.Next(1, 50) });
-                        container.characters.Add(new Runtime_Character_C3 { character_id = secondCharacterId, user_id = i, name = $"Hero_C3_{secondCharacterId}", guild_id = random.Next(1, 50) });
-                        container.items.Add(new Master_Item_C3 { item_id = i, name = $"MasterItem_C3_{i}", rarity = random.Next(1, 6) });
-                        container.effects.Add(new Master_Effect_C3 { effect_id = i, effect_type = effectTypes[random.Next(effectTypes.Length)], value = random.Next(5, 100) });
-                        container.links.Add(new Item_Effect_Link_C3 { item_id = i, effect_id = i });
-                        container.inventories.Add(new Runtime_Inventory_C3 { instance_id = firstCharacterId, character_id = firstCharacterId, item_id = i, durability = random.Next(1, 100) });
-                        container.inventories.Add(new Runtime_Inventory_C3 { instance_id = secondCharacterId, character_id = secondCharacterId, item_id = i, durability = random.Next(1, 100) });
-                    }
-                    return container;
-                }
-        }
-        return null;
     }
 }

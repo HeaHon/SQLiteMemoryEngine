@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -12,8 +12,12 @@ public class SqliteNativeConnection : IDisposable
     public bool IsOpen => isOpen;
     public string LastError { get; private set; }
 
-    [DllImport("e_sqlite3", EntryPoint = "sqlite3_open")]
-    private static extern int sqlite3_open(string filename, out IntPtr db);
+    private const int SQLITE_OPEN_READONLY = 0x00000001;
+    private const int SQLITE_OPEN_READWRITE = 0x00000002;
+    private const int SQLITE_OPEN_CREATE = 0x00000004;
+
+    [DllImport("e_sqlite3", EntryPoint = "sqlite3_open_v2")]
+    private static extern int sqlite3_open_v2(string filename, out IntPtr db, int flags, IntPtr zVfs);
 
     [DllImport("e_sqlite3", EntryPoint = "sqlite3_close")]
     private static extern int sqlite3_close(IntPtr db);
@@ -23,6 +27,12 @@ public class SqliteNativeConnection : IDisposable
 
     [DllImport("e_sqlite3", EntryPoint = "sqlite3_step")]
     private static extern int sqlite3_step(IntPtr stmt);
+
+    [DllImport("e_sqlite3", EntryPoint = "sqlite3_reset")]
+    private static extern int sqlite3_reset(IntPtr stmt);
+
+    [DllImport("e_sqlite3", EntryPoint = "sqlite3_clear_bindings")]
+    private static extern int sqlite3_clear_bindings(IntPtr stmt);
 
     [DllImport("e_sqlite3", EntryPoint = "sqlite3_column_count")]
     private static extern int sqlite3_column_count(IntPtr stmt);
@@ -75,19 +85,99 @@ public class SqliteNativeConnection : IDisposable
     private const int SQLITE_ROW = 100;
     private const int SQLITE_DONE = 101;
 
-    public SqliteNativeConnection(string filePath)
+    public SqliteNativeConnection(string filePath, bool readOnly = true)
     {
-        int result = sqlite3_open(filePath, out dbPtr);
+        int flags = readOnly ? SQLITE_OPEN_READONLY : (SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
+        int result = sqlite3_open_v2(filePath, out dbPtr, flags, IntPtr.Zero);
         if (result != 0)
         {
             LastError = GetErrorMessage();
-            Debug.LogError($"[SqliteNativeManager] DB 열기 실패: {filePath} ({LastError}, Error Code: {result})");
+            Debug.LogError($"[SqliteNativeConnection] DB 열기 실패: {filePath} ({LastError}, Error Code: {result})");
             if (dbPtr != IntPtr.Zero) sqlite3_close(dbPtr);
             dbPtr = IntPtr.Zero;
             return;
         }
 
         isOpen = true;
+    }
+
+    public IntPtr PrepareStatement(string query)
+    {
+        if (!isOpen || dbPtr == IntPtr.Zero) return IntPtr.Zero;
+        IntPtr stmt;
+        int rc = sqlite3_prepare_v2(dbPtr, query, -1, out stmt, IntPtr.Zero);
+        if (rc != 0)
+        {
+            LastError = GetErrorMessage();
+            Debug.LogError($"[SqliteNativeConnection] Prepare 실패: {LastError} (Code: {rc})");
+            return IntPtr.Zero;
+        }
+        return stmt;
+    }
+
+    public bool ExecutePrepared(IntPtr stmt, object[] parameters, Action<IntPtr> rowCallback)
+    {
+        if (stmt == IntPtr.Zero) return false;
+        sqlite3_reset(stmt);
+        sqlite3_clear_bindings(stmt);
+
+        if (!BindParameters(stmt, parameters)) return false;
+
+        while (true)
+        {
+            int stepResult = sqlite3_step(stmt);
+            if (stepResult == SQLITE_ROW)
+            {
+                rowCallback?.Invoke(stmt);
+                continue;
+            }
+            if (stepResult == SQLITE_DONE) return true;
+
+            LastError = GetErrorMessage();
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// 콜백/클로저 할당 없이 순수 Step + 컬럼 읽기만 수행하는 Zero-Alloc 실행기
+    /// </summary>
+    public int ExecutePreparedCountNoAlloc(IntPtr stmt, object[] parameters)
+    {
+        if (stmt == IntPtr.Zero) return -1;
+        sqlite3_reset(stmt);
+        sqlite3_clear_bindings(stmt);
+
+        if (!BindParameters(stmt, parameters)) return -1;
+
+        int colCount = sqlite3_column_count(stmt);
+        int rowCount = 0;
+
+        while (true)
+        {
+            int stepResult = sqlite3_step(stmt);
+            if (stepResult == SQLITE_ROW)
+            {
+                // 실제 컬럼 데이터 디코딩 비용 포함 (단, 힙 할당 0)
+                for (int i = 0; i < colCount; i++)
+                {
+                    int colType = sqlite3_column_type(stmt, i);
+                    if (colType == 1) _ = sqlite3_column_int64(stmt, i);
+                    else if (colType == 2) _ = sqlite3_column_double(stmt, i);
+                    else if (colType == 3) _ = sqlite3_column_text(stmt, i);
+                }
+                rowCount++;
+                continue;
+            }
+            if (stepResult == SQLITE_DONE) return rowCount;
+
+            LastError = GetErrorMessage();
+            return -1;
+        }
+    }
+
+    public static void FinalizeStatement(IntPtr stmt)
+    {
+        if (stmt != IntPtr.Zero) sqlite3_finalize(stmt);
     }
 
     public bool ExecuteQuery(string query, Action<IntPtr> rowCallback)
@@ -103,34 +193,12 @@ public class SqliteNativeConnection : IDisposable
             return false;
         }
 
-        IntPtr stmt = IntPtr.Zero;
-        int prepareResult = sqlite3_prepare_v2(dbPtr, query, -1, out stmt, IntPtr.Zero);
-        if (prepareResult != 0)
-        {
-            LastError = GetErrorMessage();
-            Debug.LogError($"[SqliteNativeManager] 쿼리 준비 실패: {LastError} (Error Code: {prepareResult})");
-            return false;
-        }
+        IntPtr stmt = PrepareStatement(query);
+        if (stmt == IntPtr.Zero) return false;
 
         try
         {
-            if (!BindParameters(stmt, parameters)) return false;
-
-            while (true)
-            {
-                int stepResult = sqlite3_step(stmt);
-                if (stepResult == SQLITE_ROW)
-                {
-                    rowCallback?.Invoke(stmt);
-                    continue;
-                }
-
-                if (stepResult == SQLITE_DONE) return true;
-
-                LastError = GetErrorMessage();
-                Debug.LogError($"[SqliteNativeManager] 쿼리 실행 실패: {LastError} (Error Code: {stepResult})");
-                return false;
-            }
+            return ExecutePrepared(stmt, parameters, rowCallback);
         }
         finally
         {

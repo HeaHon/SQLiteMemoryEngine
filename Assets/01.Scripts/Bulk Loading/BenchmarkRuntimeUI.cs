@@ -7,14 +7,18 @@ using UnityEngine.UI;
 
 public class BenchmarkRuntimeUI : MonoBehaviour
 {
-    public event Action<DataScale, DataComplexity, TargetFormat> OnRunAllRequested;
-    public event Action<TargetFormat, DataScale, DataComplexity, string> OnRunQueryRequested;
+    public event Action<DataShape, DataScale, DataComplexity, TargetFormat> OnRunAllRequested;
+    public event Action<TargetFormat, DataShape, DataScale, DataComplexity, string> OnRunQueryRequested;
 
+    private static readonly DataShape[] ShapeOptions = { DataShape.Relational, DataShape.Document, DataShape.Sparse };
+    private static readonly DataScale[] ScaleOptions = { DataScale.S100, DataScale.S1K, DataScale.S10K, DataScale.S100K };
+    private static readonly DataComplexity[] ComplexityOptions = { DataComplexity.C1_Low, DataComplexity.C2_Mid, DataComplexity.C3_High };
+
+    private Dropdown shapeDropdown;
     private Dropdown scaleDropdown;
     private Dropdown complexityDropdown;
     private InputField queryInputField;
 
-    // 로그 관리용 컴포넌트
     private List<string> displayLines = new List<string>();
     private Text resultOutputText;
     private ScrollRect scrollRect;
@@ -28,9 +32,12 @@ public class BenchmarkRuntimeUI : MonoBehaviour
         AppendOutput("System: Benchmark Console Initialized.");
     }
 
+    private DataShape GetSelectedShape() => ShapeOptions[Mathf.Clamp(shapeDropdown.value, 0, ShapeOptions.Length - 1)];
+    private DataScale GetSelectedScale() => ScaleOptions[Mathf.Clamp(scaleDropdown.value, 0, ScaleOptions.Length - 1)];
+    private DataComplexity GetSelectedComplexity() => ComplexityOptions[Mathf.Clamp(complexityDropdown.value, 0, ComplexityOptions.Length - 1)];
+
     private void BuildRuntimeUI()
     {
-        // 1. Canvas 설정 (Pixel Perfect 활성화로 텍스트 화질 선명하게 개선)
         var canvasObj = new GameObject("Benchmark_Canvas");
         var canvas = canvasObj.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -51,7 +58,6 @@ public class BenchmarkRuntimeUI : MonoBehaviour
             eventSystemObj.AddComponent<InputSystemUIInputModule>();
         }
 
-        // 2. 메인 패널
         var panelObj = CreateUIObject("MainPanel", canvasObj.transform);
         panelObj.AddComponent<Image>().color = new Color(0.07f, 0.09f, 0.13f, 0.98f);
 
@@ -63,10 +69,8 @@ public class BenchmarkRuntimeUI : MonoBehaviour
 
         Transform p = panelObj.transform;
 
-        // --- Header 타이틀 ---
-        CreateAbsoluteLabel(p, "연구 A안 : 단건 및 조건 조회 성능 벤치 마크", 16, TextAnchor.MiddleCenter, new Color(0.2f, 0.8f, 1f), new Vector2(20, -15), new Vector2(320, 28), true);
+        CreateAbsoluteLabel(p, "연구 A안 : 단건 및 조건 조회 성능 벤치 마크", 16, TextAnchor.MiddleCenter, new Color(0.2f, 0.8f, 1f), new Vector2(20, -15), new Vector2(360, 28), true);
 
-        // --- [추가] 콘솔창 클리어 버튼 (우측 상단 배치) ---
         var clearBtn = CreateAbsoluteButton(p, "Clear Console", new Color(0.55f, 0.2f, 0.2f), new Vector2(-20, -15), new Vector2(120, 28), true);
         clearBtn.onClick.AddListener(() =>
         {
@@ -74,26 +78,29 @@ public class BenchmarkRuntimeUI : MonoBehaviour
             AppendOutput("System: Console Cleared.");
         });
 
-        // --- 섹션 1: Scale & Complexity 설정 ---
-        CreateAbsoluteLabel(p, "Data Scale:", 12, TextAnchor.MiddleRight, Color.gray, new Vector2(20, -55), new Vector2(75, 24));
-        scaleDropdown = CreateAbsoluteDropdown(p, new List<string> { "S100", "S1K", "S10K", "S100K" }, new Vector2(100, -55), new Vector2(120, 26));
+        // --- 섹션 1: Shape & Scale & Complexity 설정 ---
+        CreateAbsoluteLabel(p, "Shape:", 12, TextAnchor.MiddleRight, Color.gray, new Vector2(20, -55), new Vector2(55, 24));
+        shapeDropdown = CreateAbsoluteDropdown(p, new List<string> { "Relational", "Document", "Sparse" }, new Vector2(80, -55), new Vector2(120, 26));
 
-        CreateAbsoluteLabel(p, "Complexity:", 12, TextAnchor.MiddleRight, Color.gray, new Vector2(240, -55), new Vector2(80, 24));
-        complexityDropdown = CreateAbsoluteDropdown(p, new List<string> { "C1_Low", "C2_Mid", "C3_High" }, new Vector2(325, -55), new Vector2(120, 26));
+        CreateAbsoluteLabel(p, "Scale:", 12, TextAnchor.MiddleRight, Color.gray, new Vector2(210, -55), new Vector2(55, 24));
+        scaleDropdown = CreateAbsoluteDropdown(p, new List<string> { "S100", "S1K", "S10K", "S100K" }, new Vector2(270, -55), new Vector2(110, 26));
 
-        // --- 섹션 2: 포맷 선택 체크박스들 (All 연동 로직 포함) ---
+        CreateAbsoluteLabel(p, "Complexity:", 12, TextAnchor.MiddleRight, Color.gray, new Vector2(390, -55), new Vector2(80, 24));
+        complexityDropdown = CreateAbsoluteDropdown(p, new List<string> { "C1_Low", "C2_Mid", "C3_High" }, new Vector2(475, -55), new Vector2(120, 26));
+
+        // --- 섹션 2: 포맷 선택 체크박스들 ---
         CreateAbsoluteLabel(p, "TARGET FORMATS:", 11, TextAnchor.MiddleLeft, new Color(1f, 0.85f, 0.3f), new Vector2(20, -95), new Vector2(300, 18), true);
 
         CreateAbsoluteToggle(p, "All", TargetFormat.All, true, new Vector2(20, -120), new Vector2(70, 22));
         CreateAbsoluteToggle(p, "SQLite (ORM)", TargetFormat.SQLite_ORM, true, new Vector2(100, -120), new Vector2(115, 22));
         CreateAbsoluteToggle(p, "SQLite (NativeC)", TargetFormat.SQLite_NativeC, true, new Vector2(225, -120), new Vector2(115, 22));
         CreateAbsoluteToggle(p, "RocksDB", TargetFormat.RocksDB, true, new Vector2(350, -120), new Vector2(95, 22));
-        CreateAbsoluteToggle(p, "FlatBuffers", TargetFormat.FlatBuffers, true, new Vector2(455, -120), new Vector2(110, 22));
+        CreateAbsoluteToggle(p, "LiteDB", TargetFormat.LiteDB, true, new Vector2(455, -120), new Vector2(85, 22));
 
-        CreateAbsoluteToggle(p, "RawBinary", TargetFormat.RawBinary, true, new Vector2(20, -148), new Vector2(105, 22));
-        CreateAbsoluteToggle(p, "LiteDB", TargetFormat.LiteDB, true, new Vector2(135, -148), new Vector2(85, 22));
-        CreateAbsoluteToggle(p, "MessagePack", TargetFormat.MessagePack, true, new Vector2(230, -148), new Vector2(120, 22));
-        CreateAbsoluteToggle(p, "JSON", TargetFormat.JSON, true, new Vector2(360, -148), new Vector2(75, 22));
+        CreateAbsoluteToggle(p, "FlatBuffers", TargetFormat.FlatBuffers, false, new Vector2(20, -148), new Vector2(110, 22));
+        CreateAbsoluteToggle(p, "RawBinary", TargetFormat.RawBinary, false, new Vector2(135, -148), new Vector2(105, 22));
+        CreateAbsoluteToggle(p, "MessagePack", TargetFormat.MessagePack, false, new Vector2(250, -148), new Vector2(120, 22));
+        CreateAbsoluteToggle(p, "JSON", TargetFormat.JSON, false, new Vector2(380, -148), new Vector2(75, 22));
 
         foreach (var kvp in formatToggles)
         {
@@ -106,43 +113,39 @@ public class BenchmarkRuntimeUI : MonoBehaviour
         var bulkBtn = CreateAbsoluteButton(p, "RUN BULK LOAD BENCHMARK (선택 포맷 전체 로드 측정)", new Color(0.15f, 0.55f, 0.35f), new Vector2(20, -180), new Vector2(-40, 30));
         bulkBtn.onClick.AddListener(() =>
         {
-            var scale = (DataScale)scaleDropdown.value;
-            var complexity = (DataComplexity)complexityDropdown.value;
+            var shape = GetSelectedShape();
+            var scale = GetSelectedScale();
+            var complexity = GetSelectedComplexity();
             var selectedFormats = GetSelectedFormats();
 
-            AppendOutput($"=== [전체 로드] 시작 [{scale} / {complexity}] ===");
-            OnRunAllRequested?.Invoke(scale, complexity, selectedFormats);
+            AppendOutput($"=== [전체 로드] 시작 [{shape} / {scale} / {complexity}] ===");
+            OnRunAllRequested?.Invoke(shape, scale, complexity, selectedFormats);
         });
 
         // --- 섹션 4: Case A ~ D 쿼리 생성 버튼들 ---
-        CreateAbsoluteLabel(p, "CASE A ~ D GENERATOR:", 11, TextAnchor.MiddleLeft, new Color(1f, 0.85f, 0.3f), new Vector2(20, -222), new Vector2(200, 18), true);
+        CreateAbsoluteLabel(p, "CASE A ~ D GENERATOR:", 11, TextAnchor.MiddleLeft, new Color(1f, 0.85f, 0.3f), new Vector2(20, -222), new Vector2(220, 18), true);
 
         CreateAbsoluteCaseButton(p, "Case A (PK)", new Vector2(20, -244), new Vector2(120, 28), 'A');
         CreateAbsoluteCaseButton(p, "Case B (범위)", new Vector2(148, -244), new Vector2(120, 28), 'B');
         CreateAbsoluteCaseButton(p, "Case C (연쇄)", new Vector2(276, -244), new Vector2(120, 28), 'C');
         CreateAbsoluteCaseButton(p, "Case D (추출)", new Vector2(404, -244), new Vector2(120, 28), 'D');
 
-        scaleDropdown.onValueChanged.AddListener((index) =>
-        {
-            var scale = (DataScale)scaleDropdown.value;
-            var complexity = (DataComplexity)complexityDropdown.value;
-            AppendOutput($"<color=#00FFCC>[조건 갱신] Scale이 {scale}(으)로 변경되었습니다.</color>");
-        });
-        complexityDropdown.onValueChanged.AddListener((index) =>
-        {
-            var scale = (DataScale)scaleDropdown.value;
-            var complexity = (DataComplexity)complexityDropdown.value;
-            AppendOutput($"<color=#00FFCC>[조건 갱신] Complexity가 {complexity}(으)로 변경되었습니다.</color>");
-        });
+        shapeDropdown.onValueChanged.AddListener(_ =>
+            AppendOutput($"<color=#00FFCC>[조건 갱신] Shape가 {GetSelectedShape()}(으)로 변경되었습니다.</color>"));
+        scaleDropdown.onValueChanged.AddListener(_ =>
+            AppendOutput($"<color=#00FFCC>[조건 갱신] Scale이 {GetSelectedScale()}(으)로 변경되었습니다.</color>"));
+        complexityDropdown.onValueChanged.AddListener(_ =>
+            AppendOutput($"<color=#00FFCC>[조건 갱신] Complexity가 {GetSelectedComplexity()}(으)로 변경되었습니다.</color>"));
 
-        // --- 섹션 5: 개별 SQL 쿼리 입력창 및 선택된 모든 포맷 대상 실행 ---
-        queryInputField = CreateAbsoluteInputField(p, "SELECT price FROM Master_Item_C1 WHERE item_id = 1005", new Vector2(20, -282), new Vector2(-155, 32));
+        // --- 섹션 5: 개별 SQL 쿼리 입력창 ---
+        queryInputField = CreateAbsoluteInputField(p, "SELECT price FROM RelMasterItem_C1 WHERE item_id = 50", new Vector2(20, -282), new Vector2(-155, 32));
 
         var queryBtn = CreateAbsoluteButton(p, "Execute Query", new Color(0.2f, 0.45f, 0.8f), new Vector2(-20, -282), new Vector2(130, 32), true);
         queryBtn.onClick.AddListener(() =>
         {
-            var scale = (DataScale)scaleDropdown.value;
-            var complexity = (DataComplexity)complexityDropdown.value;
+            var shape = GetSelectedShape();
+            var scale = GetSelectedScale();
+            var complexity = GetSelectedComplexity();
             string query = queryInputField.text;
 
             if (string.IsNullOrEmpty(query))
@@ -152,26 +155,25 @@ public class BenchmarkRuntimeUI : MonoBehaviour
             }
 
             var selectedFormats = GetSelectedFormats();
-            CheckAndWarnJsonMessagePack(selectedFormats);
+            CheckAndWarnNonQueryable(selectedFormats);
 
             TargetFormat queryableFormats = selectedFormats & ~(TargetFormat.JSON | TargetFormat.MessagePack);
 
             AppendOutput($"=== [선택 포맷 쿼리 실행] ===\nQuery: {query}");
-            OnRunQueryRequested?.Invoke(queryableFormats, scale, complexity, query);
+            OnRunQueryRequested?.Invoke(queryableFormats, shape, scale, complexity, query);
         });
 
-        // --- 섹션 6: 대형 스크롤 로그 창 및 수직 스크롤 바 생성 ---
+        // --- 섹션 6: 대형 스크롤 로그 창 ---
         var scrollObj = CreateUIObject("ScrollArea", p);
         scrollRect = scrollObj.AddComponent<ScrollRect>();
-        var scrollBg = scrollObj.AddComponent<Image>();
-        scrollBg.color = new Color(0.04f, 0.05f, 0.07f, 1f);
+        scrollObj.AddComponent<Image>().color = new Color(0.04f, 0.05f, 0.07f, 1f);
 
         var scrollRectTransform = scrollObj.GetComponent<RectTransform>();
         scrollRectTransform.anchorMin = new Vector2(0, 1);
         scrollRectTransform.anchorMax = new Vector2(1, 1);
         scrollRectTransform.pivot = new Vector2(0.5f, 1);
-        scrollRectTransform.anchoredPosition = new Vector2(0, -350); // Pos Y: -350
-        scrollRectTransform.sizeDelta = new Vector2(-40, 660);         // Height: 660
+        scrollRectTransform.anchoredPosition = new Vector2(0, -350);
+        scrollRectTransform.sizeDelta = new Vector2(-40, 660);
 
         var viewportObj = CreateUIObject("Viewport", scrollObj.transform);
         SetRectTransform(viewportObj.GetComponent<RectTransform>(), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
@@ -202,7 +204,6 @@ public class BenchmarkRuntimeUI : MonoBehaviour
         scrollRect.horizontal = false;
         scrollRect.vertical = true;
 
-        // --- [추가] 수직 스크롤 바(Scrollbar) 동적 생성 및 연동 ---
         var scrollbarObj = CreateUIObject("ScrollbarVertical", scrollObj.transform);
         var sbRect = scrollbarObj.GetComponent<RectTransform>();
         sbRect.anchorMin = new Vector2(1, 0);
@@ -211,9 +212,7 @@ public class BenchmarkRuntimeUI : MonoBehaviour
         sbRect.sizeDelta = new Vector2(16, 0);
         sbRect.anchoredPosition = Vector2.zero;
 
-        var sbImage = scrollbarObj.AddComponent<Image>();
-        sbImage.color = new Color(0.12f, 0.14f, 0.18f, 1f);
-
+        scrollbarObj.AddComponent<Image>().color = new Color(0.12f, 0.14f, 0.18f, 1f);
         var scrollbar = scrollbarObj.AddComponent<Scrollbar>();
         scrollbar.direction = Scrollbar.Direction.BottomToTop;
 
@@ -229,20 +228,15 @@ public class BenchmarkRuntimeUI : MonoBehaviour
         scrollbar.handleRect = handleRect;
         scrollbar.targetGraphic = handleImage;
 
-        // ScrollRect에 스크롤 바 연결
         scrollRect.verticalScrollbar = scrollbar;
         scrollRect.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.Permanent;
     }
 
-    // JSON 및 MessagePack 체크 여부 검사 후 경고 로그 띄우기
-    private void CheckAndWarnJsonMessagePack(TargetFormat formats)
+    private void CheckAndWarnNonQueryable(TargetFormat formats)
     {
-        bool hasJson = (formats & TargetFormat.JSON) != 0;
-        bool hasMsgPack = (formats & TargetFormat.MessagePack) != 0;
-
-        if (hasJson || hasMsgPack)
+        if ((formats & (TargetFormat.JSON | TargetFormat.MessagePack)) != 0)
         {
-            AppendOutput("<color=#FF4444>[경고]쿼리를 실행할 수 있는 유효하지 않은 포맷이 선택되었습니다. (JSON, MessagePack은 단건 조회 불가)</color>");
+            AppendOutput("<color=#FF4444>[경고] JSON/MessagePack은 단건 쿼리 조회 대상에서 제외됩니다.</color>");
         }
     }
 
@@ -253,10 +247,7 @@ public class BenchmarkRuntimeUI : MonoBehaviour
 
         if (format == TargetFormat.All)
         {
-            foreach (var kvp in formatToggles)
-            {
-                kvp.Value.isOn = isOn;
-            }
+            foreach (var kvp in formatToggles) kvp.Value.isOn = isOn;
         }
         else
         {
@@ -269,16 +260,10 @@ public class BenchmarkRuntimeUI : MonoBehaviour
                 bool allOthersOn = true;
                 foreach (var kvp in formatToggles)
                 {
-                    if (kvp.Key != TargetFormat.All && !kvp.Value.isOn)
-                    {
-                        allOthersOn = false;
-                        break;
-                    }
+                    if (kvp.Key != TargetFormat.All && !kvp.Value.isOn) { allOthersOn = false; break; }
                 }
                 if (allOthersOn && formatToggles.ContainsKey(TargetFormat.All))
-                {
                     formatToggles[TargetFormat.All].isOn = true;
-                }
             }
         }
 
@@ -290,17 +275,12 @@ public class BenchmarkRuntimeUI : MonoBehaviour
         displayLines.Add(message);
         if (displayLines.Count > 200) displayLines.RemoveAt(0);
 
-        if (resultOutputText != null)
-        {
-            resultOutputText.text = string.Join("\n\n", displayLines);
-        }
-
+        if (resultOutputText != null) resultOutputText.text = string.Join("\n\n", displayLines);
         if (scrollRect != null)
         {
             Canvas.ForceUpdateCanvases();
             scrollRect.verticalNormalizedPosition = 0f;
         }
-
         Debug.Log(message);
     }
 
@@ -310,45 +290,85 @@ public class BenchmarkRuntimeUI : MonoBehaviour
         if (resultOutputText != null) resultOutputText.text = string.Empty;
     }
 
-    // DataScale에 따른 최대 아이템/데이터 개수 반환 헬퍼
-    private int GetMaxIdByScale(DataScale scale)
+    private string GetCaseQuery(DataShape shape, DataScale scale, DataComplexity complexity, char caseType)
     {
-        switch (scale)
+        int maxId = (int)scale;
+        int midId = Mathf.Max(1, maxId / 2);
+
+        if (shape == DataShape.Document)
         {
-            case DataScale.S100: return 100;
-            case DataScale.S1K: return 1000;
-            case DataScale.S10K: return 10000;
-            case DataScale.S100K: return 100000;
-            default: return 100;
+            switch (complexity)
+            {
+                case DataComplexity.C1_Low:
+                    if (caseType == 'A') return $"SELECT * FROM Doc_Item_C1 WHERE item_id = {midId}";
+                    if (caseType == 'B') return "SELECT * FROM Doc_Item_C1 WHERE rarity >= 3 AND atk >= 100";
+                    if (caseType == 'C') return "SELECT i.item_id, i.name, t.tag_name FROM Doc_Item_C1 i JOIN Doc_Item_Tag_C1 t ON i.item_id = t.item_id WHERE i.item_id = 1";
+                    if (caseType == 'D') return $"SELECT price FROM Doc_Item_C1 WHERE item_id = {midId}";
+                    break;
+                case DataComplexity.C2_Mid:
+                    if (caseType == 'A') return $"SELECT * FROM Doc_Char_C2 WHERE character_id = {midId}";
+                    if (caseType == 'B') return "SELECT * FROM Doc_Char_C2 WHERE level >= 50";
+                    if (caseType == 'C') return "SELECT c.character_id, c.name, inv.instance_id, inv.item_name FROM Doc_Char_C2 c JOIN Doc_Inv_C2 inv ON c.character_id = inv.character_id WHERE c.character_id = 1";
+                    if (caseType == 'D') return $"SELECT cur_hp FROM Doc_Char_C2 WHERE character_id = {midId}";
+                    break;
+                case DataComplexity.C3_High:
+                    if (caseType == 'A') return $"SELECT * FROM Doc_User_C3 WHERE user_id = {midId}";
+                    if (caseType == 'B') return "SELECT * FROM Doc_User_C3 WHERE user_id <= 20";
+                    if (caseType == 'C') return "SELECT u.user_id, u.account_name, c.character_id, inv.instance_id FROM Doc_User_C3 u JOIN Doc_Char_C3 c ON u.user_id = c.user_id JOIN Doc_Inv_C3 inv ON c.character_id = inv.character_id WHERE u.user_id = 1";
+                    if (caseType == 'D') return $"SELECT account_name FROM Doc_User_C3 WHERE user_id = {midId}";
+                    break;
+            }
+            return "SELECT 1";
         }
-    }
 
-    private string GetCaseQuery(DataScale scale, DataComplexity complexity, char caseType)
-    {
-        int maxId = GetMaxIdByScale(scale);
-        int midId = maxId / 2; // 규모의 중간 지점 ID
+        if (shape == DataShape.Sparse)
+        {
+            switch (complexity)
+            {
+                case DataComplexity.C1_Low:
+                    if (caseType == 'A') return $"SELECT * FROM Sparse_Item_C1 WHERE item_id = {midId}";
+                    if (caseType == 'B') return "SELECT * FROM Sparse_Item_C1 WHERE item_type = 'WEAPON'";
+                    if (caseType == 'C') return "SELECT i.item_id, i.name, a.attr_key, a.attr_value FROM Sparse_Item_C1 i JOIN Sparse_Attr a ON i.item_id = a.owner_id WHERE i.item_id = 1";
+                    if (caseType == 'D') return $"SELECT name FROM Sparse_Item_C1 WHERE item_id = {midId}";
+                    break;
+                case DataComplexity.C2_Mid:
+                    if (caseType == 'A') return $"SELECT * FROM Sparse_Entity_C2 WHERE entity_id = {midId}";
+                    if (caseType == 'B') return "SELECT * FROM Sparse_Entity_C2 WHERE category = 'HERO'";
+                    if (caseType == 'C') return "SELECT e.entity_id, e.name, a.attr_key, a.attr_value FROM Sparse_Entity_C2 e JOIN Sparse_Attr a ON e.entity_id = a.owner_id WHERE e.entity_id = 1";
+                    if (caseType == 'D') return $"SELECT category FROM Sparse_Entity_C2 WHERE entity_id = {midId}";
+                    break;
+                case DataComplexity.C3_High:
+                    if (caseType == 'A') return $"SELECT * FROM Sparse_Event_C3 WHERE event_id = 'EV_{midId:D8}'";
+                    if (caseType == 'B') return "SELECT * FROM Sparse_Event_C3 WHERE user_id = 1 AND event_type = 'COMBAT'";
+                    if (caseType == 'C') return "SELECT e.event_id, e.event_type, p.payload_key, p.payload_value FROM Sparse_Event_C3 e JOIN Sparse_Event_Payload p ON e.event_id = p.event_id WHERE e.event_id = 'EV_00000001'";
+                    if (caseType == 'D') return $"SELECT event_type FROM Sparse_Event_C3 WHERE event_id = 'EV_{midId:D8}'";
+                    break;
+            }
+            return "SELECT 1";
+        }
 
+        // Relational
         switch (complexity)
         {
             case DataComplexity.C1_Low:
-                if (caseType == 'A') return $"SELECT * FROM Master_Item_C1 WHERE item_id = {midId}";
-                if (caseType == 'B') return "SELECT * FROM Master_Item_C1 WHERE rarity >= 3 AND atk >= 100";
-                if (caseType == 'C') return $"할 수 없음 (단일 테이블 구조)";
-                if (caseType == 'D') return $"SELECT price FROM Master_Item_C1 WHERE item_id = {midId}";
+                if (caseType == 'A') return $"SELECT * FROM RelMasterItem_C1 WHERE item_id = {midId}";
+                if (caseType == 'B') return "SELECT * FROM RelMasterItem_C1 WHERE rarity >= 3 AND atk >= 100";
+                if (caseType == 'C') return "할 수 없음 (단일 테이블 구조)";
+                if (caseType == 'D') return $"SELECT price FROM RelMasterItem_C1 WHERE item_id = {midId}";
                 break;
 
             case DataComplexity.C2_Mid:
-                if (caseType == 'A') return $"SELECT * FROM Master_Item_C2 WHERE item_id = {midId}";
-                if (caseType == 'B') return "SELECT * FROM Master_Item_C2 WHERE req_level >= 10 AND rarity >= 3";
-                if (caseType == 'C') return "SELECT c.character_id, c.name AS character_name, i.item_id, i.name AS item_name, inv.instance_id, inv.quantity FROM Runtime_Inventory_C2 inv JOIN Runtime_Character_C2 c ON inv.character_id = c.character_id JOIN Master_Item_C2 i ON inv.item_id = i.item_id WHERE c.character_id = 1 ORDER BY inv.instance_id";
-                if (caseType == 'D') return $"SELECT base_atk FROM Master_Item_C2 WHERE item_id = {midId}";
+                if (caseType == 'A') return $"SELECT * FROM RelMasterItem_C2 WHERE item_id = {midId}";
+                if (caseType == 'B') return "SELECT * FROM RelMasterItem_C2 WHERE req_level >= 10 AND rarity >= 3";
+                if (caseType == 'C') return "SELECT c.character_id, c.name AS character_name, i.item_id, i.name AS item_name, inv.instance_id, inv.quantity FROM RelRuntimeInventory_C2 inv JOIN RelRuntimeCharacter_C2 c ON inv.character_id = c.character_id JOIN RelMasterItem_C2 i ON inv.item_id = i.item_id WHERE c.character_id = 1 ORDER BY inv.instance_id";
+                if (caseType == 'D') return $"SELECT base_atk FROM RelMasterItem_C2 WHERE item_id = {midId}";
                 break;
 
             case DataComplexity.C3_High:
-                if (caseType == 'A') return $"SELECT * FROM Master_Item_C3 WHERE item_id = {midId}";
-                if (caseType == 'B') return "SELECT * FROM Master_Item_C3 WHERE rarity >= 4";
-                if (caseType == 'C') return "SELECT u.user_id, u.account_name, c.character_id, c.name AS character_name, i.item_id, i.name AS item_name, inv.instance_id, e.effect_type FROM System_User_C3 u JOIN Runtime_Character_C3 c ON c.user_id = u.user_id JOIN Runtime_Inventory_C3 inv ON inv.character_id = c.character_id JOIN Master_Item_C3 i ON i.item_id = inv.item_id LEFT JOIN Item_Effect_Link_C3 l ON l.item_id = i.item_id LEFT JOIN Master_Effect_C3 e ON e.effect_id = l.effect_id WHERE u.user_id = 1 ORDER BY inv.instance_id";
-                if (caseType == 'D') return $"SELECT name FROM Master_Item_C3 WHERE item_id = {midId}";
+                if (caseType == 'A') return $"SELECT * FROM RelMasterItem_C3 WHERE item_id = {midId}";
+                if (caseType == 'B') return "SELECT * FROM RelMasterItem_C3 WHERE rarity >= 4";
+                if (caseType == 'C') return "SELECT u.user_id, u.account_name, c.character_id, c.name AS character_name, i.item_id, i.name AS item_name, inv.instance_id, e.effect_type FROM RelSystemUser_C3 u JOIN RelRuntimeCharacter_C3 c ON c.user_id = u.user_id JOIN RelRuntimeInventory_C3 inv ON inv.character_id = c.character_id JOIN RelMasterItem_C3 i ON i.item_id = inv.item_id LEFT JOIN RelItemEffectLink_C3 l ON l.item_id = i.item_id LEFT JOIN RelMasterEffect_C3 e ON e.effect_id = l.effect_id WHERE u.user_id = 1 ORDER BY inv.instance_id";
+                if (caseType == 'D') return $"SELECT name FROM RelMasterItem_C3 WHERE item_id = {midId}";
                 break;
         }
         return "SELECT 1";
@@ -359,15 +379,12 @@ public class BenchmarkRuntimeUI : MonoBehaviour
         TargetFormat formats = TargetFormat.None;
         foreach (var pair in formatToggles)
         {
-            if (pair.Key != TargetFormat.All && pair.Value.isOn)
-            {
-                formats |= pair.Key;
-            }
+            if (pair.Key != TargetFormat.All && pair.Value.isOn) formats |= pair.Key;
         }
         return formats == TargetFormat.None ? TargetFormat.All : formats;
     }
 
-    #region 절대 좌표 기반 정밀 UI 생성 헬퍼
+    #region UI 생성 헬퍼
     private GameObject CreateUIObject(string name, Transform parent)
     {
         var obj = new GameObject(name);
@@ -558,12 +575,8 @@ public class BenchmarkRuntimeUI : MonoBehaviour
         {
             if (queryInputField != null)
             {
-                var scale = (DataScale)scaleDropdown.value;
-                var complexity = (DataComplexity)complexityDropdown.value;
-
-                string q = GetCaseQuery(scale, complexity, queryKey);
+                string q = GetCaseQuery(GetSelectedShape(), GetSelectedScale(), GetSelectedComplexity(), queryKey);
                 queryInputField.text = q;
-
                 AppendOutput($"<color=#00FFFF>[Case 쿼리 장착]</color> {q}");
             }
         });
