@@ -1,5 +1,5 @@
 # SQLiteMemoryEngine
-SQLite In-Memory DB 및 로컬 데이터 스토리지 포맷별 게임 데이터 아키텍처 연구
+SQLite In-Memory DB 및 로컬 스토리지 엔진 기반 게임 데이터 아키텍처 연구
 
 ---
 
@@ -78,31 +78,39 @@ SQL과 NoSQL의 구조적 유불리를 공정하게 대조하기 위해 동일�
 
 ---
 
-## 3. 벤치마크 데이터 포맷 라인업 (Common Lineup)
+## 3. 벤치마크 DB 라인업 (Common DB Lineup)
 
-| 분류 | 비교 포맷 | 현재 구현 상태 | 특징 및 채택 이유 |
+연구안 A(조회), B(인메모리 Hot/Cold-Path), C(상태 저장 및 롤백) 전반에서 공통으로 비교·검증하는 데이터베이스 및 인메모리 저장소 라인업입니다.
+
+| 분류 | 비교 엔진 | 적용 연구안 | 특징 및 상용 게임 채택 이유 |
 | :--- | :--- | :--- | :--- |
-| **Relational DB** | **SQLite (Native C)** | 활성 (빌드/조회) | C API(`e_sqlite3`) 직접 P/Invoke 매핑 (Zero-Alloc 목표 SQL) |
-| | **SQLite (sqlite-net)** | 활성 (빌드/조회) | ORM 편의성 대가로 발생하는 객체/Reflection 할당 오버헤드 측정 |
-| **NoSQL DB** | **RocksDB** | 활성 (빌드/조회) | SSTable 기반 KV 로컬 DB (단건 `Get` 및 프리픽스 탐색) |
-| | **LiteDB** | 활성 (빌드/조회) | C# 순수 Document DB (BSON 중첩 문서 및 동적 스키마 처리) |
-| **Zero-Parsing** | **FlatBuffers** | 보류 (별도 최적화 예정) | 역직렬화 없는 Direct Memory Read |
-| **Binary Serializer** | **MessagePack (Cysharp)** | 보류 (별도 최적화 예정) | C# 최적화 바이너리 직렬화 |
-| | **Raw Binary** | 보류 (별도 최적화 예정) | `MemoryStream` / `BinaryReader` 기반 기준점 |
-| **Text Data** | **JSON (Newtonsoft)** | 보류 (별도 최적화 예정) | 가독성 중심 대조군 (Baseline) |
+| **Relational DB** | **SQLite (Native C)** | A, B, C | C API(`e_sqlite3`) 직접 P/Invoke 매핑 (Zero-Alloc 목표 SQL) |
+| | **SQLite (sqlite-net ORM)** | A, B, C | ORM 편의성 대가로 발생하는 Reflection·객체 할당 오버헤드 측정 |
+| **NoSQL DB** | **RocksDB (KV Store)** | A, C | SSTable + Bloom Filter 기반 고성능 로컬 KV 엔진 |
+| | **LiteDB (Document DB)** | A, B, C | C# 순수 BSON Document DB (파일 및 `MemoryStream` 인메모리 지원) |
+| **In-Memory Baseline** | **C# Collection (`Dictionary` + `LINQ`)** | B, C | 기존 게임 클라이언트 인메모리 관리 방식 (조건 검색 GC 및 롤백 한계 대조) |
 
 ---
 
 ## 4. 연구 A안: Master Data 로드 및 조회 성능 벤치마크
 
 ### 연구 개요 및 조회 유형
-* **연구 목적:** 대용량 게임 데이터의 **전체 로드(Bulk Load)** 및 **부분/조건 조회(Query Lookup)** 시 포맷별 실행 시간과 C# 힙 메모리 할당량을 정량적으로 비교 검증합니다.
+* **연구 목적:** 대용량 읽기 전용 Master Data의 **전체 로드(Bulk Load)** 및 **부분/조건 조회(Query Lookup)** 시 DB/포맷별 실행 시간과 C# 힙 메모리 할당량을 정량적으로 비교 검증합니다.
 * **측정 시나리오:**
   * **Bulk Load:** 선택된 `Shape × Scale × Complexity` 데이터셋 전체를 C# 인메모리 컨테이너로 적재
   * **Case A (PK 단건 조회):** Primary Key 기반 1:1 직접 조회
   * **Case B (범위/복합 조건 조회):** 인덱스 컬럼 기반 범위 및 다중 `AND` 필터링
   * **Case C (연쇄/트리 조회):** `Relational`은 다중 `JOIN`, `Document`는 중첩 하위 트리 조회
   * **Case D (부분 필드 추출):** Projection을 통한 단일 컬럼 추출
+
+### 연구 A안 대조군 (Comparison Lineup)
+| 구분 | 포맷 / 엔진 | 상태 | 역할 및 측정 초점 |
+| :--- | :--- | :--- | :--- |
+| **실험군 (SQL)** | **SQLite (Native C)** | 활성 | P/Invoke + Prepared Statement 기반 Zero-Alloc 성능 상한선 검증 |
+| | **SQLite (sqlite-net ORM)** | 활성 | Reflection·객체 할당 오버헤드 대조 및 정합성 기준(Baseline) |
+| **대조군 (NoSQL DB)** | **RocksDB (KV Store)** | 활성 | 단건 PK 및 보조 프리픽스 조회 성능 대조 |
+| | **LiteDB (Document)** | 활성 | 중첩 문서(`Document`) 및 동적 스키마(`Sparse`) 조회 대조 |
+| **대조군 (비-DB 직렬화)** | **FlatBuffers / MessagePack / Raw Binary / JSON** | 보류 | 읽기 전용 직렬화 대조군 (별도 조회 최적화 후 합류 예정) |
 
 ### 정밀 측정 프로토콜 (왜곡 방지 설계)
 단순 1회 실행 시 발생하는 초기화·박싱·콜드 캐시 왜곡을 제거하기 위해 `IQueryBenchmarkSession` 기반의 2단계 실행 구조를 사용합니다.
@@ -115,11 +123,58 @@ SQL과 NoSQL의 구조적 유불리를 공정하게 대조하기 위해 동일�
 
 ---
 
-## 5. 비-SQL 포맷의 조회 기능 보완 구현 (Query Capability Emulation)
+## 5. 연구 B안: Cold-Path & Hot-Path 조건 검색 및 수정 (In-Memory DB 단독 관리)
+
+### 연구 개요 및 목적
+* **연구 목적:** 디스크 파일이 아닌 **In-Memory 상주 상태**에서 게임 런타임의 실시간 읽기·쓰기 혼합 연산(상태 갱신, 조건 검색, 트랜잭션)을 **In-Memory DB 단독 관리**로 처리할 때의 실전 성능과 GC 안정성을 검증합니다.
+
+### 연구 B안 대조군 (In-Memory Comparison Lineup)
+| 구분 | 엔진 / 구현 | 역할 및 측정 초점 |
+| :--- | :--- | :--- |
+| **기준 대조군 (Baseline)** | **C# Native Collection (`Dictionary` + `LINQ`)** | 기존 클라이언트 인메모리 관리 방식 (단건 조회 속도 vs LINQ 조건 검색 GC 비용) |
+| **실험군 (SQL)** | **SQLite `:memory:` (Native C)** | `sqlite3_backup` API로 메모리 적재 후 Prepared Statement + Transaction 기반 Zero-Alloc 운용 |
+| | **SQLite `:memory:` (sqlite-net ORM)** | 동일 인메모리 DB에서 ORM `Insert`/`Update`/`Query` 할당량 비교 |
+| **대조군 (NoSQL)** | **LiteDB (`MemoryStream`)** | `MemoryStream` 기반 인메모리 BSON 문서 수정·업서트(`Upsert`) 및 동적 필터링 대조 |
+
+### Hot-Path vs Cold-Path 시나리오 (Test Scenarios)
+| 경로 구분 | 요구 조건 | 대표 게임 연산 시나리오 | 핵심 측정 지표 |
+| :--- | :--- | :--- | :--- |
+| **Hot-Path** (매 프레임/틱) | `< 0.1~0.5 ms`<br>**GC 0 Bytes** | 1. **단건 스탯/좌표 갱신:** 피격 HP 차감, 이동 좌표(`pos_x`, `pos_y`) 업데이트<br>2. **단건 전투 참조:** 공격 시 장착 무기·캐릭터 스탯 즉시 조회<br>3. **배치 틱 갱신:** N개 유닛 상태를 단일 트랜잭션으로 일괄 업데이트 | `Avg / P95 / P99 (ms)`, `Bytes/op`, **60fps 프레임 예산(16.67ms) 대비 점유율(%)** |
+| **Cold-Path** (비정기/UI) | 안정적 `P95`<br>트랜잭션 정합성 | 1. **복합 조건 검색+정렬:** 상점/인벤토리 다중 필터(`rarity >= 3 AND req_level <= 50 ORDER BY price`)<br>2. **인벤토리 증감 트랜잭션:** 아이템 획득(`Insert`) + 수량 차감(`Update`) + 소진 삭제(`Delete`)<br>3. **집계/연쇄 갱신:** 유저·길드 단위 합산(`SUM`/`COUNT`) 및 일괄 내구도 감소 | `Avg / P95 (ms)`, `Bytes/op`, 트랜잭션 묶음 유무에 따른 쓰기 지연 차이 |
+
+### 정밀 측정 설계 원칙 (`IRuntimeDbSession`)
+1. **초기 적재 분리 (`HydrateFromDisk`)**: 디스크 `.db`를 인메모리 DB로 복제하는 시간(`Hydration Time`, SQLite는 `sqlite3_backup` 활용)을 별도 1회 지표로 분리하고, Hot/Cold 측정에는 포함하지 않습니다.
+2. **세션 및 Statement 재사용 (`Prepare`)**: 커넥션 유지 상태에서 `sqlite3_prepare_v2` 및 컬렉션 참조를 사전 바인딩해 순수 연산 비용만 측정합니다.
+3. **반복 측정 시 상태 보존**: `Insert`/`Delete`가 포함된 Cold-Path는 100회 반복 측정 시 데이터 크기가 변하지 않도록 루프 내 `ROLLBACK` 또는 대칭 연산(`+1` 후 `-1`)을 적용합니다.
+4. **상태 정합성 검증 (`VerifyStateChecksum`)**: 쓰기 연산 완료 후 총 행 수·HP 합계 등 체크섬을 대조해 데이터 무결성을 검증합니다.
+
+---
+
+## 6. 연구 C안: 트랜잭션 기반 상태 저장 및 롤백(Undo/Redo) 시스템
+
+### 연구 개요 및 목적
+* **연구 목적:** 턴제 게임, 시뮬레이션, 미스터리 장르에서 **N턴 전 또는 N초 전의 데이터 상태로 복구(Undo/Redo)** 할 때, DB 트랜잭션/Savepoint 기반 상태 롤백과 C# 인메모리 수동 복구 방식 간의 **복구 속도, 메모리 점유율, 힙 파편화(Fragmentation)** 를 비교 검증합니다.
+
+### 연구 C안 대조군 (Comparison Lineup)
+| 구분 | 방식 / 엔진 | 역할 및 측정 초점 |
+| :--- | :--- | :--- |
+| **실험군 (DB 트랜잭션)** | **SQLite `:memory:` (`SAVEPOINT` / `ROLLBACK`)** | 중첩 `SAVEPOINT` 기반 N단계 상태 되돌리기 속도 및 메모리 페이지 관리 효율 검증 |
+| | **LiteDB (`Transaction`)** | Document 단위 트랜잭션 롤백 비용 및 BSON 스냅샷 오버헤드 비교 |
+| **대조군 (C# 수동 복구)** | **C# Snapshot (Deep Copy / Memento)** | 턴/시간마다 상태 스냅샷 복제 시 발생하는 LOH·힙 메모리 파편화 및 GC 압력 측정 |
+| | **C# Command Pattern (역연산 스택)** | 상태 변경 커맨드 기록 및 역실행(`Undo`) 구현 복잡도 대비 실행 속도 대조 |
+
+### 핵심 측정 지표 (Metrics)
+* **Checkpoint / Save Cost (ms):** N턴·N초 간격으로 복구 지점을 기록할 때의 지연 시간
+* **Rollback Latency (ms):** 1턴 전 ~ N턴 전 상태로 되돌리는 데 걸리는 소요 시간
+* **Memory Fragmentation & GC:** 반복 Undo/Redo 사이클 수행 후 C# 힙 할당량(`Bytes/op`) 및 파편화 추이
+
+---
+
+## 7. 비-SQL 포맷의 조회 기능 보완 구현 (Query Capability Emulation)
 
 SQL 엔진이 없는 스토리지 포맷은 동일한 `QuerySpec`(Case A~D)을 실행하기 위해 빌드 시 보조 키 설계와 조회 시 애플리케이션 레이어 에뮬레이션을 적용합니다.
 
-### 5.1 RocksDB (Key-Value Store)
+### 7.1 RocksDB (Key-Value Store)
 RocksDB는 순수 Key-Value 저장소(`Get`, `Seek`)이므로 SQL 조건 검색·조인·컬럼 추출을 다음과 같이 보완합니다.
 
 | 조회 유형 | 네이티브 한계 | RocksDB 보완 구현 방식 |
@@ -128,3 +183,18 @@ RocksDB는 순수 Key-Value 저장소(`Get`, `Seek`)이므로 SQL 조건 검색�
 | **Case B (범위/조건)** | 보조 B-Tree 인덱스 미지원 | **기본(현재):** 테이블 프리픽스(`item_` 등) 기준 `Iterator.Seek` 풀 스캔 후 `QueryRuntime.Matches` 필터링<br>**확장안:** `idx_c1_ratk_{rarity:D2}_{atk:D5}_{id:D6}`처럼 고정 자릿수 패딩 보조 키를 기록해 사전순 정렬 기반 범위 `Seek` 수행 |
 | **Case C (연쇄/JOIN)** | `JOIN` 연산자 미지원 | 빌드 시 `inv_by_char_{character_id}_{instance_id}`, `char_by_user_{user_id}_{character_id}`, `link_{item_id}_{effect_id}` 역인덱스 프리픽스 키를 중복 기록하고, 조회 시 `Seek` + 연쇄 `db.Get()`으로 C#에서 행 조립 (`Document`/`Sparse` 검증 시 `DocumentUnwindHelper`로 평면화) |
 | **Case D (부분 추출)** | 컬럼 단위 Projection 불가 | 행 전체 `byte[]`를 읽은 뒤 `BinaryReader`로 필요 필드까지 순차 디코딩 (향후 고정 길이 숫자 필드를 가변 `string` 앞에 배치하면 `BitConverter` 오프셋 직독으로 할당 없는 추출 가능) |
+
+---
+
+## 8. 실험 통제 변수 및 결과 해석 기준 (Reproducibility & Trade-offs)
+
+### 실험 환경 및 통제 변수 (측정 시 기록 필수)
+* **런타임 환경:** Unity 버전, OS, Scripting Backend (`Mono` vs `IL2CPP`), 실행 스레드(`UniTask.RunOnThreadPool`)
+* **데이터 생성 통제:** 고정 `Seed = 42`, 동일 난수 분포로 모든 포맷에 동일한 논리 데이터 생성
+* **측정 통제:** 사전 `GC.Collect()` 정리, `Warmup = 5회`, `Measure = 100회` 반복, 결과는 `Benchmark_Results.txt`에 자동 누적 기록
+
+### 아키텍처 선택 트레이드오프 (해석 가이드)
+* **정규화 조회·복합 필터·Zero-Alloc 우선** → `SQLite (Native C)`
+* **중첩 객체 그래프 1-shot 로드·동적 스키마 유연성 우선** → `LiteDB` (단, C# Managed BSON 파싱·할당 비용 감수)
+* **대규모(`S100K`+) 단건 KV 포인트 조회 및 대량 순차 쓰기 우선** → `RocksDB`
+* **복합 상태 수정의 원자성·롤백 안정성 + 조건 검색 동시 충족** → `SQLite :memory:` 단독 관리 (연구 B·C안으로 정량 검증)
